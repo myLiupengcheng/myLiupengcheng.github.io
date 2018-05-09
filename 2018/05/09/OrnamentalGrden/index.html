@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>装饰者花园 | 刘鹏程</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="题目：有一所很大的花园，花园提供了多个大门供游人进出花园，花园供应商希望了解每天通过多个大门进入公园的总人数。每个大门都有一个计数器，并且任何一个计数器递增的时候，就表示公园当中的总人数也会递增，反之同理。每一个游客可能从一个大门进入以后从另外的一个大门出去。 分析：这是一个典型的多线程共享资源冲突的算法，有一个总人数，为共享资源，而那几个大门就是不同的任务，随时随地的对人数这个资源进行着读写，所">
+<meta name="keywords" content="并发,java,算法,共享资源">
+<meta property="og:type" content="article">
+<meta property="og:title" content="装饰者花园">
+<meta property="og:url" content="http://yoursite.com/2018/05/09/OrnamentalGrden/index.html">
+<meta property="og:site_name" content="刘鹏程">
+<meta property="og:description" content="题目：有一所很大的花园，花园提供了多个大门供游人进出花园，花园供应商希望了解每天通过多个大门进入公园的总人数。每个大门都有一个计数器，并且任何一个计数器递增的时候，就表示公园当中的总人数也会递增，反之同理。每一个游客可能从一个大门进入以后从另外的一个大门出去。 分析：这是一个典型的多线程共享资源冲突的算法，有一个总人数，为共享资源，而那几个大门就是不同的任务，随时随地的对人数这个资源进行着读写，所">
+<meta property="og:locale" content="中文">
+<meta property="og:updated_time" content="2018-05-09T02:07:08.771Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="装饰者花园">
+<meta name="twitter:description" content="题目：有一所很大的花园，花园提供了多个大门供游人进出花园，花园供应商希望了解每天通过多个大门进入公园的总人数。每个大门都有一个计数器，并且任何一个计数器递增的时候，就表示公园当中的总人数也会递增，反之同理。每一个游客可能从一个大门进入以后从另外的一个大门出去。 分析：这是一个典型的多线程共享资源冲突的算法，有一个总人数，为共享资源，而那几个大门就是不同的任务，随时随地的对人数这个资源进行着读写，所">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <!-- <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'> -->
+  <!-- <link href="//fonts.googleapis.com/css?family=Source+Code+Pro:400,700" rel="stylesheet" type="text/css"> -->
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro:400,700" rel="stylesheet" type="text/css">
+  <link href='//fonts.useso.com/css?family=Open+Sans:300,600' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="header-outer" class="outer">
+    <a href="/" class="logo">刘鹏程</a>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about/index.html">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+        </div>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        
+        
+          <a id="nav-github-link" class="nav-icon" href="https://github.com/ppoffice/hexo-theme-alex" title="Fork me on GitHub"></a>
+        
+      </nav>
+    </div>
+  </div>
+</header>
+      <nav id="mobile-nav" class="off">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about/index.html" class="mobile-nav-link">About</a>
+  
+  <div id="search-form-wrap-mobile">
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+  </div>
+</nav>
+      <div class="outer">
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/并发/">并发</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/并发/java/">java</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/05/09/OrnamentalGrden/">装饰者花园</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/09/thread02/">线程基础（后篇）</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/09/thread01/">线程基础（前篇）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/共享资源/">共享资源</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线程/">线程</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/共享资源/" style="font-size: 10px;">共享资源</a> <a href="/tags/并发/" style="font-size: 20px;">并发</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/线程/" style="font-size: 15px;">线程</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://hexo.io">Hexo</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+        <section id="main"><article id="post-OrnamentalGrden" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/09/OrnamentalGrden/" class="article-date">
+  <time datetime="2018-05-09T02:06:00.000Z" itemprop="datePublished">2018-05-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/算法/">算法</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      装饰者花园
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>题目：有一所很大的花园，花园提供了多个大门供游人进出花园，花园供应商希望了解每天通过多个大门进入公园的总人数。每个大门都有一个计数器，并且任何一个计数器递增的时候，就表示公园当中的总人数也会递增，反之同理。每一个游客可能从一个大门进入以后从另外的一个大门出去。</p>
+<p>分析：这是一个典型的多线程共享资源冲突的算法，有一个总人数，为共享资源，而那几个大门就是不同的任务，随时随地的对人数这个资源进行着读写，所以同步操作一定要注意。下面通过一个Demo来模拟上述场景。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 装饰者花园：</span></span><br><span class="line"><span class="comment"> * 题目：有一所很大的花园，花园提供了多个大门供游人进出花园，花园供应商希望了解每天通过多个大门进入公园的总人数。</span></span><br><span class="line"><span class="comment"> * 每个大门都有一个计数器，并且任何一个计数器递增的时候，就表示公园当中的总人数也会递增，反之同理。</span></span><br><span class="line"><span class="comment"> * 每一个游客可能从一个大门进入以后从另外的一个大门出去。</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> pengchengliu</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrnamentalGrden</span> </span>&#123;</span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line"> 		ExecutorService threadPool = Executors.newCachedThreadPool();</span><br><span class="line"> 		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line"> 			threadPool.execute(<span class="keyword">new</span> Door(i));</span><br><span class="line"> 		&#125;</span><br><span class="line"> 		TimeUnit.SECONDS.sleep(<span class="number">3</span>);</span><br><span class="line"> 		Door.cancel();</span><br><span class="line"> 		threadPool.shutdown();</span><br><span class="line"> 		</span><br><span class="line"> 		<span class="keyword">if</span> (!threadPool.awaitTermination(<span class="number">250</span>, TimeUnit.MILLISECONDS)) &#123;</span><br><span class="line"> 			System.out.println(<span class="string">"some tasks were not terminated!"</span>);</span><br><span class="line"> 		&#125;</span><br><span class="line"> 		System.out.println(<span class="string">"Total : "</span> + Door.getTotalCount());</span><br><span class="line"> 		System.out.println(<span class="string">"sum of door: "</span> + Door.sumCount());</span><br><span class="line"> 	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Door</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line"> 	<span class="comment">//使用static，让这个变量成为多个Door的持有者，也就是共享域</span></span><br><span class="line"> 	<span class="keyword">private</span> <span class="keyword">static</span> Count sCount = <span class="keyword">new</span> Count() ;</span><br><span class="line"> 	<span class="comment">//每创建一个大门，将大门压入一个共享域的List当中，这样的好处是，将多个相互独立的大门对象托管到大门类的共享域当中</span></span><br><span class="line"> 	<span class="keyword">private</span> <span class="keyword">static</span> List&lt;Door&gt; sDoorList = <span class="keyword">new</span> ArrayList&lt;Door&gt;();</span><br><span class="line"> 	<span class="comment">//终结任务的标示符，为了保证每一个任务都对该变量具有可视性，所以必须保持volatile，并且被多个任务所共享，只需要一份，所以为static</span></span><br><span class="line"> 	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">volatile</span> <span class="keyword">boolean</span> sCanceled = <span class="keyword">false</span> ;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="comment">//当前大门所经过的人数，每一个大门和每一个大门不同，所以属于对象层次，不属于类层次</span></span><br><span class="line"> 	<span class="keyword">private</span> <span class="keyword">int</span> number = <span class="number">0</span>;</span><br><span class="line"> 	<span class="comment">// ID 是每一个门的标示，所以置为final，代表只在第一次初始化的时候赋值</span></span><br><span class="line"> 	<span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> ID ;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="title">Door</span> <span class="params">(<span class="keyword">int</span> id)</span> </span>&#123;</span><br><span class="line"> 		<span class="keyword">this</span>.ID = id ;</span><br><span class="line"> 		sDoorList.add(<span class="keyword">this</span>) ;</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	<span class="meta">@Override</span></span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line"> 		<span class="keyword">while</span> (!sCanceled) &#123;</span><br><span class="line"> 			<span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</span><br><span class="line"> 				++ number; </span><br><span class="line"> 			&#125;</span><br><span class="line"> 			System.out.println(<span class="keyword">this</span> + <span class="string">"Totle : "</span> + sCount.increment());</span><br><span class="line"> 			<span class="keyword">try</span>&#123;</span><br><span class="line"> 				TimeUnit.MILLISECONDS.sleep(<span class="number">100</span>);</span><br><span class="line"> 			&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line"> 				System.out.println(<span class="string">"sleep interrupted"</span>);</span><br><span class="line"> 			&#125;</span><br><span class="line"> 		&#125;</span><br><span class="line"> 		System.out.println(<span class="string">"stopping "</span> + <span class="keyword">this</span>);</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">int</span> <span class="title">getValue</span> <span class="params">()</span> </span>&#123;</span><br><span class="line"> 		<span class="keyword">return</span> number ;</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="comment">//修改终结标示符，让所有的任务结束。</span></span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">cancel</span><span class="params">()</span> </span>&#123;</span><br><span class="line"> 		sCanceled = <span class="keyword">true</span> ;</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="meta">@Override</span></span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line"> 		<span class="keyword">return</span> <span class="string">"Door "</span> + ID + <span class="string">" : "</span> + getValue();</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="comment">/* * * * * * * * * * *  static fun  * * * * * * * * * * */</span></span><br><span class="line"> 	</span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getTotalCount</span> <span class="params">()</span> </span>&#123;</span><br><span class="line"> 		<span class="keyword">return</span> sCount.value() ;</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">sumCount</span> <span class="params">()</span> </span>&#123;</span><br><span class="line"> 		<span class="keyword">int</span> sum = <span class="number">0</span> ;</span><br><span class="line"> 		<span class="keyword">for</span> (Door door : sDoorList) &#123;</span><br><span class="line"> 			sum += door.getValue() ;</span><br><span class="line"> 		&#125;</span><br><span class="line"> 		<span class="keyword">return</span> sum ;</span><br><span class="line"> 	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 花园当中的总计数器</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> pengchengliu</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Count</span> </span>&#123;</span><br><span class="line"> 	<span class="keyword">private</span> <span class="keyword">int</span> count = <span class="number">0</span> ;</span><br><span class="line"> 	<span class="comment">//布鲁斯.艾克尔也这么提到：由47做种后，产生的随机数更加体现了随机性。</span></span><br><span class="line"> 	<span class="comment">//它没有什么具体的意义，只要理解随机数如果有一个种子，那么会出现比较随机的随机数，而当种子是47的时候，随机率是最大的。</span></span><br><span class="line"> 	<span class="keyword">private</span> Random random = <span class="keyword">new</span> Random(<span class="number">47</span>);</span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">int</span> <span class="title">increment</span> <span class="params">()</span> </span>&#123;</span><br><span class="line"> 		<span class="keyword">int</span> temp = count ;</span><br><span class="line"> 		<span class="keyword">if</span> (random.nextBoolean()) &#123;</span><br><span class="line"> 			<span class="comment">//建议调度器切换到其他线程，注意：此时没有释放相应的锁</span></span><br><span class="line"> 			Thread.yield();</span><br><span class="line"> 		&#125;</span><br><span class="line"> 		<span class="keyword">return</span> (count = ++temp);</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">int</span> <span class="title">value</span> <span class="params">()</span> </span>&#123;<span class="keyword">return</span> count ;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/05/09/OrnamentalGrden/" data-id="cjgygrxmg00007yewde5nui3u" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/共享资源/">共享资源</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/并发/">并发</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/05/09/thread02/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">线程基础（后篇）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      <a href="/" class="logo">刘鹏程</a>
+      &copy; 2018 刘鹏程<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.scrollLoading.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
