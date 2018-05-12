@@ -14,7 +14,7 @@
 <meta property="og:description" content="1、享元模式的作用 2、享元模式的使用场景 3、享元模式的UML类图 4、享元模式Demo request的缓存池 result的缓存池 JDK当中的常量池     1、享元模式的作用 享元模式实际上就是对象的缓存池，英文为Flyweight，目的是尽可能地减少内存的使用，来缓存大量重复对象的场景，来缓存可共享的对象，避免创建过多的对象的场景，来提升性能，避免内存溢出的场景。 2、享元模式的使用">
 <meta property="og:locale" content="中文">
 <meta property="og:image" content="http://yoursite.com/2018/05/12/flyweight-0/flyweight_image01.png">
-<meta property="og:updated_time" content="2018-05-12T10:04:17.428Z">
+<meta property="og:updated_time" content="2018-05-12T10:05:46.865Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="享元模式-对象池">
 <meta name="twitter:description" content="1、享元模式的作用 2、享元模式的使用场景 3、享元模式的UML类图 4、享元模式Demo request的缓存池 result的缓存池 JDK当中的常量池     1、享元模式的作用 享元模式实际上就是对象的缓存池，英文为Flyweight，目的是尽可能地减少内存的使用，来缓存大量重复对象的场景，来缓存可共享的对象，避免创建过多的对象的场景，来提升性能，避免内存溢出的场景。 2、享元模式的使用">
@@ -211,7 +211,7 @@
 <p>上述说到相应的外部状态，内部状态，这两个状态，我们建立自己的缓存池的时候，一般使用外部状态，也就是这个对象会随着变换的那个状态，做为一个key存储在一个map当中，或者使用list当中，使用list的时候，相应的inedx便是该对象为一标示的外部状态，当然了，有时候需要我们自己来维护，相应的index到外部状态的一种映射。注意；在使用享元模式的时候，一定要明白什么是外部状态，什么是内部状态。这个搞清楚了，这种模式也就相应的搞定了</p>
 <p>3、享元模式的UML类图</p>
 <p>为了让这一种设计模式看起来更加的易于理解，所以这里使用UML来描述该设计模式。</p>
-<p><img src="/2018/05/12/flyweight-0/flyweight_image01.png" alt="你想输入的替代文字"></p>
+<p><img src="/2018/05/12/flyweight-0/flyweight_image01.png" alt="享元模式，UML类图结构"></p>
 <p>4、享元模式的Demo</p>
 <p>4.1、请求缓存池</p>
 <p>例子：客户端的程序设计一般都是含有相应的网络请求模块的，本地请求服务器拿到相应的数据，然后显示这些数据。现在有这样一种情况，当客户端请求服务器，如果相同的请求，一下就请求了100次，或者上千次，或者相同的请求只是参数不同，然后请求了很多次。</p>
@@ -232,7 +232,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/12/flyweight-0/" data-id="cjh384pk8000cooeweppewhff" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/12/flyweight-0/" data-id="cjh3871hk000cpbewijvei1d4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
