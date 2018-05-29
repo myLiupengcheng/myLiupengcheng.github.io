@@ -77,7 +77,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/并发/">并发</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/并发/java/">java</a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/java/">java</a><span class="category-list-count">1</span></li></ul></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/并发/">并发</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/并发/java/">java</a><span class="category-list-count">7</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/java/">java</a><span class="category-list-count">1</span></li></ul></li></ul>
     </div>
   </div>
 
@@ -86,7 +86,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">9</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">10</span></li></ul>
     </div>
   </div>
 
@@ -96,6 +96,10 @@
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/05/29/CyclicBarrier/">线程同步工具类CyclicBarrier</a>
+          </li>
         
           <li>
             <a href="/2018/05/29/CountDownLatch/">线程同步工具类CountDownLatch</a>
@@ -113,10 +117,6 @@
             <a href="/2018/05/12/flyweight-0/">享元模式-对象池</a>
           </li>
         
-          <li>
-            <a href="/2018/05/09/thread04/">线程死亡</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -126,7 +126,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线程/">线程</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线程/">线程</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -158,6 +158,66 @@
 </aside>
         
         <section id="main">
+  
+    <article id="post-CyclicBarrier" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/29/CyclicBarrier/" class="article-date">
+  <time datetime="2018-05-29T14:47:00.000Z" itemprop="datePublished">2018-05-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/并发/">并发</a>►<a class="article-category-link" href="/categories/并发/java/">java</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/29/CyclicBarrier/">线程同步工具类CyclicBarrier</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>1、CyclicBarrier的作用</li>
+<li>2、CyclicBarrier使用规则</li>
+<li>3、CyclicBarrier的Demo</li>
+<li>4、CyclicBarrier原理 (待补充)</li>
+<li>5、CyclicBarrier的实现 （待补充）</li>
+</ul>
+<h3 id="1、CyclicBarrier的作用"><a href="#1、CyclicBarrier的作用" class="headerlink" title="1、CyclicBarrier的作用"></a>1、CyclicBarrier的作用</h3><p>CyclicBarrier类也是java提供给我们同步任务的时候使用的，和CountDownLatch有点类似，都是控制任务执行的顺序的，不同的地方在于，CyclicBarrier可以让一个任务在执行的途中发生多次事件，而CountDownLatch却只能发生一次，就是在我们调用countDown方法的时候，这个事件触发以后，便会减少相应的锁存器上面的计数器，而当计数器为0的时候，哪些调用了await的任务便可以执行了,但是CyclicBarrier就不同了，CyclicBarrier 的字面意思是可循环使用（Cyclic）的屏障（Barrier）。它要做的事情是，让一组线程到达一个屏障（也可以叫同步点）时被阻塞，直到最后一个线程到达屏障时，屏障才会开门，所有被屏障拦截的线程才会继续干活。CyclicBarrier默认的构造方法是CyclicBarrier(int parties)，其参数表示屏障拦截的线程数量，每个线程调用await方法告诉CyclicBarrier我已经到达了屏障，然后当前线程被阻塞</p>
+<h3 id="2、CyclicBarrier的使用规则"><a href="#2、CyclicBarrier的使用规则" class="headerlink" title="2、CyclicBarrier的使用规则"></a>2、CyclicBarrier的使用规则</h3><p>CountDownLatch是一个同步的辅助类，允许一个或多个线程，等待其他一组线程完成操作，再继续执行。<br>CyclicBarrier是一个同步的辅助类，允许一组线程相互之间等待，达到一个共同点，再继续执行。</p>
+<p>个人理解：CyclicBarrier:可看成是个障碍，所有的线程必须到齐后才能一起通过这个障碍<br>场景还原：以前公司组织户外拓展活动，帮助团队建设，其中最重要一个项目就是全体员工（包括女同事，BOSS）在完成其他项目时，到达一个高达四米的高墙没有任何抓点，要求所有人，一个不能少的越过高墙，才能继续进行其他项目。</p>
+<h3 id="3、CyclicBarrier的Demo"><a href="#3、CyclicBarrier的Demo" class="headerlink" title="3、CyclicBarrier的Demo"></a>3、CyclicBarrier的Demo</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 探究CyclicBarrier的使用规则</span></span><br><span class="line"><span class="comment"> * 模拟赛马游戏</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> pengchengliu</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestCycilcBarrier</span> </span>&#123;</span><br><span class="line"> 	<span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> FINISH_LINE = <span class="number">100</span> ;</span><br><span class="line"> 	<span class="keyword">private</span> List&lt;Horse&gt; mHorses = <span class="keyword">new</span> ArrayList&lt;Horse&gt;() ;</span><br><span class="line"> 	<span class="keyword">private</span> ExecutorService mExec = Executors.newCachedThreadPool() ;</span><br><span class="line"> 	<span class="keyword">private</span> CyclicBarrier mCyclicBarrier ;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="title">TestCycilcBarrier</span> <span class="params">(<span class="keyword">int</span> horsesSize, <span class="keyword">int</span> pause)</span> </span>&#123;</span><br><span class="line"> 		</span><br><span class="line"> 		<span class="comment">// "栏栅动作"，该动作为一个Runnable，这个Runnable在CyclicBarrier计数器变为0的时候执行。</span></span><br><span class="line"> 		mCyclicBarrier = <span class="keyword">new</span> CyclicBarrier(horsesSize, <span class="keyword">new</span> Runnable() &#123;</span><br><span class="line"> 			</span><br><span class="line"> 			<span class="meta">@Override</span></span><br><span class="line"> 			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line"> 				StringBuilder stringBuilder = <span class="keyword">new</span> StringBuilder();</span><br><span class="line"> 				<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; FINISH_LINE; i++) &#123;</span><br><span class="line"> 					stringBuilder.append(<span class="string">"="</span>);</span><br><span class="line"> 				&#125;</span><br><span class="line"> 				System.out.println(stringBuilder);</span><br><span class="line"> 				</span><br><span class="line"> 				<span class="keyword">for</span> (Horse horse : mHorses) &#123;</span><br><span class="line"> 					System.out.println(horse.tracks());</span><br><span class="line"> 					<span class="keyword">if</span> (horse.getStrides() &gt;= FINISH_LINE) &#123;</span><br><span class="line"> 						System.out.println(horse + <span class="string">"won!"</span>);</span><br><span class="line"> 						mExec.shutdownNow();</span><br><span class="line"> 						<span class="keyword">return</span> ;</span><br><span class="line"> 					&#125;</span><br><span class="line"> 				&#125;</span><br><span class="line"> 				<span class="keyword">try</span> &#123;</span><br><span class="line"> 					TimeUnit.MILLISECONDS.sleep(pause);</span><br><span class="line"> 				&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line"> 					System.out.println(<span class="string">"barrier-action sleep interrupted"</span>);</span><br><span class="line"> 				&#125;</span><br><span class="line"> 				</span><br><span class="line"> 			&#125;</span><br><span class="line"> 		&#125;);</span><br><span class="line"> 		</span><br><span class="line"> 		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; horsesSize; i++) &#123;</span><br><span class="line"> 			Horse horse = <span class="keyword">new</span> Horse(mCyclicBarrier);</span><br><span class="line"> 			mHorses.add(horse);</span><br><span class="line"> 			mExec.execute(horse);</span><br><span class="line"> 		&#125;</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"> 		<span class="keyword">int</span> horsesSize = <span class="number">10</span> ;</span><br><span class="line"> 		<span class="keyword">int</span> pause = <span class="number">200</span> ;</span><br><span class="line"> 		</span><br><span class="line"> 		<span class="keyword">if</span> (args.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line"> 			Integer temp = <span class="keyword">new</span> Integer(args[<span class="number">0</span>]);</span><br><span class="line"> 			horsesSize = temp &gt; <span class="number">0</span> ? temp : horsesSize ;</span><br><span class="line"> 		&#125;</span><br><span class="line"> 		</span><br><span class="line"> 		<span class="keyword">if</span> (args.length &gt; <span class="number">1</span>) &#123;</span><br><span class="line"> 			Integer temp = <span class="keyword">new</span> Integer(args[<span class="number">1</span>]);</span><br><span class="line"> 			pause = temp &gt; <span class="number">0</span> ? temp : pause ;</span><br><span class="line"> 		&#125;</span><br><span class="line"> 		</span><br><span class="line"> 		<span class="keyword">new</span> TestCycilcBarrier(horsesSize, pause);</span><br><span class="line"> 	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Horse</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line"> 	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> sCounter = <span class="number">0</span> ;</span><br><span class="line"> 	<span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> ID = sCounter ++ ;</span><br><span class="line"> 	<span class="keyword">private</span> <span class="keyword">int</span> mStrides = <span class="number">0</span> ;</span><br><span class="line"> 	<span class="keyword">private</span> Random mRandom = <span class="keyword">new</span> Random(<span class="number">47</span>);</span><br><span class="line"> 	<span class="keyword">private</span> <span class="keyword">static</span> CyclicBarrier sBarrier ;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="title">Horse</span> <span class="params">(CyclicBarrier cyclicBarrier)</span> </span>&#123;</span><br><span class="line"> 		<span class="keyword">this</span>.sBarrier = cyclicBarrier ;</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="meta">@Override</span></span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line"> 		<span class="keyword">try</span> &#123;</span><br><span class="line"> 			<span class="keyword">while</span> (!Thread.interrupted()) &#123;</span><br><span class="line"> 				<span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</span><br><span class="line"> 					mStrides += mRandom.nextInt(<span class="number">5</span>);</span><br><span class="line"> 				&#125;</span><br><span class="line"> 				sBarrier.await();</span><br><span class="line"> 			&#125;</span><br><span class="line"> 		&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line"> 			</span><br><span class="line"> 		&#125; <span class="keyword">catch</span> (BrokenBarrierException e) &#123;</span><br><span class="line"> 			<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e) ;</span><br><span class="line"> 		&#125;</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">int</span> <span class="title">getStrides</span> <span class="params">()</span> </span>&#123;</span><br><span class="line"> 		<span class="keyword">return</span> mStrides ;</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="meta">@Override</span></span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line"> 		<span class="keyword">return</span> <span class="string">"Horse  "</span> + <span class="keyword">this</span>.ID ;</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> String <span class="title">tracks</span> <span class="params">()</span> </span>&#123;</span><br><span class="line"> 		StringBuffer stringBuffer = <span class="keyword">new</span> StringBuffer();</span><br><span class="line"> 		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; getStrides(); i++) &#123;</span><br><span class="line"> 			stringBuffer.append(<span class="string">"-"</span>);</span><br><span class="line"> 		&#125;</span><br><span class="line"> 		stringBuffer.append(<span class="keyword">this</span>.ID);</span><br><span class="line"> 		<span class="keyword">return</span> stringBuffer.toString() ;</span><br><span class="line"> 	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上述Demo运行起来的效果图，如下图所示：</p>
+<p><img src="/2018/05/29/CyclicBarrier/horese.gif" alt="赛马游戏"></p>
+<p>参考文献</p>
+<ul>
+<li><a href="https://blog.csdn.net/zzg1229059735/article/details/61191679" target="_blank" rel="noopener">https://blog.csdn.net/zzg1229059735/article/details/61191679</a></li>
+<li><a href="http://ifeve.com/concurrency-cyclicbarrier/" target="_blank" rel="noopener">http://ifeve.com/concurrency-cyclicbarrier/</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/05/29/CyclicBarrier/" data-id="cjhrsxc900001ntewjwy2qpug" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/并发/">并发</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/线程/">线程</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-CountDownLatch" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -212,7 +272,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/29/CountDownLatch/" data-id="cjhrsnvey0000mvewue5e2djz" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/29/CountDownLatch/" data-id="cjhrsxc8w0000ntewv4g1sy3d" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/并发/">并发</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/线程/">线程</a></li></ul>
@@ -269,7 +329,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/29/Philosopher/" data-id="cjhrsnvf30001mvewwfattyt3" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/29/Philosopher/" data-id="cjhrsxc960005ntew539bsxvl" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
@@ -400,7 +460,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/13/thread5/" data-id="cjhrsnvgl001imvewvvtwrc8n" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/13/thread5/" data-id="cjhrsxcap001tntewd0zm0i09" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/并发/">并发</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/线程/">线程</a></li></ul>
@@ -483,7 +543,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/12/flyweight-0/" data-id="cjhrsnvfq000lmvew0mety1rx" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/12/flyweight-0/" data-id="cjhrsxc9q000wntewpv6u68kk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
@@ -573,7 +633,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/09/thread04/" data-id="cjhrsnvg50010mvew8fpq59rc" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/09/thread04/" data-id="cjhrsxca6001bntewzlrz8c1k" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/并发/">并发</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/线程/">线程</a></li></ul>
@@ -717,7 +777,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/09/thread03/" data-id="cjhrsnvgg0017mvewwf1ievnr" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/09/thread03/" data-id="cjhrsxcal001intewdxny9wks" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/并发/">并发</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/线程/">线程</a></li></ul>
@@ -761,7 +821,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/09/OrnamentalGrden/" data-id="cjhrsnvf80004mvewgd3bnaeu" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/09/OrnamentalGrden/" data-id="cjhrsxc940004ntewldas9nql" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
@@ -862,7 +922,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/09/thread02/" data-id="cjhrsnvge0016mvewhr4xst0l" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/09/thread02/" data-id="cjhrsxcak001hntew59fwbqwv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/并发/">并发</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/线程/">线程</a></li></ul>
@@ -984,7 +1044,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/09/thread01/" data-id="cjhrsnvfs000nmvewprtl45ja" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/09/thread01/" data-id="cjhrsxc9s000yntewyu0veshr" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/并发/">并发</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/线程/">线程</a></li></ul>
