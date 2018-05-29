@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>线程同步工具类CountDownLatch | 刘鹏程</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1、CountDownLatch的作用 2、CountDownLatch使用规则 3、CountDownLatch的Demo 4、CountDownLatch原理  (待补充) 5、CountDownLatch的实现 （待补充）   1、CountDownLatch的作用在JDK 5 以后sun公司引入了大量设计来解决并发的问题，学习使用这些类，我们可以更加自如的创建简单而健壮的并发程序，Cou">
+<meta name="keywords" content="并发,java,线程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="线程同步工具类CountDownLatch">
+<meta property="og:url" content="http://yoursite.com/2018/05/29/CountDownLatch/index.html">
+<meta property="og:site_name" content="刘鹏程">
+<meta property="og:description" content="1、CountDownLatch的作用 2、CountDownLatch使用规则 3、CountDownLatch的Demo 4、CountDownLatch原理  (待补充) 5、CountDownLatch的实现 （待补充）   1、CountDownLatch的作用在JDK 5 以后sun公司引入了大量设计来解决并发的问题，学习使用这些类，我们可以更加自如的创建简单而健壮的并发程序，Cou">
+<meta property="og:locale" content="中文">
+<meta property="og:updated_time" content="2018-05-29T14:45:08.462Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="线程同步工具类CountDownLatch">
+<meta name="twitter:description" content="1、CountDownLatch的作用 2、CountDownLatch使用规则 3、CountDownLatch的Demo 4、CountDownLatch原理  (待补充) 5、CountDownLatch的实现 （待补充）   1、CountDownLatch的作用在JDK 5 以后sun公司引入了大量设计来解决并发的问题，学习使用这些类，我们可以更加自如的创建简单而健壮的并发程序，Cou">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <!-- <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'> -->
+  <!-- <link href="//fonts.googleapis.com/css?family=Source+Code+Pro:400,700" rel="stylesheet" type="text/css"> -->
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro:400,700" rel="stylesheet" type="text/css">
+  <link href='//fonts.useso.com/css?family=Open+Sans:300,600' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="header-outer" class="outer">
+    <a href="/" class="logo">刘鹏程</a>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about/index.html">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+        </div>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        
+        
+          <a id="nav-github-link" class="nav-icon" href="https://github.com/ppoffice/hexo-theme-alex" title="Fork me on GitHub"></a>
+        
+      </nav>
+    </div>
+  </div>
+</header>
+      <nav id="mobile-nav" class="off">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about/index.html" class="mobile-nav-link">About</a>
+  
+  <div id="search-form-wrap-mobile">
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+  </div>
+</nav>
+      <div class="outer">
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/并发/">并发</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/并发/java/">java</a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/java/">java</a><span class="category-list-count">1</span></li></ul></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">9</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/05/29/CountDownLatch/">线程同步工具类CountDownLatch</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/29/Philosopher/">哲学家就餐</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/13/thread5/">线程协作</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/12/flyweight-0/">享元模式-对象池</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/09/thread04/">线程死亡</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线程/">线程</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/并发/" style="font-size: 20px;">并发</a> <a href="/tags/算法/" style="font-size: 15px;">算法</a> <a href="/tags/线程/" style="font-size: 20px;">线程</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://hexo.io">Hexo</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+        <section id="main"><article id="post-CountDownLatch" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/29/CountDownLatch/" class="article-date">
+  <time datetime="2018-05-29T14:44:00.000Z" itemprop="datePublished">2018-05-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/并发/">并发</a>►<a class="article-category-link" href="/categories/并发/java/">java</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      线程同步工具类CountDownLatch
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>1、CountDownLatch的作用</li>
+<li>2、CountDownLatch使用规则</li>
+<li>3、CountDownLatch的Demo</li>
+<li>4、CountDownLatch原理  (待补充)</li>
+<li>5、CountDownLatch的实现 （待补充）</li>
+</ul>
+<hr>
+<h3 id="1、CountDownLatch的作用"><a href="#1、CountDownLatch的作用" class="headerlink" title="1、CountDownLatch的作用"></a>1、CountDownLatch的作用</h3><p>在JDK 5 以后sun公司引入了大量设计来解决并发的问题，学习使用这些类，我们可以更加自如的创建简单而健壮的并发程序，CountDownLatch类是用来同步一个或者多个任务的工具类，强制它们等待由其他任务执行的一组操作。</p>
+<p>例如，现在有这样的一个需求，为了程序的快速运行，我们把一个程序分为三部分，分别是初始化、数据拉取、显示数据。初始化操作和数据拉取操作不会冲突，可以说这两个操作完全不相关，但是显示数据必须要在上面两个任务完成以后才可以继续。如果把这三个操作至于不同的线程，那么如果不对线程的同步加以控制的话，必将大乱，这个时候我们就可以先对CountDownLatct初始计数器为2，然后让初始化操作和数据拉取操作开始运行，然后在结束的时候调用countDown方法，然后显示操作在run开始的时候使用awit进行等待，直到计数器归0，显示操作开始执行，而这个时候上述两个操作都已经执行完毕。</p>
+<h3 id="2、CountDownLatch的使用规则"><a href="#2、CountDownLatch的使用规则" class="headerlink" title="2、CountDownLatch的使用规则"></a>2、CountDownLatch的使用规则</h3><p>我们可以向CountDownLatch对象设置一个初始计数值，任何在CountDownLatch对象上调用wait的方法都将被阻塞，直到这个计数器达到0。其他任务在结束其工作时，可以在该对象上调用countDown（）来减少这个计数器。CountDownLatch被设计为只触发一次，计数器不能被重置。</p>
+<p>调用countDown的任务在产生这个调用时并没有被阻塞，只有对await的调用会产生阻塞，直到计数器达到0为止。</p>
+<p>CountDownLatch的典型用法是将一个程序分为n个互相独立的可以解决的任务，并创建值为0的CountDownLatch。当每个任务完成时，都会在这个锁存器上调用countDown。等待问题被解决的任务在这个锁存器上面调用await，将它们自己揽住，直至锁存器计数结束，下面通过一个例子来演示该框架应该如何应用。</p>
+<p>个人理解：CountDownLatch:我把他理解成倒计时锁<br>场景还原：一年级期末考试要开始了，监考老师发下去试卷，然后坐在讲台旁边玩着手机等待着学生答题，有的学生提前交了试卷，并约起打球了，等到最后一个学生交卷了，老师开始整理试卷，贴封条，下班，陪老婆孩子去了。<br>补充场景：我们在玩LOL英雄联盟时会出现十个人不同加载状态，但是最后一个人由于各种原因始终加载不了100%，于是游戏系统自动等待所有玩家的状态都准备好，才展现游戏画面。</p>
+<h3 id="3、CountDownLatch的Demo"><a href="#3、CountDownLatch的Demo" class="headerlink" title="3、CountDownLatch的Demo"></a>3、CountDownLatch的Demo</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 演示CountDownLatch的使用</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> pengchengliu</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestCountDownLatch</span> </span>&#123;</span><br><span class="line"> 	<span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> SIZE = <span class="number">10</span> ;</span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"> 		ExecutorService exec = Executors.newCachedThreadPool();</span><br><span class="line"> 		CountDownLatch countDownLatch = <span class="keyword">new</span> CountDownLatch(SIZE);</span><br><span class="line"> 		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line"> 			exec.execute(<span class="keyword">new</span> WaitingTask(countDownLatch));</span><br><span class="line"> 		&#125;</span><br><span class="line"> 		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; SIZE; i++) &#123;</span><br><span class="line"> 			exec.execute(<span class="keyword">new</span> TaskProtion(countDownLatch));</span><br><span class="line"> 		&#125;</span><br><span class="line"> 		System.out.println(<span class="string">"Launch all task"</span>);</span><br><span class="line"> 		exec.shutdown();</span><br><span class="line"> 	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TaskProtion</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line"> 	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> sCounter = <span class="number">0</span> ;</span><br><span class="line"> 	<span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> id = sCounter ++ ;</span><br><span class="line"> 	<span class="keyword">private</span> <span class="keyword">static</span> Random sRandom = <span class="keyword">new</span> Random(<span class="number">47</span>) ;</span><br><span class="line"> 	<span class="keyword">private</span> <span class="keyword">final</span> CountDownLatch mLatch ;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="title">TaskProtion</span><span class="params">(CountDownLatch latch)</span> </span>&#123;</span><br><span class="line"> 		<span class="keyword">this</span>.mLatch = latch ;</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="meta">@Override</span></span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line"> 		<span class="keyword">try</span> &#123;</span><br><span class="line"> 			doWork();</span><br><span class="line"> 			mLatch.countDown();</span><br><span class="line"> 		&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line"> 			System.out.println(<span class="string">"TaskProtion is exiting form intrrupt"</span>);</span><br><span class="line"> 		&#125;</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doWork</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line"> 		TimeUnit.MICROSECONDS.sleep(sRandom.nextInt(<span class="number">2000</span>));</span><br><span class="line"> 		System.out.println(<span class="keyword">this</span> + <span class="string">" completed"</span>);</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="meta">@Override</span></span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line"> 		<span class="keyword">return</span> String.format(<span class="string">"%1$-3d"</span>, id);</span><br><span class="line"> 	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">WaitingTask</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line"> 	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> sCounter = <span class="number">0</span> ;</span><br><span class="line"> 	<span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> id = sCounter ++ ;</span><br><span class="line"> 	<span class="keyword">private</span> <span class="keyword">final</span> CountDownLatch mLatch ;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="title">WaitingTask</span> <span class="params">(CountDownLatch latch)</span> </span>&#123;</span><br><span class="line"> 		<span class="keyword">this</span>.mLatch = latch ;</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="meta">@Override</span></span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line"> 		<span class="keyword">try</span> &#123;</span><br><span class="line"> 			<span class="keyword">this</span>.mLatch.await();</span><br><span class="line"> 			System.out.println(<span class="string">"Latch barrier passed for "</span> + <span class="keyword">this</span>);</span><br><span class="line"> 		&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line"> 			System.out.println(<span class="keyword">this</span> + <span class="string">" interrupted"</span>);</span><br><span class="line"> 		&#125;</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="meta">@Override</span></span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line"> 		<span class="keyword">return</span> String.format(<span class="string">"WaitingTask %1$-3d"</span>, id);</span><br><span class="line"> 	&#125;</span><br><span class="line">&#125;</span><br><span class="line">Launch all task</span><br><span class="line"><span class="number">2</span>   completed</span><br><span class="line"><span class="number">8</span>   completed</span><br><span class="line"><span class="number">6</span>   completed</span><br><span class="line"><span class="number">5</span>   completed</span><br><span class="line"><span class="number">3</span>   completed</span><br><span class="line"><span class="number">9</span>   completed</span><br><span class="line"><span class="number">4</span>   completed</span><br><span class="line"><span class="number">0</span>   completed</span><br><span class="line"><span class="number">7</span>   completed</span><br><span class="line"><span class="number">1</span>   completed</span><br><span class="line">Latch barrier passed <span class="keyword">for</span> WaitingTask <span class="number">3</span>  </span><br><span class="line">Latch barrier passed <span class="keyword">for</span> WaitingTask <span class="number">6</span>  </span><br><span class="line">Latch barrier passed <span class="keyword">for</span> WaitingTask <span class="number">0</span>  </span><br><span class="line">Latch barrier passed <span class="keyword">for</span> WaitingTask <span class="number">1</span>  </span><br><span class="line">Latch barrier passed <span class="keyword">for</span> WaitingTask <span class="number">8</span>  </span><br><span class="line">Latch barrier passed <span class="keyword">for</span> WaitingTask <span class="number">9</span>  </span><br><span class="line">Latch barrier passed <span class="keyword">for</span> WaitingTask <span class="number">7</span>  </span><br><span class="line">Latch barrier passed <span class="keyword">for</span> WaitingTask <span class="number">2</span>  </span><br><span class="line">Latch barrier passed <span class="keyword">for</span> WaitingTask <span class="number">4</span>  </span><br><span class="line">Latch barrier passed <span class="keyword">for</span> WaitingTask <span class="number">5</span></span><br></pre></td></tr></table></figure>
+<p>通过上述的任务输出，我们不难看出，我们将我们的任务很整齐的进行了先后顺序的控制，让我们程序当中有预支条件的任务可以在预支条件之后进行运行。这里就是通过CountDownLatch的锁存器当中的计数器来控制的。这里需要注意的两点就是，</p>
+<ul>
+<li>CountDownLatch这个类当中的计数器的初始值，只能被初始化一次，不能初始化第二次，</li>
+<li>在使用的时候，必须多个对象同步同一个CountDownLatch这个类。</li>
+</ul>
+<p>我们可以尝试将上述代码当中的CountDownLatch相关操作去除，我们再来看一下运行结果，</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">Launch all task</span><br><span class="line">Latch barrier passed <span class="keyword">for</span> WaitingTask <span class="number">9</span>  </span><br><span class="line">Latch barrier passed <span class="keyword">for</span> WaitingTask <span class="number">1</span>  </span><br><span class="line">Latch barrier passed <span class="keyword">for</span> WaitingTask <span class="number">2</span>  </span><br><span class="line">Latch barrier passed <span class="keyword">for</span> WaitingTask <span class="number">8</span>  </span><br><span class="line">Latch barrier passed <span class="keyword">for</span> WaitingTask <span class="number">5</span>  </span><br><span class="line"><span class="number">9</span>   completed</span><br><span class="line"><span class="number">2</span>   completed</span><br><span class="line">Latch barrier passed <span class="keyword">for</span> WaitingTask <span class="number">6</span>  </span><br><span class="line"><span class="number">5</span>   completed</span><br><span class="line"><span class="number">8</span>   completed</span><br><span class="line"><span class="number">3</span>   completed</span><br><span class="line">Latch barrier passed <span class="keyword">for</span> WaitingTask <span class="number">3</span>  </span><br><span class="line"><span class="number">1</span>   completed</span><br><span class="line"><span class="number">6</span>   completed</span><br><span class="line">Latch barrier passed <span class="keyword">for</span> WaitingTask <span class="number">4</span>  </span><br><span class="line"><span class="number">7</span>   completed</span><br><span class="line">Latch barrier passed <span class="keyword">for</span> WaitingTask <span class="number">7</span>  </span><br><span class="line">Latch barrier passed <span class="keyword">for</span> WaitingTask <span class="number">0</span>  </span><br><span class="line"><span class="number">0</span>   completed</span><br><span class="line"><span class="number">4</span>   completed</span><br></pre></td></tr></table></figure>
+<p>很明显结果杂乱无章，没有任何规律可言，到这里大家应该明白了CountDownLatch类的使用了吧。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/05/29/CountDownLatch/" data-id="cjhrsnvey0000mvewue5e2djz" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/并发/">并发</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/线程/">线程</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/05/29/Philosopher/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">哲学家就餐</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      <a href="/" class="logo">刘鹏程</a>
+      &copy; 2018 刘鹏程<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.scrollLoading.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
