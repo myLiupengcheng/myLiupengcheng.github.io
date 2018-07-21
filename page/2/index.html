@@ -191,7 +191,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/09/OrnamentalGrden/" data-id="cjjve1vg50007jgew25nls6j7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/09/OrnamentalGrden/" data-id="cjjve6poc0007k4ew0s5dica8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
@@ -292,7 +292,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/09/thread02/" data-id="cjjve1vhi002ajgewmrf0mt76" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/09/thread02/" data-id="cjjve6pps002ak4ew4oxkca2f" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/并发/">并发</a></li></ul>
@@ -414,7 +414,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/09/thread01/" data-id="cjjve1vh0001rjgew0ucxgxoy" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/09/thread01/" data-id="cjjve6pp9001rk4ew6fojfs9m" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/并发/">并发</a></li></ul>
@@ -461,8 +461,9 @@
 <h4 id="2、触发器的分类："><a href="#2、触发器的分类：" class="headerlink" title="2、触发器的分类："></a>2、触发器的分类：</h4><p>在SQL server当中将触发器主要分为了两种，第一种就是“Instead of”触发器，第二种叫做“After”触发器。</p>
 <p>2.1、Instead of触发器，</p>
 <p>这种类型的触发器在执行真正的“插入之前”会被SQL引擎调用，除了表之外，还可以将该触发器运用于视图当中，用来让视图可以支持更新操作。</p>
-<p>这种类型的触发器会替代所要执行的SQL语句，意思就是说本来要执行的SQL语句斌不会真正的执行。下面可以看一个例子。<br>create trigger tigger_users_delete<br>on users<br>instead of Delete<br>as<br>begin<br>    select * from deleted<br>end</p>
-<p>delete from users where userNo= 4;<br>上述触发器定义了，当我们去删除表users当中的数据时，进行触发，所要做的动作就是去查询user表，</p>
+<p>这种类型的触发器会替代所要执行的SQL语句，意思就是说本来要执行的SQL语句斌不会真正的执行。下面可以看一个例子。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">trigger</span> tigger_users_delete</span><br><span class="line"><span class="keyword">on</span> <span class="keyword">users</span></span><br><span class="line">instead <span class="keyword">of</span> <span class="keyword">Delete</span></span><br><span class="line"><span class="keyword">as</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">select</span> * <span class="keyword">from</span> deleted</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> <span class="keyword">users</span> <span class="keyword">where</span> userNo= <span class="number">4</span>;</span><br></pre></td></tr></table></figure>
+<p>上述触发器定义了，当我们去删除表users当中的数据时，进行触发，所要做的动作就是去查询user表，</p>
 <p>但是当我们最后执行了delete语句之后，发现userNo=4的数据还在，并没有被删除，原因就是触发器代替了所有执行的delete，而在触发器当中并未真正意义上的删除。</p>
 <p>2.2、After 触发器</p>
 <p>After触发器是在DML语句执行之后被触发的。并且After触发器只能修饰表，不能修饰视图。<br>After触发器主要用途就是在表进行DML语句之后，用来修改其他表的值，可以通过这种触发器来判断外键约束，和引用完整性。</p>
@@ -494,12 +495,13 @@
 <p>1、索引是什么<br>2、索引的分类<br>3、索引的原理<br>4、使用场景<br>5、使用索引的优缺点<br>6、简单的例子</p>
 <p>五、事物和锁特性</p>
 <p>1、事务<br>2、事务的范围<br>3、数据库的锁<br>4、数据库的死锁<br>5、事务的种类<br>6、使用注意点</p>
+<p>备注：未完成，由于查看资料时，发现很大一部分内容是两种说法，所以本人以列出大纲，自行研究中，下面网址，可以供读者学习这一方面内容</p>
 <p><a href="http://blog.csdn.net/hustyangju/article/details/17488309" target="_blank" rel="noopener">http://blog.csdn.net/hustyangju/article/details/17488309</a><br><a href="http://blog.csdn.net/lzq_it/article/details/6960176" target="_blank" rel="noopener">http://blog.csdn.net/lzq_it/article/details/6960176</a><br><a href="http://www.runoob.com/sqlite/sqlite-trigger.html" target="_blank" rel="noopener">http://www.runoob.com/sqlite/sqlite-trigger.html</a><br><a href="http://www.cnblogs.com/rainman/p/3675834.html" target="_blank" rel="noopener">http://www.cnblogs.com/rainman/p/3675834.html</a><br><a href="https://www.cnblogs.com/richzhang/archive/2013/04/24/3041280.html" target="_blank" rel="noopener">https://www.cnblogs.com/richzhang/archive/2013/04/24/3041280.html</a><br><a href="https://www.cnblogs.com/envoy/p/4751140.html" target="_blank" rel="noopener">https://www.cnblogs.com/envoy/p/4751140.html</a><br><a href="https://stackoverflow.com/questions/172303/is-there-a-regular-expression-to-detect-a-valid-regular-expression" target="_blank" rel="noopener">https://stackoverflow.com/questions/172303/is-there-a-regular-expression-to-detect-a-valid-regular-expression</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/02/06/android-sqlite02/" data-id="cjjve1vgy001njgewv3jyy44x" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/02/06/android-sqlite02/" data-id="cjjve6pp7001nk4ewal45iemk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
@@ -667,7 +669,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/02/05/android-sqlite01/" data-id="cjjve1vh90021jgewylhdvvv7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/02/05/android-sqlite01/" data-id="cjjve6ppi0021k4ewdvlxlnhh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
@@ -731,7 +733,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/06/view-SurfaceView01/" data-id="cjjve1vgh000ojgew9g9oqap7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/03/06/view-SurfaceView01/" data-id="cjjve6poo000ok4ewtsuhjbpu" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/控件/">控件</a></li></ul>
@@ -847,7 +849,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/02/webView01/" data-id="cjjve1vhb0024jgew2xq9f6hr" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/03/02/webView01/" data-id="cjjve6ppk0024k4ewd8yhf6oc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/控件/">控件</a></li></ul>
@@ -937,7 +939,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/12/09/http03/" data-id="cjjve1vgg000kjgewp9ow3v0e" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/12/09/http03/" data-id="cjjve6pon000kk4ew65g52hpf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/">http</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/协议/">协议</a></li></ul>
@@ -1076,7 +1078,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/12/05/http02/" data-id="cjjve1vgf000ijgew87zl4gv1" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/12/05/http02/" data-id="cjjve6pol000ik4ewrz24vet3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/">http</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/协议/">协议</a></li></ul>
@@ -1197,7 +1199,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/12/02/http01/" data-id="cjjve1vgd000djgeweahtk4u2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/12/02/http01/" data-id="cjjve6poj000dk4ew8a33b97v" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/">http</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/协议/">协议</a></li></ul>
