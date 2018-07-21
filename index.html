@@ -77,7 +77,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JVM/">JVM</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/并发/">并发</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/并发/java/">java</a><span class="category-list-count">7</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/java/">java</a><span class="category-list-count">1</span></li></ul></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JVM/">JVM</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/并发/">并发</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/并发/java/">java</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/java/">java</a><span class="category-list-count">1</span></li></ul></li></ul>
     </div>
   </div>
 
@@ -86,7 +86,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">10</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">10</span></li></ul>
     </div>
   </div>
 
@@ -96,6 +96,10 @@
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/06/15/delayQueue/">线程延时队列DelayQueue</a>
+          </li>
         
           <li>
             <a href="/2018/06/15/JVM-outofMemroyError-02/">JVM学习2 - OutOfMemroyError***</a>
@@ -113,10 +117,6 @@
             <a href="/2018/05/29/CountDownLatch/">线程同步工具类CountDownLatch</a>
           </li>
         
-          <li>
-            <a href="/2018/05/29/Philosopher/">哲学家就餐</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -126,7 +126,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OutOfMemroy/">OutOfMemroy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线程/">线程</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OutOfMemroy/">OutOfMemroy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线程/">线程</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -158,6 +158,66 @@
 </aside>
         
         <section id="main">
+  
+    <article id="post-delayQueue" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/06/15/delayQueue/" class="article-date">
+  <time datetime="2018-06-15T07:19:03.000Z" itemprop="datePublished">2018-06-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/并发/">并发</a>►<a class="article-category-link" href="/categories/并发/java/">java</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/15/delayQueue/">线程延时队列DelayQueue</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>1、DelayQueue的作用</li>
+<li>2、DelayQueue使用规则</li>
+<li>3、DelayQueue的Demo</li>
+<li>4、DelayQueue原理  *</li>
+<li>5、DelayQueue的实现 *</li>
+</ul>
+<hr>
+<h3 id="1、DelayQueue的作用"><a href="#1、DelayQueue的作用" class="headerlink" title="1、DelayQueue的作用"></a>1、DelayQueue的作用</h3><p>作用便是线程调度机制通过粒度特别细的时间控制相应的元素在合适的时间出队，使用场景也是非常多的比如：缓存机制当中使用这个队列来控制缓存队列当中的缓存是否过期，如果过期则执行缓存过期以后的相应逻辑。</p>
+<h3 id="2、DelayQueue使用规则"><a href="#2、DelayQueue使用规则" class="headerlink" title="2、DelayQueue使用规则"></a>2、DelayQueue使用规则</h3><p>DelayQueue从名字，我们知道是一个队列，并且继承自BlockingQueue，是一个阻塞队列，那么就有着阻塞队列的特点，当队列为空的时候，take方法将阻塞，这里需要注意的便是DelayQueue是一个无届队列，也就意味着，没有当队列为满的时候，所以就没有队满。put/add 阻塞的情况，其次DelayQueue最显著的特点便是，这个队列当中根据时间为优先级对队中的元素进行排序，如果我们take一个元素的时候，这个元素的时间值没有到，便会自动阻塞，当时间到以后take到元素。在DelayQueue这个队列当中所描述的任何一种元素必须实现Delay接口，而这个接口当中便定义了两个方法，我们通过这两个方法来进行队当中的排序，以及take的时候，相应的时间粒度的控制。</p>
+<p>时间最长的在对头还是时间最短的在对头，这个主要看如何实现元素的 compareTo 方法。</p>
+<ul>
+<li>public int compareTo(T o);</li>
+<li>long getDelay(TimeUnit unit);</li>
+</ul>
+<p>这里需要注意的是在getDelay当中获取时间的单位是NANOSECONDS，所以在写getDelay这个方法的时候注意使用的时间单位是NANOSECONDS。</p>
+<h3 id="3、DelayQueue的Demo"><a href="#3、DelayQueue的Demo" class="headerlink" title="3、DelayQueue的Demo"></a>3、DelayQueue的Demo</h3><p>下面我们通过一个例子来看一下这个DelayQueue到底应该如何使用。本例子当中我们先根据时间短的先执行，打印了一遍执行顺序，然后通过一个List将原本初始化的时候的Runnable进行了保存，然后在最后进行打印，打印的顺序，便是初始化的顺序，也就是入队的时候的顺序。还有在方括号当中便是延时的时间，可以通过运行看一下，是否是等了相应的时间打印出来的这句话。目的就是让大家可以很直观的看到，我们通过DelayQueue是按照一个什么顺序进行排序的，最后通过一个任务将整个系统结束掉。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/***</span></span><br><span class="line"><span class="comment"> * 探究无届队列DelayQueue</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> pengchengliu</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestDelayQueue</span> </span>&#123;</span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"> 		Random random = <span class="keyword">new</span> Random(<span class="number">47</span>);</span><br><span class="line"> 		ExecutorService newCachedThreadPool = Executors.newCachedThreadPool();</span><br><span class="line"> 		DelayQueue&lt;DelayedTask&gt; delayQueue = <span class="keyword">new</span> DelayQueue&lt;DelayedTask&gt;();</span><br><span class="line"> 		</span><br><span class="line"> 		<span class="comment">// 初始化 delayQueue ，</span></span><br><span class="line"> 		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">20</span>; i++) &#123;</span><br><span class="line"> 			delayQueue.put(<span class="keyword">new</span> DelayedTask(random.nextInt(<span class="number">5000</span>)));</span><br><span class="line"> 		&#125;</span><br><span class="line"> 		delayQueue.add(<span class="keyword">new</span> DelayedTask.EndSentinel(<span class="number">5000</span>, newCachedThreadPool));</span><br><span class="line"> 		</span><br><span class="line"> 		<span class="comment">// 启动任务开关</span></span><br><span class="line"> 		newCachedThreadPool.execute(<span class="keyword">new</span> DelayedTaskConsumer(delayQueue));</span><br><span class="line"> 	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DelayedTask</span> <span class="keyword">implements</span> <span class="title">Runnable</span>, <span class="title">Delayed</span> </span>&#123;</span><br><span class="line"> 	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> counter = <span class="number">0</span> ;</span><br><span class="line"> 	<span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> id = counter ++ ;</span><br><span class="line"> 	<span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> delta ;</span><br><span class="line"> 	<span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">long</span> trigger ;</span><br><span class="line"> 	<span class="keyword">protected</span> <span class="keyword">static</span> List&lt;DelayedTask&gt; sequence = <span class="keyword">new</span> ArrayList&lt;DelayedTask&gt;();</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="title">DelayedTask</span><span class="params">(<span class="keyword">int</span> delayInMilliseconds)</span> </span>&#123;</span><br><span class="line"> 		<span class="keyword">this</span>.delta = delayInMilliseconds ;</span><br><span class="line"> 		<span class="comment">// 从较细粒度到较粗粒度的舍位转换，这样会失去精确性。例如，将 999 毫秒转换为秒的结果为 0。</span></span><br><span class="line">                <span class="comment">// 使用参数从较粗粒度到较细粒度转换，如果参数为负，则在数字上溢出至 Long.MIN_VALUE，</span></span><br><span class="line">                <span class="comment">// 如果为正，则为 Long.MAX_VALUE。 将1毫秒转换为毫微秒</span></span><br><span class="line"> 		trigger = System.nanoTime() + TimeUnit.NANOSECONDS.convert(<span class="keyword">this</span>.delta, TimeUnit.MILLISECONDS);</span><br><span class="line"> 		sequence.add(<span class="keyword">this</span>) ;</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="meta">@Override</span></span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">long</span> <span class="title">getDelay</span><span class="params">(TimeUnit unit)</span> </span>&#123;</span><br><span class="line"> 		<span class="keyword">return</span> unit.convert(trigger - System.nanoTime(), TimeUnit.NANOSECONDS);</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="meta">@Override</span></span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(Delayed delayed)</span> </span>&#123;</span><br><span class="line"> 		DelayedTask task = (DelayedTask) delayed ;</span><br><span class="line"> 		<span class="keyword">if</span> (<span class="keyword">this</span>.delta &lt; task.delta) <span class="keyword">return</span> -<span class="number">1</span> ;</span><br><span class="line"> 		<span class="keyword">if</span> (<span class="keyword">this</span>.delta &gt; task.delta) <span class="keyword">return</span> <span class="number">1</span> ;</span><br><span class="line"> 		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="meta">@Override</span></span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line"> 		System.out.println(<span class="keyword">this</span> + <span class="string">" "</span>);</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="meta">@Override</span></span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line"> 		<span class="keyword">return</span> String.format(<span class="string">"[%1$-4d]"</span>, delta) + <span class="string">" Task:"</span> + id;</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> String <span class="title">summary</span> <span class="params">()</span> </span>&#123;</span><br><span class="line"> 		<span class="keyword">return</span> <span class="string">"("</span> + id + <span class="string">":"</span> + delta + <span class="string">")"</span>;</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">EndSentinel</span> <span class="keyword">extends</span> <span class="title">DelayedTask</span> </span>&#123;</span><br><span class="line"> 		</span><br><span class="line"> 		<span class="keyword">private</span> ExecutorService exec ;</span><br><span class="line"> 		</span><br><span class="line"> 		<span class="function"><span class="keyword">public</span> <span class="title">EndSentinel</span><span class="params">(<span class="keyword">int</span> delayInMilliseconds, ExecutorService exec)</span> </span>&#123;</span><br><span class="line"> 			<span class="keyword">super</span>(delayInMilliseconds);</span><br><span class="line"> 			<span class="keyword">this</span>.exec = exec ;</span><br><span class="line"> 		&#125;</span><br><span class="line"> 		</span><br><span class="line"> 		<span class="meta">@Override</span></span><br><span class="line"> 		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line"> 			<span class="keyword">for</span> (DelayedTask task : sequence) &#123;</span><br><span class="line"> 				System.out.print(task.summary() + <span class="string">" "</span>);</span><br><span class="line"> 			&#125;</span><br><span class="line"> 			System.out.println();</span><br><span class="line"> 			System.out.println(<span class="keyword">this</span> + <span class="string">" Calling shutdownNow()"</span>);</span><br><span class="line"> 			exec.shutdownNow() ;</span><br><span class="line"> 		&#125;</span><br><span class="line"> 		</span><br><span class="line"> 	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DelayedTaskConsumer</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="keyword">private</span> DelayQueue&lt;DelayedTask&gt; q ;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="title">DelayedTaskConsumer</span><span class="params">(DelayQueue&lt;DelayedTask&gt; q)</span> </span>&#123;</span><br><span class="line"> 		<span class="keyword">this</span>.q = q ;</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="meta">@Override</span></span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line"> 		<span class="keyword">try</span> &#123;</span><br><span class="line"> 			<span class="keyword">while</span> (!Thread.interrupted())&#123;</span><br><span class="line"> 				<span class="comment">//注意：手动调用run方法</span></span><br><span class="line"> 				q.take().run();</span><br><span class="line"> 			&#125;</span><br><span class="line"> 		&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;&#125;</span><br><span class="line"> 		System.out.println(<span class="string">"Finish DelayedTaskConsumer"</span>);</span><br><span class="line"> 	&#125;</span><br><span class="line">&#125;</span><br><span class="line">[<span class="number">128</span> ] Task:<span class="number">11</span> </span><br><span class="line">[<span class="number">200</span> ] Task:<span class="number">7</span> </span><br><span class="line">[<span class="number">429</span> ] Task:<span class="number">5</span> </span><br><span class="line">[<span class="number">520</span> ] Task:<span class="number">18</span> </span><br><span class="line">[<span class="number">555</span> ] Task:<span class="number">1</span> </span><br><span class="line">[<span class="number">961</span> ] Task:<span class="number">4</span> </span><br><span class="line">[<span class="number">998</span> ] Task:<span class="number">16</span> </span><br><span class="line">[<span class="number">1207</span>] Task:<span class="number">9</span> </span><br><span class="line">[<span class="number">1693</span>] Task:<span class="number">2</span> </span><br><span class="line">[<span class="number">1809</span>] Task:<span class="number">14</span> </span><br><span class="line">[<span class="number">1861</span>] Task:<span class="number">3</span> </span><br><span class="line">[<span class="number">2278</span>] Task:<span class="number">15</span> </span><br><span class="line">[<span class="number">3288</span>] Task:<span class="number">10</span> </span><br><span class="line">[<span class="number">3551</span>] Task:<span class="number">12</span> </span><br><span class="line">[<span class="number">4258</span>] Task:<span class="number">0</span> </span><br><span class="line">[<span class="number">4258</span>] Task:<span class="number">19</span> </span><br><span class="line">[<span class="number">4522</span>] Task:<span class="number">8</span> </span><br><span class="line">[<span class="number">4589</span>] Task:<span class="number">13</span> </span><br><span class="line">[<span class="number">4861</span>] Task:<span class="number">17</span> </span><br><span class="line">[<span class="number">4868</span>] Task:<span class="number">6</span> </span><br><span class="line">(<span class="number">0</span>:<span class="number">4258</span>) (<span class="number">1</span>:<span class="number">555</span>) (<span class="number">2</span>:<span class="number">1693</span>) (<span class="number">3</span>:<span class="number">1861</span>) (<span class="number">4</span>:<span class="number">961</span>) (<span class="number">5</span>:<span class="number">429</span>) (<span class="number">6</span>:<span class="number">4868</span>) (<span class="number">7</span>:<span class="number">200</span>) (<span class="number">8</span>:<span class="number">4522</span>) (<span class="number">9</span>:<span class="number">1207</span>) (<span class="number">10</span>:<span class="number">3288</span>) (<span class="number">11</span>:<span class="number">128</span>) (<span class="number">12</span>:<span class="number">3551</span>) (<span class="number">13</span>:<span class="number">4589</span>) (<span class="number">14</span>:<span class="number">1809</span>) (<span class="number">15</span>:<span class="number">2278</span>) (<span class="number">16</span>:<span class="number">998</span>) (<span class="number">17</span>:<span class="number">4861</span>) (<span class="number">18</span>:<span class="number">520</span>) (<span class="number">19</span>:<span class="number">4258</span>) (<span class="number">20</span>:<span class="number">5000</span>) </span><br><span class="line">[<span class="number">5000</span>] Task:<span class="number">20</span> <span class="function">Calling <span class="title">shutdownNow</span><span class="params">()</span></span></span><br><span class="line"><span class="function">Finish DelayedTaskConsumer</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/06/15/delayQueue/" data-id="cjjv36bqg00091pew6q5jsn6s" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/并发/">并发</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/线程/">线程</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-JVM-outofMemroyError-02" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -229,7 +289,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/15/JVM-outofMemroyError-02/" data-id="cjjv2xcbv0004zwewimu15i05" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/15/JVM-outofMemroyError-02/" data-id="cjjv36bqa00041pewqfeg7gfu" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OutOfMemroy/">OutOfMemroy</a></li></ul>
@@ -354,7 +414,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/03/JVM-memory-01/" data-id="cjjv2xccm0013zwew9yz12e7s" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/03/JVM-memory-01/" data-id="cjjv36bqy001b1pewlsbn75ay" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/">JVM</a></li></ul>
@@ -414,7 +474,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/29/CyclicBarrier/" data-id="cjjv2xcbr0001zwew3o0j43to" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/29/CyclicBarrier/" data-id="cjjv36bq600011pewyz1feihd" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/并发/">并发</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/线程/">线程</a></li></ul>
@@ -479,7 +539,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/29/CountDownLatch/" data-id="cjjv2xcbn0000zwew32qx2epb" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/29/CountDownLatch/" data-id="cjjv36bq300001pewatnlx6ht" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/并发/">并发</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/线程/">线程</a></li></ul>
@@ -536,7 +596,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/29/Philosopher/" data-id="cjjv2xcbx0006zwew8bnox98z" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/29/Philosopher/" data-id="cjjv36bqe00061pewwk8iws4e" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
@@ -667,7 +727,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/13/thread5/" data-id="cjjv2xcdu0023zwewc0xkcuk6" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/13/thread5/" data-id="cjjv36bse002b1pewo9c0xz34" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/并发/">并发</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/线程/">线程</a></li></ul>
@@ -750,7 +810,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/12/flyweight-0/" data-id="cjjv2xcco0015zwew9v4c4nhg" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/12/flyweight-0/" data-id="cjjv36br1001d1pew20nmgk91" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
@@ -840,7 +900,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/09/thread04/" data-id="cjjv2xcd3001lzwewx7onkdhi" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/09/thread04/" data-id="cjjv36brt001t1pewrzi35lrm" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/并发/">并发</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/线程/">线程</a></li></ul>
@@ -984,54 +1044,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/09/thread03/" data-id="cjjv2xcdk001szwewttch0lax" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/09/thread03/" data-id="cjjv36bsa00201pewcdoh1a67" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/并发/">并发</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/线程/">线程</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-OrnamentalGrden" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/05/09/OrnamentalGrden/" class="article-date">
-  <time datetime="2018-05-09T02:06:00.000Z" itemprop="datePublished">2018-05-09</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/算法/">算法</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/09/OrnamentalGrden/">装饰者花园</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>题目：有一所很大的花园，花园提供了多个大门供游人进出花园，花园供应商希望了解每天通过多个大门进入公园的总人数。每个大门都有一个计数器，并且任何一个计数器递增的时候，就表示公园当中的总人数也会递增，反之同理。每一个游客可能从一个大门进入以后从另外的一个大门出去。</p>
-<p>分析：这是一个典型的多线程共享资源冲突的算法，有一个总人数，为共享资源，而那几个大门就是不同的任务，随时随地的对人数这个资源进行着读写，所以同步操作一定要注意。下面通过一个Demo来模拟上述场景。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 装饰者花园：</span></span><br><span class="line"><span class="comment"> * 题目：有一所很大的花园，花园提供了多个大门供游人进出花园，花园供应商希望了解每天通过多个大门进入公园的总人数。</span></span><br><span class="line"><span class="comment"> * 每个大门都有一个计数器，并且任何一个计数器递增的时候，就表示公园当中的总人数也会递增，反之同理。</span></span><br><span class="line"><span class="comment"> * 每一个游客可能从一个大门进入以后从另外的一个大门出去。</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> pengchengliu</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrnamentalGrden</span> </span>&#123;</span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line"> 		ExecutorService threadPool = Executors.newCachedThreadPool();</span><br><span class="line"> 		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line"> 			threadPool.execute(<span class="keyword">new</span> Door(i));</span><br><span class="line"> 		&#125;</span><br><span class="line"> 		TimeUnit.SECONDS.sleep(<span class="number">3</span>);</span><br><span class="line"> 		Door.cancel();</span><br><span class="line"> 		threadPool.shutdown();</span><br><span class="line"> 		</span><br><span class="line"> 		<span class="keyword">if</span> (!threadPool.awaitTermination(<span class="number">250</span>, TimeUnit.MILLISECONDS)) &#123;</span><br><span class="line"> 			System.out.println(<span class="string">"some tasks were not terminated!"</span>);</span><br><span class="line"> 		&#125;</span><br><span class="line"> 		System.out.println(<span class="string">"Total : "</span> + Door.getTotalCount());</span><br><span class="line"> 		System.out.println(<span class="string">"sum of door: "</span> + Door.sumCount());</span><br><span class="line"> 	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Door</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line"> 	<span class="comment">//使用static，让这个变量成为多个Door的持有者，也就是共享域</span></span><br><span class="line"> 	<span class="keyword">private</span> <span class="keyword">static</span> Count sCount = <span class="keyword">new</span> Count() ;</span><br><span class="line"> 	<span class="comment">//每创建一个大门，将大门压入一个共享域的List当中，这样的好处是，将多个相互独立的大门对象托管到大门类的共享域当中</span></span><br><span class="line"> 	<span class="keyword">private</span> <span class="keyword">static</span> List&lt;Door&gt; sDoorList = <span class="keyword">new</span> ArrayList&lt;Door&gt;();</span><br><span class="line"> 	<span class="comment">//终结任务的标示符，为了保证每一个任务都对该变量具有可视性，所以必须保持volatile，并且被多个任务所共享，只需要一份，所以为static</span></span><br><span class="line"> 	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">volatile</span> <span class="keyword">boolean</span> sCanceled = <span class="keyword">false</span> ;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="comment">//当前大门所经过的人数，每一个大门和每一个大门不同，所以属于对象层次，不属于类层次</span></span><br><span class="line"> 	<span class="keyword">private</span> <span class="keyword">int</span> number = <span class="number">0</span>;</span><br><span class="line"> 	<span class="comment">// ID 是每一个门的标示，所以置为final，代表只在第一次初始化的时候赋值</span></span><br><span class="line"> 	<span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> ID ;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="title">Door</span> <span class="params">(<span class="keyword">int</span> id)</span> </span>&#123;</span><br><span class="line"> 		<span class="keyword">this</span>.ID = id ;</span><br><span class="line"> 		sDoorList.add(<span class="keyword">this</span>) ;</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	<span class="meta">@Override</span></span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line"> 		<span class="keyword">while</span> (!sCanceled) &#123;</span><br><span class="line"> 			<span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</span><br><span class="line"> 				++ number; </span><br><span class="line"> 			&#125;</span><br><span class="line"> 			System.out.println(<span class="keyword">this</span> + <span class="string">"Totle : "</span> + sCount.increment());</span><br><span class="line"> 			<span class="keyword">try</span>&#123;</span><br><span class="line"> 				TimeUnit.MILLISECONDS.sleep(<span class="number">100</span>);</span><br><span class="line"> 			&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line"> 				System.out.println(<span class="string">"sleep interrupted"</span>);</span><br><span class="line"> 			&#125;</span><br><span class="line"> 		&#125;</span><br><span class="line"> 		System.out.println(<span class="string">"stopping "</span> + <span class="keyword">this</span>);</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">int</span> <span class="title">getValue</span> <span class="params">()</span> </span>&#123;</span><br><span class="line"> 		<span class="keyword">return</span> number ;</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="comment">//修改终结标示符，让所有的任务结束。</span></span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">cancel</span><span class="params">()</span> </span>&#123;</span><br><span class="line"> 		sCanceled = <span class="keyword">true</span> ;</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="meta">@Override</span></span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line"> 		<span class="keyword">return</span> <span class="string">"Door "</span> + ID + <span class="string">" : "</span> + getValue();</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="comment">/* * * * * * * * * * *  static fun  * * * * * * * * * * */</span></span><br><span class="line"> 	</span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getTotalCount</span> <span class="params">()</span> </span>&#123;</span><br><span class="line"> 		<span class="keyword">return</span> sCount.value() ;</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">sumCount</span> <span class="params">()</span> </span>&#123;</span><br><span class="line"> 		<span class="keyword">int</span> sum = <span class="number">0</span> ;</span><br><span class="line"> 		<span class="keyword">for</span> (Door door : sDoorList) &#123;</span><br><span class="line"> 			sum += door.getValue() ;</span><br><span class="line"> 		&#125;</span><br><span class="line"> 		<span class="keyword">return</span> sum ;</span><br><span class="line"> 	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 花园当中的总计数器</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> pengchengliu</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Count</span> </span>&#123;</span><br><span class="line"> 	<span class="keyword">private</span> <span class="keyword">int</span> count = <span class="number">0</span> ;</span><br><span class="line"> 	<span class="comment">//布鲁斯.艾克尔也这么提到：由47做种后，产生的随机数更加体现了随机性。</span></span><br><span class="line"> 	<span class="comment">//它没有什么具体的意义，只要理解随机数如果有一个种子，那么会出现比较随机的随机数，而当种子是47的时候，随机率是最大的。</span></span><br><span class="line"> 	<span class="keyword">private</span> Random random = <span class="keyword">new</span> Random(<span class="number">47</span>);</span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">int</span> <span class="title">increment</span> <span class="params">()</span> </span>&#123;</span><br><span class="line"> 		<span class="keyword">int</span> temp = count ;</span><br><span class="line"> 		<span class="keyword">if</span> (random.nextBoolean()) &#123;</span><br><span class="line"> 			<span class="comment">//建议调度器切换到其他线程，注意：此时没有释放相应的锁</span></span><br><span class="line"> 			Thread.yield();</span><br><span class="line"> 		&#125;</span><br><span class="line"> 		<span class="keyword">return</span> (count = ++temp);</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">int</span> <span class="title">value</span> <span class="params">()</span> </span>&#123;<span class="keyword">return</span> count ;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/09/OrnamentalGrden/" data-id="cjjv2xcbw0005zwewlarjdbzd" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
 
     </footer>
   </div>
