@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>线程延时队列DelayQueue | 刘鹏程</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1、DelayQueue的作用 2、DelayQueue使用规则 3、DelayQueue的Demo 4、DelayQueue原理  * 5、DelayQueue的实现 *   1、DelayQueue的作用作用便是线程调度机制通过粒度特别细的时间控制相应的元素在合适的时间出队，使用场景也是非常多的比如：缓存机制当中使用这个队列来控制缓存队列当中的缓存是否过期，如果过期则执行缓存过期以后的相应逻">
+<meta name="keywords" content="并发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="线程延时队列DelayQueue">
+<meta property="og:url" content="http://yoursite.com/2018/06/15/thread-tools-delayQueue/index.html">
+<meta property="og:site_name" content="刘鹏程">
+<meta property="og:description" content="1、DelayQueue的作用 2、DelayQueue使用规则 3、DelayQueue的Demo 4、DelayQueue原理  * 5、DelayQueue的实现 *   1、DelayQueue的作用作用便是线程调度机制通过粒度特别细的时间控制相应的元素在合适的时间出队，使用场景也是非常多的比如：缓存机制当中使用这个队列来控制缓存队列当中的缓存是否过期，如果过期则执行缓存过期以后的相应逻">
+<meta property="og:locale" content="中文">
+<meta property="og:updated_time" content="2018-07-21T07:51:51.948Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="线程延时队列DelayQueue">
+<meta name="twitter:description" content="1、DelayQueue的作用 2、DelayQueue使用规则 3、DelayQueue的Demo 4、DelayQueue原理  * 5、DelayQueue的实现 *   1、DelayQueue的作用作用便是线程调度机制通过粒度特别细的时间控制相应的元素在合适的时间出队，使用场景也是非常多的比如：缓存机制当中使用这个队列来控制缓存队列当中的缓存是否过期，如果过期则执行缓存过期以后的相应逻">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <!-- <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'> -->
+  <!-- <link href="//fonts.googleapis.com/css?family=Source+Code+Pro:400,700" rel="stylesheet" type="text/css"> -->
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro:400,700" rel="stylesheet" type="text/css">
+  <link href='//fonts.useso.com/css?family=Open+Sans:300,600' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="header-outer" class="outer">
+    <a href="/" class="logo">刘鹏程</a>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about/index.html">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+        </div>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        
+        
+          <a id="nav-github-link" class="nav-icon" href="https://github.com/ppoffice/hexo-theme-alex" title="Fork me on GitHub"></a>
+        
+      </nav>
+    </div>
+  </div>
+</header>
+      <nav id="mobile-nav" class="off">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about/index.html" class="mobile-nav-link">About</a>
+  
+  <div id="search-form-wrap-mobile">
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+  </div>
+</nav>
+      <div class="outer">
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JVM/">JVM</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/协议/">协议</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/并发/">并发</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据结构/">数据结构</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/06/15/thread-tools-delayQueue/">线程延时队列DelayQueue</a>
+          </li>
+        
+          <li>
+            <a href="/2018/06/15/JVM-outofMemroyError-02/">JVM学习2 - OutOfMemroyError***</a>
+          </li>
+        
+          <li>
+            <a href="/2018/06/03/JVM-memory-01/">JVM学习1 - 内存区域</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/29/thread-tools-CyclicBarrier/">线程同步工具类CyclicBarrier</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/29/thread-tools-CountDownLatch/">线程同步工具类CountDownLatch</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OutOfMemroy/">OutOfMemroy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/协议/">协议</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/控件/">控件</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构/">数据结构</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JVM/" style="font-size: 13.33px;">JVM</a> <a href="/tags/OutOfMemroy/" style="font-size: 10px;">OutOfMemroy</a> <a href="/tags/http/" style="font-size: 16.67px;">http</a> <a href="/tags/协议/" style="font-size: 16.67px;">协议</a> <a href="/tags/并发/" style="font-size: 20px;">并发</a> <a href="/tags/控件/" style="font-size: 13.33px;">控件</a> <a href="/tags/数据库/" style="font-size: 16.67px;">数据库</a> <a href="/tags/数据结构/" style="font-size: 13.33px;">数据结构</a> <a href="/tags/算法/" style="font-size: 13.33px;">算法</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://hexo.io">Hexo</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+        <section id="main"><article id="post-thread-tools-delayQueue" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/06/15/thread-tools-delayQueue/" class="article-date">
+  <time datetime="2018-06-15T07:19:03.000Z" itemprop="datePublished">2018-06-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/并发/">并发</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      线程延时队列DelayQueue
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>1、DelayQueue的作用</li>
+<li>2、DelayQueue使用规则</li>
+<li>3、DelayQueue的Demo</li>
+<li>4、DelayQueue原理  *</li>
+<li>5、DelayQueue的实现 *</li>
+</ul>
+<hr>
+<h3 id="1、DelayQueue的作用"><a href="#1、DelayQueue的作用" class="headerlink" title="1、DelayQueue的作用"></a>1、DelayQueue的作用</h3><p>作用便是线程调度机制通过粒度特别细的时间控制相应的元素在合适的时间出队，使用场景也是非常多的比如：缓存机制当中使用这个队列来控制缓存队列当中的缓存是否过期，如果过期则执行缓存过期以后的相应逻辑。</p>
+<h3 id="2、DelayQueue使用规则"><a href="#2、DelayQueue使用规则" class="headerlink" title="2、DelayQueue使用规则"></a>2、DelayQueue使用规则</h3><p>DelayQueue从名字，我们知道是一个队列，并且继承自BlockingQueue，是一个阻塞队列，那么就有着阻塞队列的特点，当队列为空的时候，take方法将阻塞，这里需要注意的便是DelayQueue是一个无届队列，也就意味着，没有当队列为满的时候，所以就没有队满。put/add 阻塞的情况，其次DelayQueue最显著的特点便是，这个队列当中根据时间为优先级对队中的元素进行排序，如果我们take一个元素的时候，这个元素的时间值没有到，便会自动阻塞，当时间到以后take到元素。在DelayQueue这个队列当中所描述的任何一种元素必须实现Delay接口，而这个接口当中便定义了两个方法，我们通过这两个方法来进行队当中的排序，以及take的时候，相应的时间粒度的控制。</p>
+<p>时间最长的在对头还是时间最短的在对头，这个主要看如何实现元素的 compareTo 方法。</p>
+<ul>
+<li>public int compareTo(T o);</li>
+<li>long getDelay(TimeUnit unit);</li>
+</ul>
+<p>这里需要注意的是在getDelay当中获取时间的单位是NANOSECONDS，所以在写getDelay这个方法的时候注意使用的时间单位是NANOSECONDS。</p>
+<h3 id="3、DelayQueue的Demo"><a href="#3、DelayQueue的Demo" class="headerlink" title="3、DelayQueue的Demo"></a>3、DelayQueue的Demo</h3><p>下面我们通过一个例子来看一下这个DelayQueue到底应该如何使用。本例子当中我们先根据时间短的先执行，打印了一遍执行顺序，然后通过一个List将原本初始化的时候的Runnable进行了保存，然后在最后进行打印，打印的顺序，便是初始化的顺序，也就是入队的时候的顺序。还有在方括号当中便是延时的时间，可以通过运行看一下，是否是等了相应的时间打印出来的这句话。目的就是让大家可以很直观的看到，我们通过DelayQueue是按照一个什么顺序进行排序的，最后通过一个任务将整个系统结束掉。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/***</span></span><br><span class="line"><span class="comment"> * 探究无届队列DelayQueue</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> pengchengliu</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestDelayQueue</span> </span>&#123;</span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"> 		Random random = <span class="keyword">new</span> Random(<span class="number">47</span>);</span><br><span class="line"> 		ExecutorService newCachedThreadPool = Executors.newCachedThreadPool();</span><br><span class="line"> 		DelayQueue&lt;DelayedTask&gt; delayQueue = <span class="keyword">new</span> DelayQueue&lt;DelayedTask&gt;();</span><br><span class="line"> 		</span><br><span class="line"> 		<span class="comment">// 初始化 delayQueue ，</span></span><br><span class="line"> 		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">20</span>; i++) &#123;</span><br><span class="line"> 			delayQueue.put(<span class="keyword">new</span> DelayedTask(random.nextInt(<span class="number">5000</span>)));</span><br><span class="line"> 		&#125;</span><br><span class="line"> 		delayQueue.add(<span class="keyword">new</span> DelayedTask.EndSentinel(<span class="number">5000</span>, newCachedThreadPool));</span><br><span class="line"> 		</span><br><span class="line"> 		<span class="comment">// 启动任务开关</span></span><br><span class="line"> 		newCachedThreadPool.execute(<span class="keyword">new</span> DelayedTaskConsumer(delayQueue));</span><br><span class="line"> 	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DelayedTask</span> <span class="keyword">implements</span> <span class="title">Runnable</span>, <span class="title">Delayed</span> </span>&#123;</span><br><span class="line"> 	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> counter = <span class="number">0</span> ;</span><br><span class="line"> 	<span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> id = counter ++ ;</span><br><span class="line"> 	<span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> delta ;</span><br><span class="line"> 	<span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">long</span> trigger ;</span><br><span class="line"> 	<span class="keyword">protected</span> <span class="keyword">static</span> List&lt;DelayedTask&gt; sequence = <span class="keyword">new</span> ArrayList&lt;DelayedTask&gt;();</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="title">DelayedTask</span><span class="params">(<span class="keyword">int</span> delayInMilliseconds)</span> </span>&#123;</span><br><span class="line"> 		<span class="keyword">this</span>.delta = delayInMilliseconds ;</span><br><span class="line"> 		<span class="comment">// 从较细粒度到较粗粒度的舍位转换，这样会失去精确性。例如，将 999 毫秒转换为秒的结果为 0。</span></span><br><span class="line">                <span class="comment">// 使用参数从较粗粒度到较细粒度转换，如果参数为负，则在数字上溢出至 Long.MIN_VALUE，</span></span><br><span class="line">                <span class="comment">// 如果为正，则为 Long.MAX_VALUE。 将1毫秒转换为毫微秒</span></span><br><span class="line"> 		trigger = System.nanoTime() + TimeUnit.NANOSECONDS.convert(<span class="keyword">this</span>.delta, TimeUnit.MILLISECONDS);</span><br><span class="line"> 		sequence.add(<span class="keyword">this</span>) ;</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="meta">@Override</span></span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">long</span> <span class="title">getDelay</span><span class="params">(TimeUnit unit)</span> </span>&#123;</span><br><span class="line"> 		<span class="keyword">return</span> unit.convert(trigger - System.nanoTime(), TimeUnit.NANOSECONDS);</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="meta">@Override</span></span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(Delayed delayed)</span> </span>&#123;</span><br><span class="line"> 		DelayedTask task = (DelayedTask) delayed ;</span><br><span class="line"> 		<span class="keyword">if</span> (<span class="keyword">this</span>.delta &lt; task.delta) <span class="keyword">return</span> -<span class="number">1</span> ;</span><br><span class="line"> 		<span class="keyword">if</span> (<span class="keyword">this</span>.delta &gt; task.delta) <span class="keyword">return</span> <span class="number">1</span> ;</span><br><span class="line"> 		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="meta">@Override</span></span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line"> 		System.out.println(<span class="keyword">this</span> + <span class="string">" "</span>);</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="meta">@Override</span></span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line"> 		<span class="keyword">return</span> String.format(<span class="string">"[%1$-4d]"</span>, delta) + <span class="string">" Task:"</span> + id;</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> String <span class="title">summary</span> <span class="params">()</span> </span>&#123;</span><br><span class="line"> 		<span class="keyword">return</span> <span class="string">"("</span> + id + <span class="string">":"</span> + delta + <span class="string">")"</span>;</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">EndSentinel</span> <span class="keyword">extends</span> <span class="title">DelayedTask</span> </span>&#123;</span><br><span class="line"> 		</span><br><span class="line"> 		<span class="keyword">private</span> ExecutorService exec ;</span><br><span class="line"> 		</span><br><span class="line"> 		<span class="function"><span class="keyword">public</span> <span class="title">EndSentinel</span><span class="params">(<span class="keyword">int</span> delayInMilliseconds, ExecutorService exec)</span> </span>&#123;</span><br><span class="line"> 			<span class="keyword">super</span>(delayInMilliseconds);</span><br><span class="line"> 			<span class="keyword">this</span>.exec = exec ;</span><br><span class="line"> 		&#125;</span><br><span class="line"> 		</span><br><span class="line"> 		<span class="meta">@Override</span></span><br><span class="line"> 		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line"> 			<span class="keyword">for</span> (DelayedTask task : sequence) &#123;</span><br><span class="line"> 				System.out.print(task.summary() + <span class="string">" "</span>);</span><br><span class="line"> 			&#125;</span><br><span class="line"> 			System.out.println();</span><br><span class="line"> 			System.out.println(<span class="keyword">this</span> + <span class="string">" Calling shutdownNow()"</span>);</span><br><span class="line"> 			exec.shutdownNow() ;</span><br><span class="line"> 		&#125;</span><br><span class="line"> 		</span><br><span class="line"> 	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DelayedTaskConsumer</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="keyword">private</span> DelayQueue&lt;DelayedTask&gt; q ;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="title">DelayedTaskConsumer</span><span class="params">(DelayQueue&lt;DelayedTask&gt; q)</span> </span>&#123;</span><br><span class="line"> 		<span class="keyword">this</span>.q = q ;</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="meta">@Override</span></span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line"> 		<span class="keyword">try</span> &#123;</span><br><span class="line"> 			<span class="keyword">while</span> (!Thread.interrupted())&#123;</span><br><span class="line"> 				<span class="comment">//注意：手动调用run方法</span></span><br><span class="line"> 				q.take().run();</span><br><span class="line"> 			&#125;</span><br><span class="line"> 		&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;&#125;</span><br><span class="line"> 		System.out.println(<span class="string">"Finish DelayedTaskConsumer"</span>);</span><br><span class="line"> 	&#125;</span><br><span class="line">&#125;</span><br><span class="line">[<span class="number">128</span> ] Task:<span class="number">11</span> </span><br><span class="line">[<span class="number">200</span> ] Task:<span class="number">7</span> </span><br><span class="line">[<span class="number">429</span> ] Task:<span class="number">5</span> </span><br><span class="line">[<span class="number">520</span> ] Task:<span class="number">18</span> </span><br><span class="line">[<span class="number">555</span> ] Task:<span class="number">1</span> </span><br><span class="line">[<span class="number">961</span> ] Task:<span class="number">4</span> </span><br><span class="line">[<span class="number">998</span> ] Task:<span class="number">16</span> </span><br><span class="line">[<span class="number">1207</span>] Task:<span class="number">9</span> </span><br><span class="line">[<span class="number">1693</span>] Task:<span class="number">2</span> </span><br><span class="line">[<span class="number">1809</span>] Task:<span class="number">14</span> </span><br><span class="line">[<span class="number">1861</span>] Task:<span class="number">3</span> </span><br><span class="line">[<span class="number">2278</span>] Task:<span class="number">15</span> </span><br><span class="line">[<span class="number">3288</span>] Task:<span class="number">10</span> </span><br><span class="line">[<span class="number">3551</span>] Task:<span class="number">12</span> </span><br><span class="line">[<span class="number">4258</span>] Task:<span class="number">0</span> </span><br><span class="line">[<span class="number">4258</span>] Task:<span class="number">19</span> </span><br><span class="line">[<span class="number">4522</span>] Task:<span class="number">8</span> </span><br><span class="line">[<span class="number">4589</span>] Task:<span class="number">13</span> </span><br><span class="line">[<span class="number">4861</span>] Task:<span class="number">17</span> </span><br><span class="line">[<span class="number">4868</span>] Task:<span class="number">6</span> </span><br><span class="line">(<span class="number">0</span>:<span class="number">4258</span>) (<span class="number">1</span>:<span class="number">555</span>) (<span class="number">2</span>:<span class="number">1693</span>) (<span class="number">3</span>:<span class="number">1861</span>) (<span class="number">4</span>:<span class="number">961</span>) (<span class="number">5</span>:<span class="number">429</span>) (<span class="number">6</span>:<span class="number">4868</span>) (<span class="number">7</span>:<span class="number">200</span>) (<span class="number">8</span>:<span class="number">4522</span>) (<span class="number">9</span>:<span class="number">1207</span>) (<span class="number">10</span>:<span class="number">3288</span>) (<span class="number">11</span>:<span class="number">128</span>) (<span class="number">12</span>:<span class="number">3551</span>) (<span class="number">13</span>:<span class="number">4589</span>) (<span class="number">14</span>:<span class="number">1809</span>) (<span class="number">15</span>:<span class="number">2278</span>) (<span class="number">16</span>:<span class="number">998</span>) (<span class="number">17</span>:<span class="number">4861</span>) (<span class="number">18</span>:<span class="number">520</span>) (<span class="number">19</span>:<span class="number">4258</span>) (<span class="number">20</span>:<span class="number">5000</span>) </span><br><span class="line">[<span class="number">5000</span>] Task:<span class="number">20</span> <span class="function">Calling <span class="title">shutdownNow</span><span class="params">()</span></span></span><br><span class="line"><span class="function">Finish DelayedTaskConsumer</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/06/15/thread-tools-delayQueue/" data-id="cjk4y7p2f000nmdewag3bv59k" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/并发/">并发</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/06/15/JVM-outofMemroyError-02/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">JVM学习2 - OutOfMemroyError***</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      <a href="/" class="logo">刘鹏程</a>
+      &copy; 2018 刘鹏程<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.scrollLoading.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

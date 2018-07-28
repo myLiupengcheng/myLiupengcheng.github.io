@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>SurfaceView的简单使用 | 刘鹏程</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="SurfaceView1、SurfaceView的基本介绍SurfaceView 是继承自View的，属于View的一个小小的分枝。  View 通过onDraw（）方法里面的Canvas对象去绘制自己到屏幕上面。 SurfaceView 并不需要实现OnDraw（）方法。那么我们的Surface是如何绘制自身的呢！其实View是在UI线程当中绘制自己，而SurfaceView是在子线程当中绘制自">
+<meta name="keywords" content="控件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SurfaceView的简单使用">
+<meta property="og:url" content="http://yoursite.com/2017/03/06/android-view-SurfaceView01/index.html">
+<meta property="og:site_name" content="刘鹏程">
+<meta property="og:description" content="SurfaceView1、SurfaceView的基本介绍SurfaceView 是继承自View的，属于View的一个小小的分枝。  View 通过onDraw（）方法里面的Canvas对象去绘制自己到屏幕上面。 SurfaceView 并不需要实现OnDraw（）方法。那么我们的Surface是如何绘制自身的呢！其实View是在UI线程当中绘制自己，而SurfaceView是在子线程当中绘制自">
+<meta property="og:locale" content="中文">
+<meta property="og:updated_time" content="2018-07-21T08:15:53.278Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SurfaceView的简单使用">
+<meta name="twitter:description" content="SurfaceView1、SurfaceView的基本介绍SurfaceView 是继承自View的，属于View的一个小小的分枝。  View 通过onDraw（）方法里面的Canvas对象去绘制自己到屏幕上面。 SurfaceView 并不需要实现OnDraw（）方法。那么我们的Surface是如何绘制自身的呢！其实View是在UI线程当中绘制自己，而SurfaceView是在子线程当中绘制自">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <!-- <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'> -->
+  <!-- <link href="//fonts.googleapis.com/css?family=Source+Code+Pro:400,700" rel="stylesheet" type="text/css"> -->
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro:400,700" rel="stylesheet" type="text/css">
+  <link href='//fonts.useso.com/css?family=Open+Sans:300,600' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="header-outer" class="outer">
+    <a href="/" class="logo">刘鹏程</a>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about/index.html">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+        </div>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        
+        
+          <a id="nav-github-link" class="nav-icon" href="https://github.com/ppoffice/hexo-theme-alex" title="Fork me on GitHub"></a>
+        
+      </nav>
+    </div>
+  </div>
+</header>
+      <nav id="mobile-nav" class="off">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about/index.html" class="mobile-nav-link">About</a>
+  
+  <div id="search-form-wrap-mobile">
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+  </div>
+</nav>
+      <div class="outer">
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JVM/">JVM</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/协议/">协议</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/并发/">并发</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据结构/">数据结构</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/06/15/thread-tools-delayQueue/">线程延时队列DelayQueue</a>
+          </li>
+        
+          <li>
+            <a href="/2018/06/15/JVM-outofMemroyError-02/">JVM学习2 - OutOfMemroyError***</a>
+          </li>
+        
+          <li>
+            <a href="/2018/06/03/JVM-memory-01/">JVM学习1 - 内存区域</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/29/thread-tools-CyclicBarrier/">线程同步工具类CyclicBarrier</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/29/thread-tools-CountDownLatch/">线程同步工具类CountDownLatch</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OutOfMemroy/">OutOfMemroy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/协议/">协议</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/控件/">控件</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构/">数据结构</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JVM/" style="font-size: 13.33px;">JVM</a> <a href="/tags/OutOfMemroy/" style="font-size: 10px;">OutOfMemroy</a> <a href="/tags/http/" style="font-size: 16.67px;">http</a> <a href="/tags/协议/" style="font-size: 16.67px;">协议</a> <a href="/tags/并发/" style="font-size: 20px;">并发</a> <a href="/tags/控件/" style="font-size: 13.33px;">控件</a> <a href="/tags/数据库/" style="font-size: 16.67px;">数据库</a> <a href="/tags/数据结构/" style="font-size: 13.33px;">数据结构</a> <a href="/tags/算法/" style="font-size: 13.33px;">算法</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://hexo.io">Hexo</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+        <section id="main"><article id="post-android-view-SurfaceView01" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/06/android-view-SurfaceView01/" class="article-date">
+  <time datetime="2017-03-06T08:13:13.000Z" itemprop="datePublished">2017-03-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      SurfaceView的简单使用
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="SurfaceView"><a href="#SurfaceView" class="headerlink" title="SurfaceView"></a>SurfaceView</h2><h4 id="1、SurfaceView的基本介绍"><a href="#1、SurfaceView的基本介绍" class="headerlink" title="1、SurfaceView的基本介绍"></a>1、SurfaceView的基本介绍</h4><p>SurfaceView 是继承自View的，属于View的一个小小的分枝。</p>
+<ul>
+<li>View 通过onDraw（）方法里面的Canvas对象去绘制自己到屏幕上面。</li>
+<li>SurfaceView 并不需要实现OnDraw（）方法。那么我们的Surface是如何绘制自身的呢！其实View是在UI线程当中绘制自己，而SurfaceView是在子线程当中绘制自身。就是因为在子线程当中绘制自己所以不管绘制是多么的缓慢，还是绘制方法多么频繁的调用，其都不会阻塞UI线程。所以像播放视频时候使用的View，还是游戏所使用的View都是SurfaceView，而不是View。</li>
+</ul>
+<ul>
+<li><p>SurfaceView是在子线程当中进行绘制，那么它是如何获取到Canvas的，如何进行绘制的？ </p>
+<p>  答：在SurfaceView当中存在一个Surface，而在Surface当中持有Canvas，但是我们拿不到Surface，系统为之暴露了一个SurfaceHolder（Surface的持有者），那么我们可以通过SurfaceView获取SurfaceHolder，然后通过SurfaceHolder获取Canvas。</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SurfaceHolder holder = <span class="keyword">new</span> SurfaceView().getHolder();</span><br><span class="line">Canvas canvas = holder.getCanvas();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>SurfaceView的绘制时机是什么时候，我们知道View的绘制时机是在onDraw()方法里面，但是SurfaceView的绘制时机在什么时候。==</p>
+<p>  答：之前说过的SurfaceHolder不仅仅能获取Canvas对象，其实SurfaceHolder还管理者SurfaceView的生命周期。同时生命周期如下所示：</p>
+<ul>
+<li>SurfaceCreated（）：创建相应的子线程，然后在子线程的run（）方法当中开启对SurfaceView的绘制</li>
+<li>SurfaceChanged（）：相当与对SurfaceView的进行监听。</li>
+<li>SurfaceDestorye（）：关闭我们子线程，以及对一些资源的回收。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="2、SurfaceView的基本写法"><a href="#2、SurfaceView的基本写法" class="headerlink" title="2、SurfaceView的基本写法"></a>2、SurfaceView的基本写法</h4><p>常见的SurfaceView的写法，这里是模版代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * SurfaceView的自定义流程</span></span><br><span class="line"><span class="comment"> * Created by pengchengliu on 2017/8/25.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SurfaceDemo</span> <span class="keyword">extends</span> <span class="title">SurfaceView</span> <span class="keyword">implements</span> <span class="title">SurfaceHolder</span>.<span class="title">Callback</span>, <span class="title">Runnable</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> SurfaceHolder mHolder ;</span><br><span class="line">    <span class="keyword">private</span> Thread mThread ;</span><br><span class="line">    <span class="keyword">private</span> Canvas mCanvas ;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> isRunning ;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SurfaceDemo</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>(context, <span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SurfaceDemo</span><span class="params">(Context context, AttributeSet attrs)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>(context, attrs, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SurfaceDemo</span><span class="params">(Context context, AttributeSet attrs, <span class="keyword">int</span> defStyleAttr)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(context, attrs, defStyleAttr);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onFinishInflate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        mHolder = <span class="keyword">this</span>.getHolder();</span><br><span class="line">        <span class="keyword">this</span>.setFocusable(<span class="keyword">true</span>);            <span class="comment">//设置SurfaceView为可以获取焦点。</span></span><br><span class="line">        <span class="keyword">this</span>.setFocusableInTouchMode(<span class="keyword">true</span>); <span class="comment">//设置SurfaceView可以触摸。</span></span><br><span class="line">        <span class="keyword">this</span>.setKeepScreenOn(<span class="keyword">true</span>);         <span class="comment">//设置SurfaceView的屏幕应该为保持高亮。</span></span><br><span class="line">        mHolder.addCallback(<span class="keyword">this</span>);</span><br><span class="line">        <span class="keyword">super</span>.onFinishInflate();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 创建相应的子线程，然后在子线程的run（）方法当中开启对SurfaceView的绘制</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> holder 当前SurfaceView的Surface的持有者。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">surfaceCreated</span><span class="params">(SurfaceHolder holder)</span> </span>&#123;</span><br><span class="line">        mThread = <span class="keyword">new</span> Thread(<span class="keyword">this</span>);</span><br><span class="line">        isRunning = <span class="keyword">true</span> ;</span><br><span class="line">        mThread.start();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     *：相当与对SurfaceView的进行监听。</span></span><br><span class="line"><span class="comment">     * 任何结构变更后立即调用（格式或尺寸）已经制成表面。 应该在这一点上更新表面的图像。</span></span><br><span class="line"><span class="comment">     * 这种方法总是至少被调用一次，&#123;<span class="doctag">@link</span> #surfaceCreated&#125;之后。</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> holder 表面已更改的SurfaceHolder。</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> format 式表面的新的PixelFormat。</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> width 表面的新宽度。</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> height 表面的新高度。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">surfaceChanged</span><span class="params">(SurfaceHolder holder, <span class="keyword">int</span> format, <span class="keyword">int</span> width, <span class="keyword">int</span> height)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 当SurfaceView被销毁的时候进行回调。</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> holder 当前SurfaceView的Surface的持有者，也就是SurfaceHolder</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">surfaceDestroyed</span><span class="params">(SurfaceHolder holder)</span> </span>&#123;</span><br><span class="line">        isRunning = <span class="keyword">false</span> ;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (isRunning)&#123;</span><br><span class="line">            draw();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">     <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 进行绘制操作。主要思想就是得到绘制工具Canvas，然后在不必要的情况下进行Canvas的释放</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">draw</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//获取Canvas对象</span></span><br><span class="line">            mCanvas = mHolder.lockCanvas();</span><br><span class="line">            <span class="comment">//TODO 为什么进行判空操作呢？</span></span><br><span class="line">            <span class="comment">// 主要原因就是由于这个方法是在不断进行调用，所以当用户点击Home或者回退按键的话，当前的SurfaceView对象就会被销毁，</span></span><br><span class="line">            <span class="comment">// 相应的holder对象也会被销毁，所以在这里通过hodler获取到的canvas也就是空的。所以进行判空操作。</span></span><br><span class="line">            <span class="keyword">if</span>(mCanvas != <span class="keyword">null</span>)&#123;</span><br><span class="line">                <span class="comment">//进行绘制</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//TODO 为什么进行try-catch呢？</span></span><br><span class="line">            <span class="comment">// 因为就是当前页面如果被销毁掉，也就是说当前的SurfaceView已经被销毁，但是线程不会很快就被销毁，所以在这个地方就会抛出各种各样的异常。</span></span><br><span class="line">            <span class="comment">// 在这里是try-catch，就是防止上述情况下写出来的。</span></span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">if</span>(mCanvas != <span class="keyword">null</span>)&#123;</span><br><span class="line">                mHolder.unlockCanvasAndPost(mCanvas);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/06/android-view-SurfaceView01/" data-id="cjk4y7p230007mdewxsvatqh3" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/控件/">控件</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/07/28/dataType-adt-01/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          数据结构表（ADT）解析(上)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/03/02/android-view-webView01/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">webView的简单使用</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      <a href="/" class="logo">刘鹏程</a>
+      &copy; 2018 刘鹏程<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.scrollLoading.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
