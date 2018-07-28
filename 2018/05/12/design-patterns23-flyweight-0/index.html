@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>享元模式-对象池 | 刘鹏程</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1、享元模式的作用 2、享元模式的使用场景 3、享元模式的UML类图 4、享元模式Demo request的缓存池 result的缓存池 JDK当中的常量池     1、享元模式的作用 享元模式实际上就是对象的缓存池，英文为Flyweight，目的是尽可能地减少内存的使用，来缓存大量重复对象的场景，来缓存可共享的对象，避免创建过多的对象的场景，来提升性能，避免内存溢出的场景。 2、享元模式的使用">
+<meta name="keywords" content="设计模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="享元模式-对象池">
+<meta property="og:url" content="http://yoursite.com/2018/05/12/design-patterns23-flyweight-0/index.html">
+<meta property="og:site_name" content="刘鹏程">
+<meta property="og:description" content="1、享元模式的作用 2、享元模式的使用场景 3、享元模式的UML类图 4、享元模式Demo request的缓存池 result的缓存池 JDK当中的常量池     1、享元模式的作用 享元模式实际上就是对象的缓存池，英文为Flyweight，目的是尽可能地减少内存的使用，来缓存大量重复对象的场景，来缓存可共享的对象，避免创建过多的对象的场景，来提升性能，避免内存溢出的场景。 2、享元模式的使用">
+<meta property="og:locale" content="中文">
+<meta property="og:image" content="http://yoursite.com/2018/05/12/design-patterns23-flyweight-0/flyweight_image01.png">
+<meta property="og:updated_time" content="2018-07-28T05:03:47.112Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="享元模式-对象池">
+<meta name="twitter:description" content="1、享元模式的作用 2、享元模式的使用场景 3、享元模式的UML类图 4、享元模式Demo request的缓存池 result的缓存池 JDK当中的常量池     1、享元模式的作用 享元模式实际上就是对象的缓存池，英文为Flyweight，目的是尽可能地减少内存的使用，来缓存大量重复对象的场景，来缓存可共享的对象，避免创建过多的对象的场景，来提升性能，避免内存溢出的场景。 2、享元模式的使用">
+<meta name="twitter:image" content="http://yoursite.com/2018/05/12/design-patterns23-flyweight-0/flyweight_image01.png">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <!-- <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'> -->
+  <!-- <link href="//fonts.googleapis.com/css?family=Source+Code+Pro:400,700" rel="stylesheet" type="text/css"> -->
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro:400,700" rel="stylesheet" type="text/css">
+  <link href='//fonts.useso.com/css?family=Open+Sans:300,600' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="header-outer" class="outer">
+    <a href="/" class="logo">刘鹏程</a>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about/index.html">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+        </div>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        
+        
+          <a id="nav-github-link" class="nav-icon" href="https://github.com/ppoffice/hexo-theme-alex" title="Fork me on GitHub"></a>
+        
+      </nav>
+    </div>
+  </div>
+</header>
+      <nav id="mobile-nav" class="off">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about/index.html" class="mobile-nav-link">About</a>
+  
+  <div id="search-form-wrap-mobile">
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+  </div>
+</nav>
+      <div class="outer">
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JVM/">JVM</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/协议/">协议</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/并发/">并发</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据结构/">数据结构</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/06/15/thread-tools-delayQueue/">线程延时队列DelayQueue</a>
+          </li>
+        
+          <li>
+            <a href="/2018/06/15/JVM-outofMemroyError-02/">JVM学习2 - OutOfMemroyError***</a>
+          </li>
+        
+          <li>
+            <a href="/2018/06/03/JVM-memory-01/">JVM学习1 - 内存区域</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/29/thread-tools-CyclicBarrier/">线程同步工具类CyclicBarrier</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/29/thread-tools-CountDownLatch/">线程同步工具类CountDownLatch</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OutOfMemroy/">OutOfMemroy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/协议/">协议</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/控件/">控件</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构/">数据结构</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JVM/" style="font-size: 13.33px;">JVM</a> <a href="/tags/OutOfMemroy/" style="font-size: 10px;">OutOfMemroy</a> <a href="/tags/http/" style="font-size: 16.67px;">http</a> <a href="/tags/协议/" style="font-size: 16.67px;">协议</a> <a href="/tags/并发/" style="font-size: 20px;">并发</a> <a href="/tags/控件/" style="font-size: 16.67px;">控件</a> <a href="/tags/数据库/" style="font-size: 16.67px;">数据库</a> <a href="/tags/数据结构/" style="font-size: 13.33px;">数据结构</a> <a href="/tags/算法/" style="font-size: 13.33px;">算法</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://hexo.io">Hexo</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+        <section id="main"><article id="post-design-patterns23-flyweight-0" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/12/design-patterns23-flyweight-0/" class="article-date">
+  <time datetime="2018-05-12T09:50:00.000Z" itemprop="datePublished">2018-05-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/设计模式/">设计模式</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      享元模式-对象池
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>1、享元模式的作用</li>
+<li>2、享元模式的使用场景</li>
+<li>3、享元模式的UML类图</li>
+<li>4、享元模式Demo<ul>
+<li>request的缓存池</li>
+<li>result的缓存池</li>
+<li>JDK当中的常量池</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p>1、享元模式的作用</p>
+<p>享元模式实际上就是对象的缓存池，英文为Flyweight，目的是尽可能地减少内存的使用，来缓存大量重复对象的场景，来缓存可共享的对象，避免创建过多的对象的场景，来提升性能，避免内存溢出的场景。</p>
+<p>2、享元模式的使用场景</p>
+<p>使用享元模式的使用场景比较多，又有着显著的特点，有以下三个特点的可以使用享元模式</p>
+<ul>
+<li>系统中存在大量的相似的对象，</li>
+<li>细粒度的对象都具备较接近的外部状态，而且内部状态与环境无关，对象没有特定的身份</li>
+<li>需要缓存池的场景</li>
+</ul>
+<p>上述说到相应的外部状态，内部状态，这两个状态，我们建立自己的缓存池的时候，一般使用外部状态，也就是这个对象会随着变换的那个状态，做为一个key存储在一个map当中，或者使用list当中，使用list的时候，相应的inedx便是该对象为一标示的外部状态，当然了，有时候需要我们自己来维护，相应的index到外部状态的一种映射。注意；在使用享元模式的时候，一定要明白什么是外部状态，什么是内部状态。这个搞清楚了，这种模式也就相应的搞定了</p>
+<p>3、享元模式的UML类图</p>
+<p>为了让这一种设计模式看起来更加的易于理解，所以这里使用UML来描述该设计模式。</p>
+<p><img src="/2018/05/12/design-patterns23-flyweight-0/flyweight_image01.png" alt="享元模式，UML类图结构"></p>
+<p>4、享元模式的Demo</p>
+<p>4.1、请求缓存池</p>
+<p>例子：客户端的程序设计一般都是含有相应的网络请求模块的，本地请求服务器拿到相应的数据，然后显示这些数据。现在有这样一种情况，当客户端请求服务器，如果相同的请求，一下就请求了100次，或者上千次，或者相同的请求只是参数不同，然后请求了很多次。</p>
+<p>如果一个请求在我们的程序当中就是一个对象的话，当我们请求的时候，我们就需要new出来一个请求的对象，然后在我们请求完毕以后，由GC销毁。很明显上述的这种情况不是一种合理的解决方式，其实如果我们代入相应的享元模式的话，就会发现其实很简单。具体的相应实现如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Request.java</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 网络框架 请求缓存池 - Request对象</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> pengchengliu</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Request</span> </span>&#123;</span><br><span class="line"> 	<span class="keyword">private</span> String url;</span><br><span class="line"> 	<span class="keyword">private</span> <span class="keyword">int</span> offset ;</span><br><span class="line"> 	<span class="keyword">private</span> <span class="keyword">int</span> total ;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="title">Request</span> <span class="params">(String url, <span class="keyword">int</span> offset, <span class="keyword">int</span> total)</span> </span>&#123;</span><br><span class="line"> 		<span class="keyword">this</span>.url = url ;</span><br><span class="line"> 		<span class="keyword">this</span>.offset = offset ;</span><br><span class="line"> 		<span class="keyword">this</span>.total = total ;</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setParams</span> <span class="params">(<span class="keyword">int</span> offset, <span class="keyword">int</span> total)</span> </span>&#123;</span><br><span class="line"> 		<span class="keyword">this</span>.offset = offset ;</span><br><span class="line"> 		<span class="keyword">this</span>.total = total ;</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	<span class="meta">@Override</span></span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line"> 		<span class="keyword">return</span> <span class="string">"Request [url="</span> + url + <span class="string">", offset="</span> + offset + <span class="string">", total="</span> + total + <span class="string">"] =  "</span> + Integer.toHexString(hashCode());</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//RequestPool.java</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 网络框架 请求缓存池 - RequestFactory对象</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> pengchengliuå</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RequestFactory</span> </span>&#123;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="comment">/**</span></span><br><span class="line"><span class="comment"> 	 * 使用static的意义在于，该缓存map不必单独被对象所持有，可以使用static来所谓共享变量来使用。</span></span><br><span class="line"><span class="comment"> 	 */</span></span><br><span class="line"> 	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Map&lt;String, Request&gt; sMap = <span class="keyword">new</span> HashMap&lt;String, Request&gt;();</span><br><span class="line"> 	<span class="comment">/**</span></span><br><span class="line"><span class="comment"> 	 * 将一个对象缓存在了一个map当中，使用url来充当这个Map的key，如果可以从map当中取到这个数据，则返回，否则重新创建</span></span><br><span class="line"><span class="comment"> 	 * <span class="doctag">@param</span> offset ：当前地址所携带的参数信息</span></span><br><span class="line"><span class="comment"> 	 * <span class="doctag">@param</span> total ：当前地址所携带的参数信息</span></span><br><span class="line"><span class="comment"> 	 * <span class="doctag">@return</span> ： Request对象</span></span><br><span class="line"><span class="comment"> 	 */</span></span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Request <span class="title">getRequest</span> <span class="params">(String url, <span class="keyword">int</span> offset, <span class="keyword">int</span> total)</span> </span>&#123;</span><br><span class="line"> 		Request request ;</span><br><span class="line"> 		<span class="keyword">if</span> (sMap.containsKey(url)) &#123;</span><br><span class="line"> 			request = sMap.get(url);</span><br><span class="line"> 			request.setParams(offset, total);</span><br><span class="line"> 			<span class="keyword">return</span> request ;</span><br><span class="line"> 		&#125;</span><br><span class="line"> 		request = <span class="keyword">new</span> Request(url, offset, total);</span><br><span class="line"> 		sMap.put(url, request);</span><br><span class="line"> 		<span class="keyword">return</span> request ;</span><br><span class="line"> 	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//Test.java</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 网络框架 请求缓存池 - 主函数</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> pengchengliu</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"> 		<span class="keyword">int</span> offset = <span class="number">0</span> , total = <span class="number">0</span>;</span><br><span class="line"> 		Request request0 = RequestFactory.getRequest(<span class="string">"http://test.test.test"</span>, offset, total);</span><br><span class="line"> 		System.out.println(<span class="string">"request0 = "</span> + request0);</span><br><span class="line"> 		</span><br><span class="line"> 		Request request1 = RequestFactory.getRequest(<span class="string">"http://test.test.test"</span>, offset + <span class="number">100</span>, total + <span class="number">10</span>);</span><br><span class="line"> 		System.out.println(<span class="string">"request1 = "</span> + request1);</span><br><span class="line"> 		</span><br><span class="line"> 		Request request2 = RequestFactory.getRequest(<span class="string">"http://test.test.test"</span>, offset + <span class="number">200</span>, total + <span class="number">20</span>);</span><br><span class="line"> 		System.out.println(<span class="string">"request2 = "</span> + request2);</span><br><span class="line"> 		</span><br><span class="line"> 		System.out.println(request0 == request1);</span><br><span class="line"> 		System.out.println(request1 == request2);</span><br><span class="line"> 	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>request0 = Request [url=<a href="http://test.test.test" target="_blank" rel="noopener">http://test.test.test</a>, offset=0, total=0] =  dcf3e99<br>request1 = Request [url=<a href="http://test.test.test" target="_blank" rel="noopener">http://test.test.test</a>, offset=100, total=10] =  dcf3e99<br>request2 = Request [url=<a href="http://test.test.test" target="_blank" rel="noopener">http://test.test.test</a>, offset=200, total=20] =  dcf3e99<br>true<br>true</p>
+<p>通过上述的Demo，我们确实发现了，使用的都是一个对象，当然我们只是一个简单的例子，比如，如果前一个对象还没有使用完毕，我们在创建第二个对象的时候改变了上一个对象的状态，导致第一次查询的时候拿到是offset=100 total=10的情况，所以后续还需要我们优化。</p>
+<p>4.2、result缓存池。</p>
+<p>我们去数据库当中查询数据的时候，有时候会遇到多次查询相同的数据，这样的话我们把查询结果result至于缓存池当中，就不必多次去数据库当中查找了。</p>
+<p>下面就以查询火车票为例子，假设从A到B只有一趟列车，而列车的席位有硬卧上铺、硬卧下铺、坐票三种。下面我们来看这个Demo是如何运作的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Ticket.java</span></span><br><span class="line"><span class="keyword">package</span> flyweight.queryTicket;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 查询火车票-票抽象对象</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> pengchengliu</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Ticket</span> </span>&#123;</span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showTicketInfo</span><span class="params">(String bunk)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//TrainTicket.java</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 查询火车票-火车票对象</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> pengchengliu</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TrainTicket</span> <span class="keyword">implements</span> <span class="title">Ticket</span></span>&#123;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="keyword">public</span> String from ;  	<span class="comment">// 出发地</span></span><br><span class="line"> 	<span class="keyword">public</span> String to ; 		<span class="comment">// 目的地</span></span><br><span class="line"> 	<span class="keyword">public</span> String bunk ;	<span class="comment">// 席位</span></span><br><span class="line"> 	</span><br><span class="line"> 	<span class="keyword">public</span> <span class="keyword">int</span> price ;		<span class="comment">// 价格</span></span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="title">TrainTicket</span><span class="params">(String from, String to)</span> </span>&#123;</span><br><span class="line"> 		<span class="keyword">this</span>.from = from ;</span><br><span class="line"> 		<span class="keyword">this</span>.to = to ;</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="meta">@Override</span></span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showTicketInfo</span><span class="params">(String bunk)</span> </span>&#123;</span><br><span class="line"> 		<span class="keyword">this</span>.bunk = bunk ;</span><br><span class="line"> 		price = <span class="keyword">new</span> Random(<span class="number">47</span>).nextInt(<span class="number">300</span>);</span><br><span class="line"> 		</span><br><span class="line"> 		System.out.println(<span class="string">"该买从 "</span> + <span class="keyword">this</span>.from + <span class="string">" 到 "</span> </span><br><span class="line"> 				+ <span class="keyword">this</span>.to + <span class="string">"的 "</span> + <span class="keyword">this</span>.bunk + <span class="string">" 火车票"</span> + <span class="string">", 价格为 "</span> + <span class="keyword">this</span>.price);</span><br><span class="line"> 	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//TicketFactory.java</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 查询火车票-火车票工厂对象</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> pengchengliu</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TicketFactory</span> </span>&#123;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="keyword">private</span> <span class="keyword">static</span> Map&lt;String, Ticket&gt; sTicketMap = <span class="keyword">new</span> HashMap&lt;String, Ticket&gt;() ;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Ticket <span class="title">getTicket</span> <span class="params">(String from, String to)</span> </span>&#123;</span><br><span class="line"> 		String key = from + <span class="string">"-"</span> + to ;</span><br><span class="line"> 		<span class="keyword">if</span> (sTicketMap.containsKey(key)) &#123;</span><br><span class="line"> 			System.out.println(<span class="string">"使用缓存  -- &gt; "</span> + key);</span><br><span class="line"> 			<span class="keyword">return</span> sTicketMap.get(key);</span><br><span class="line"> 		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line"> 			System.out.println(<span class="string">"创建对象  -- &gt; "</span> + key);</span><br><span class="line"> 			Ticket ticket = <span class="keyword">new</span> TrainTicket(from, to);</span><br><span class="line"> 			sTicketMap.put(key, ticket);</span><br><span class="line"> 			<span class="keyword">return</span> ticket ;</span><br><span class="line"> 		&#125;</span><br><span class="line"> 	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//Main.java</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"> 		Ticket ticket01 = TicketFactory.getTicket(<span class="string">"北京"</span>, <span class="string">"西安"</span>);</span><br><span class="line"> 		ticket01.showTicketInfo(<span class="string">"上铺"</span>);</span><br><span class="line"> 		Ticket ticket02 = TicketFactory.getTicket(<span class="string">"北京"</span>, <span class="string">"西安"</span>);</span><br><span class="line"> 		ticket02.showTicketInfo(<span class="string">"下铺"</span>);</span><br><span class="line"> 		Ticket ticket03 = TicketFactory.getTicket(<span class="string">"北京"</span>, <span class="string">"西安"</span>);</span><br><span class="line"> 		ticket03.showTicketInfo(<span class="string">"坐票"</span>);</span><br><span class="line"> 	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>创建对象  – &gt; 北京-西安<br>该买从 北京 到 西安的 上铺 火车票, 价格为 158<br>使用缓存  – &gt; 北京-西安<br>该买从 北京 到 西安的 下铺 火车票, 价格为 158<br>使用缓存  – &gt; 北京-西安<br>该买从 北京 到 西安的 坐票 火车票, 价格为 158</p>
+<p>4.3、JDK当中的常量池</p>
+<p>我们知道一个String对象是被存储在常量池当中的，也就是说一个String被定义以后，就被缓存在了常量池当中，当其他地方要使用字符串的时候，则直接使用的是缓存，不会重复创建对象，我们通过一个简单的Demo来看一下这个机制。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 探究JDK当中的常量池的工作原理</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> pengchengliu</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"> 		String str1 = <span class="keyword">new</span> String(<span class="string">"abc"</span>);</span><br><span class="line"> 		String str2 = <span class="string">"abc"</span>;</span><br><span class="line"> 		String str3 = <span class="keyword">new</span> String(<span class="string">"abc"</span>);</span><br><span class="line"> 		String str4 = <span class="string">"ab"</span> + <span class="string">"c"</span>;</span><br><span class="line"> 		</span><br><span class="line"> 		<span class="comment">//判定内容是否相等</span></span><br><span class="line"> 		System.out.println(str1.equals(str2)); <span class="comment">//true</span></span><br><span class="line"> 		System.out.println(str1.equals(str3)); <span class="comment">//true</span></span><br><span class="line"> 		System.out.println(str1.equals(str4)); <span class="comment">//true</span></span><br><span class="line"> 		System.out.println(str2.equals(str3)); <span class="comment">//true</span></span><br><span class="line"> 		System.out.println(str2.equals(str4)); <span class="comment">//true</span></span><br><span class="line"> 		System.out.println(str3.equals(str4)); <span class="comment">//true</span></span><br><span class="line"> 		</span><br><span class="line"> 		System.out.println(<span class="string">"========"</span>);</span><br><span class="line"> 		</span><br><span class="line"> 		<span class="comment">//判定内存地址是否相等</span></span><br><span class="line"> 		System.out.println(str1 == str2); <span class="comment">//false</span></span><br><span class="line"> 		System.out.println(str1 == str3); <span class="comment">//false</span></span><br><span class="line"> 		System.out.println(str1 == str4); <span class="comment">//false</span></span><br><span class="line"> 		System.out.println(str2 == str3); <span class="comment">//false</span></span><br><span class="line"> 		System.out.println(str2 == str4); <span class="comment">//true</span></span><br><span class="line"> 		System.out.println(str3 == str4); <span class="comment">//false</span></span><br><span class="line"> 	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其实我们大部分都知道它的原理是什么，唯独str2 == str4 这个优点模糊，为什么会是true，其实只要代入本设计模式之前说过，常量池的概念，应该可以很容易的理解，就是str4使用的是str2的缓存对象 。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/05/12/design-patterns23-flyweight-0/" data-id="cjk4z1fy1001wnkew53x7v118" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/05/13/thread-base-05/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          线程协作
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/05/09/thread-base-04/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">线程死亡</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      <a href="/" class="logo">刘鹏程</a>
+      &copy; 2018 刘鹏程<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.scrollLoading.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
