@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>数据结构表（ADT）解析(上) | 刘鹏程</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1、前言自工作以来，越来越觉得数据结构的重要性，类似于网络上面拉去下来的数据进行分类，还是自定义View画图的x，y还是滑动的距离。滑动距离的判断种种。感觉自己很是欠缺火候，所以开始恶补数据结构、算法的知识，让自己可以提高。 之前在知乎上面看了一个帖子，在讨论数据结构的重要性，有一句话说的很好，也是笔者开始写一系列数据结构算法的动力，在这里送给给位看客，  对于一个程序员来说，算法的高度决定程序员">
+<meta name="keywords" content="数据结构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构表（ADT）解析(上)">
+<meta property="og:url" content="http://yoursite.com/2017/07/28/dataType-adt-01/index.html">
+<meta property="og:site_name" content="刘鹏程">
+<meta property="og:description" content="1、前言自工作以来，越来越觉得数据结构的重要性，类似于网络上面拉去下来的数据进行分类，还是自定义View画图的x，y还是滑动的距离。滑动距离的判断种种。感觉自己很是欠缺火候，所以开始恶补数据结构、算法的知识，让自己可以提高。 之前在知乎上面看了一个帖子，在讨论数据结构的重要性，有一句话说的很好，也是笔者开始写一系列数据结构算法的动力，在这里送给给位看客，  对于一个程序员来说，算法的高度决定程序员">
+<meta property="og:locale" content="中文">
+<meta property="og:image" content="http://yoursite.com/2017/07/28/dataType-adt-01/dataType-adt-01/01.png">
+<meta property="og:image" content="http://yoursite.com/2017/07/28/dataType-adt-01/dataType-adt-01/02.png">
+<meta property="og:image" content="http://yoursite.com/2017/07/28/dataType-adt-01/dataType-adt-01/03.png">
+<meta property="og:image" content="http://yoursite.com/2017/07/28/dataType-adt-01/dataType-adt-01/04.png">
+<meta property="og:updated_time" content="2018-07-28T04:49:35.228Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据结构表（ADT）解析(上)">
+<meta name="twitter:description" content="1、前言自工作以来，越来越觉得数据结构的重要性，类似于网络上面拉去下来的数据进行分类，还是自定义View画图的x，y还是滑动的距离。滑动距离的判断种种。感觉自己很是欠缺火候，所以开始恶补数据结构、算法的知识，让自己可以提高。 之前在知乎上面看了一个帖子，在讨论数据结构的重要性，有一句话说的很好，也是笔者开始写一系列数据结构算法的动力，在这里送给给位看客，  对于一个程序员来说，算法的高度决定程序员">
+<meta name="twitter:image" content="http://yoursite.com/2017/07/28/dataType-adt-01/dataType-adt-01/01.png">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <!-- <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'> -->
+  <!-- <link href="//fonts.googleapis.com/css?family=Source+Code+Pro:400,700" rel="stylesheet" type="text/css"> -->
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro:400,700" rel="stylesheet" type="text/css">
+  <link href='//fonts.useso.com/css?family=Open+Sans:300,600' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="header-outer" class="outer">
+    <a href="/" class="logo">刘鹏程</a>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about/index.html">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+        </div>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        
+        
+          <a id="nav-github-link" class="nav-icon" href="https://github.com/ppoffice/hexo-theme-alex" title="Fork me on GitHub"></a>
+        
+      </nav>
+    </div>
+  </div>
+</header>
+      <nav id="mobile-nav" class="off">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about/index.html" class="mobile-nav-link">About</a>
+  
+  <div id="search-form-wrap-mobile">
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+  </div>
+</nav>
+      <div class="outer">
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JVM/">JVM</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/协议/">协议</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/并发/">并发</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据结构/">数据结构</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/06/15/delayQueue/">线程延时队列DelayQueue</a>
+          </li>
+        
+          <li>
+            <a href="/2018/06/15/JVM-outofMemroyError-02/">JVM学习2 - OutOfMemroyError***</a>
+          </li>
+        
+          <li>
+            <a href="/2018/06/03/JVM-memory-01/">JVM学习1 - 内存区域</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/29/CyclicBarrier/">线程同步工具类CyclicBarrier</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/29/CountDownLatch/">线程同步工具类CountDownLatch</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OutOfMemroy/">OutOfMemroy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/协议/">协议</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/控件/">控件</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构/">数据结构</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JVM/" style="font-size: 13.33px;">JVM</a> <a href="/tags/OutOfMemroy/" style="font-size: 10px;">OutOfMemroy</a> <a href="/tags/http/" style="font-size: 16.67px;">http</a> <a href="/tags/协议/" style="font-size: 16.67px;">协议</a> <a href="/tags/并发/" style="font-size: 20px;">并发</a> <a href="/tags/控件/" style="font-size: 13.33px;">控件</a> <a href="/tags/数据库/" style="font-size: 16.67px;">数据库</a> <a href="/tags/数据结构/" style="font-size: 13.33px;">数据结构</a> <a href="/tags/算法/" style="font-size: 13.33px;">算法</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://hexo.io">Hexo</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+        <section id="main"><article id="post-dataType-adt-01" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/28/dataType-adt-01/" class="article-date">
+  <time datetime="2017-07-28T04:34:35.000Z" itemprop="datePublished">2017-07-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/数据结构/">数据结构</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      数据结构表（ADT）解析(上)
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1、前言"><a href="#1、前言" class="headerlink" title="1、前言"></a>1、前言</h2><p>自工作以来，越来越觉得数据结构的重要性，类似于网络上面拉去下来的数据进行分类，还是自定义View画图的x，y还是滑动的距离。滑动距离的判断种种。感觉自己很是欠缺火候，所以开始恶补数据结构、算法的知识，让自己可以提高。</p>
+<p>之前在知乎上面看了一个帖子，在讨论数据结构的重要性，有一句话说的很好，也是笔者开始写一系列数据结构算法的动力，在这里送给给位看客，</p>
+<ul>
+<li>对于一个程序员来说，算法的高度决定程序员的高度，而一个程序员将来成就的高度取决于算法的高度</li>
+</ul>
+<p>看完以后热情满满，打算从最基本的开始学习，如果各位看客发现在什么地方说的不对，希望指出。谢谢各位。</p>
+<h2 id="2、抽象数据类型（ADT）"><a href="#2、抽象数据类型（ADT）" class="headerlink" title="2、抽象数据类型（ADT）"></a>2、抽象数据类型（ADT）</h2><p>学习数据结构之前，我们需要明白什么是抽象数据类型，</p>
+<p>抽象数据类型（abstract data type）:是带有一组操作的一些对象的集合，抽象数据类型是数学方面的抽象。在抽象数据类型定义中没有地方提到关于这组操作时如何实现的任何解释。这里有两个比较重要的地方，首先第一个是一组操作。然后是一些对象的集合，</p>
+<p>在这里笔者的理解是有一个装篮球的箱子，箱子上面有各种各样的按钮，每一个按钮都可以操作箱子里面篮球，比如让箱子将所有的篮球全部吐出来，等等，这里这个装篮球的箱子以及里面的篮球和按钮就是抽象数据类型。</p>
+<p>常见的抽象数据类型有表、栈、队列、树、图、散列 等，将在后面篇章详细讨论，这里只对表进行说明。</p>
+<h2 id="3、表（ADT）"><a href="#3、表（ADT）" class="headerlink" title="3、表（ADT）"></a>3、表（ADT）</h2><h3 id="3-1-表当中的元素"><a href="#3-1-表当中的元素" class="headerlink" title="3.1 表当中的元素"></a>3.1 表当中的元素</h3><p>我们将处理 $A_{0}$、 $A_{1}$、 $A_{2}$、 $A_{3}$、 $A_{4}$、·····  $A_{N-1}$的一般的表。我们就说这个表的长度是N。我们将长度为0的表叫做空表（empty list）</p>
+<p>对于一个不为空的表，我们说 $A_{i}$后继 $A_{i-1}$（i &lt; N, i &gt; 0）并且$A_{i-1}$ 前驱 $A_{i}$。$A_{0}$为表当中的第一个元素，没有前驱元，而$A_{N-1}$为表当中的最后一个元素，没有后继元。</p>
+<h3 id="3-2-表当中的操作"><a href="#3-2-表当中的操作" class="headerlink" title="3.2 表当中的操作"></a>3.2 表当中的操作</h3><p>对于每种ADT并不存在什么固定的操作，而为每种ADT提供合理的操作，一般取决于程序的设计者。对于表这种ADT，笔者在这里提出比较常用的操作。为 ：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">printList : 按照表的顺序打印各个位置的对象，如是对象打印地址。</span><br><span class="line">makeEmpty : 将该表置空</span><br><span class="line"></span><br><span class="line">find : 返回某一项第一次返回的位置。</span><br><span class="line">findValueForIndex : 通过index查找value </span><br><span class="line">findIndexForValue : 通过value查找index</span><br><span class="line"></span><br><span class="line">insert : 在表的末尾插入</span><br><span class="line">insertForIndex : 在指定位置插入</span><br><span class="line"></span><br><span class="line">remove : 通过value删除元素</span><br><span class="line">remmoveForIndex : 通过index删除元素</span><br></pre></td></tr></table></figure>
+<h2 id="4、表的实现"><a href="#4、表的实现" class="headerlink" title="4、表的实现"></a>4、表的实现</h2><h3 id="4-1、数组实现简单的表。"><a href="#4-1、数组实现简单的表。" class="headerlink" title="4.1、数组实现简单的表。"></a>4.1、数组实现简单的表。</h3><p>我们把通过数组实现的表接口叫做顺序表。顺序表的所有操作都可以通过使用数组来实现，但是这里会涉及到一个问题就是，就是数组应该是固定长度的，我们的表应该让上层用户感觉不到容量，及当用户想要去添加的时候，我们可以让用户无限添加。这就是数组实现表里面的一个通用问题，这里的解决方式是让数组扩容，什么是扩容呢？ 就是通过大于旧数组的长度去定义一个新的数组，然后把旧的数组里面的所有元素全部拷贝到新数组。</p>
+<p>关于新数组的长度应该是多少呢？笔者在这里给出</p>
+<ul>
+<li>新数组长度 =  旧数组的长度 +（ 旧数组的长度 * 2）</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> [] arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>];</span><br><span class="line">···</span><br><span class="line">···</span><br><span class="line"><span class="comment">//开始扩容</span></span><br><span class="line"><span class="keyword">int</span> newSize = arr.length + ( arr.length * <span class="number">2</span> );</span><br><span class="line"><span class="keyword">int</span>[] newArray = <span class="keyword">new</span> <span class="keyword">int</span>[newSize];</span><br><span class="line"></span><br><span class="line"><span class="comment">//扩容完成，下面开始拷贝</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; arr.length; k++)&#123;</span><br><span class="line">	newArray[k] = arr[k]</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//归还引用</span></span><br><span class="line">arr = newArray ;</span><br></pre></td></tr></table></figure>
+<p>这种数据结构的优点在于，查找，基本消耗的时间都是线性时间，而上述提供的findValueForIndex操作，常数时间就可以很轻松的完成。</p>
+<p>缺点就是，如果我们需要对顺序表当中的表结构（数据）进行改变呢？我们不妨设想一下，如果我们需要在第2位插入一个元素，那么就代表着，表里面的原先2位置的元素下表变化称为第3，而第3变为第4，以此类推，直到表中元素结束。删除也是同样的道理。当然如果我们在最后一位插入，我们的时间也是常数值。在这里我们考虑最坏情况，那就是在第一位插入活着删除，那么我们的时间就是$o(N)$。</p>
+<p>总结：就是如果对于该表数据为只读权限（完全访问），而没有写权限，那么这种表结构的实现无一就是完美的，但是对插入删除操作比较多的话。笔者在这里不推荐使用这种表，而推荐下述的这种表结构（链表），后续会比较两表的效率问题，</p>
+<h3 id="4-2、简单链表"><a href="#4-2、简单链表" class="headerlink" title="4.2、简单链表"></a>4.2、简单链表</h3><p>为了解决上述问题，人们开始思考，如果我们将表不进行连续存储，可以避免插入和删除的线性开销，下图为链表的一般想法</p>
+<p><img src="/2017/07/28/dataType-adt-01/./dataType-adt-01/01.png" alt="简单链表"></p>
+<p>上图可知，链表是一系列节点组成的，我们称之为Node，这些Node在内存当中是不连续的。每一个Node都有一条链，我们称之为next链，直向下一个Node，最后一个元素的next链为空。</p>
+<p>我们如果打印全部，或者便利的话，通过第一个元素找到第二个元素以此类推，直到找到最后一个元素。时间是线性的，这个数组实现是一样的，不过其中的常数可能会比使用数组要大，findValueForIndex操作确实没有数组效率高，需要通过第一个开始找，直到遍历到index，所以时间复杂度为 $O(i)$ 。</p>
+<p>如果是删除和插入操作，我们只需要修改两个链也就是引用，我们就可以完成插入操作和删除操作，不需要移动项，所以对比上述数组实现确实是简便了一些。下图为删除和插入的实现链表</p>
+<p><img src="/2017/07/28/dataType-adt-01/./dataType-adt-01/02.png" alt="简单链表"></p>
+<p>这里如果要插入的话，就把A3指向A4的引用变为A3指向x，然后把x的指向变为A4即可。不需要移动项，所以在这里时间复杂度是常数时间。</p>
+<p><img src="/2017/07/28/dataType-adt-01/./dataType-adt-01/03.png" alt="简单链表"></p>
+<p>如果要删除A4节点的话，这里我们直接把A3的链指向A5，然后把A4原本指向A5的链制空。就完成了A4的删除。时间复杂度也是常数时间。</p>
+<p>使用上述链表的话，删除最后一个节点，我们得先找到指向最后一个节点的项，但是在上述链表当中，每一个节点不会提供前驱节点的任何信息。所以对上述链表进行改造，得出双向链表，即一个节点会提供下一个节点和上一个节点的信息，结构图如下所示。</p>
+<p><img src="/2017/07/28/dataType-adt-01/./dataType-adt-01/04.png" alt="简单链表"></p>
+<hr>
+<h2 id="5、Java中的表（ADT）List"><a href="#5、Java中的表（ADT）List" class="headerlink" title="5、Java中的表（ADT）List"></a>5、Java中的表（ADT）List</h2><p>Java语言中，提供了一些普通数据结构的实现。该语言的这一部分叫做Collection API。表（ADT）是在Collection中实现的数据结构之一。</p>
+<p>Java当中由java.util包中的List接口指定。根据上述表的实现思想，Java当中由ArrayList类提供了List ADT的一种可增长数组的实现。使用该数据结构的优点在于，get和set的调用花费常数时间。但是插入操作和删除操作代价昂贵（在于移动其与项）。</p>
+<p>Java当中由LinkedList类提供了List ADT的双向链表的实现，优点在于新项的插入和删除开销比较小，这里假设变动项的位置是已知的，这意味着，在表的前端和末尾都是常数时间。使用LinkedList的缺点在于get的调用是昂贵的，除非调用的项非常的接近端点</p>
+<h3 id="5-1-Java当中Iterable接口"><a href="#5-1-Java当中Iterable接口" class="headerlink" title="5.1 Java当中Iterable接口"></a>5.1 Java当中Iterable接口</h3><p>实现了Iterable接口的那些类，可以拥有增强For的循环，该循环施于这些类之上从而观察它们的所有项。</p>
+<p>Collection接口当中扩展了Iterable接口。实现Iterable接口的类，必须提供了一个名叫iterator的方法。该方法返回一个实现了Iterator接口类。下面我们看看Iterator接口是干嘛的？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Iterator</span>&lt;<span class="title">AnyType</span>&gt;</span>&#123;</span><br><span class="line">	<span class="comment">// 是否还有下一项？</span></span><br><span class="line">	<span class="function"><span class="keyword">boolean</span> <span class="title">hasNext</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 得到当前的项</span></span><br><span class="line">	<span class="function">AnyType <span class="title">next</span><span class="params">()</span></span>;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 移除当前的项</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">remove</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>具体每个方法是干嘛的，上述注释说的很清楚了。Iterator接口的思路就是，通过iterator方法，每个集合都可以创建一个实现Iterator接口的对象，并且将当前的位置概念在对象内部保存下来。</p>
+<p>1、 使用iterator进行遍历。</p>
+<p>获取当前对象的iterator，然后调用hasNext（）方法，next（）方法进行遍历。具体模拟入下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">···</span><br><span class="line">Iterator&lt;AnyType&gt; iterator = collection.iterator();</span><br><span class="line"><span class="keyword">while</span>(iterator.hasNext())&#123;</span><br><span class="line">	AnyType item = iterator.next();</span><br><span class="line">	System.out.println(item.toString());</span><br><span class="line">&#125;</span><br><span class="line">···</span><br></pre></td></tr></table></figure>
+<p>在Iterator接口里面我们看到一个remove方法，这个方法主要是删除由next方法返回的最新的项，在Collection当中同样也提供了remove方法，两者到底有什么不同呢？</p>
+<p>这里笔者推荐的是如果可以使用Iterator接口里面的remove，尽量使用。为什么这么说呢？原因有以下两点</p>
+<p>1、因为我们知道collection当中的remove是先要找到删除的项，然后进行删除。而Iterator接口里面的remove是已经找到项的，在这里会节省一部分的时间。</p>
+<p>2、如果直接使用Iterator的时候。如果对正在被遍历的集合进行结构上面的改变，那么迭代器将不再合法会跑出ConcurrentModificationException异常。如果直接使用Iterator内部的remove则不会抛出异常。</p>
+<h3 id="5-2-ArrayList的实现"><a href="#5-2-ArrayList的实现" class="headerlink" title="5.2 ArrayList的实现"></a>5.2 ArrayList的实现</h3><p>笔者在这里模拟ArrayList的实现，具体实现如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 自定义ArrayList的实现方式</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> 刘酸酸</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &lt;AnyType&gt;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyArrayList</span>&lt;<span class="title">AnyType</span>&gt; <span class="keyword">implements</span> <span class="title">Iterable</span>&lt;<span class="title">AnyType</span>&gt;</span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/** 默认扩容长度 */</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEFAULT_CAPACITY = <span class="number">10</span> ;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/** 当前数据结构的长度 */</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> mSize ;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/** 内部使用的数据来存储数据 */</span></span><br><span class="line">	<span class="keyword">private</span> AnyType[] mArray ;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">MyArrayList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		initMyArray();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/** 初始化数组 */</span></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initMyArray</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		mSize = <span class="number">0</span> ;</span><br><span class="line">		ensureCapacity(DEFAULT_CAPACITY) ;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/** 返回当前元素的长度 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">size</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">return</span> mSize ;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/** 当前表是否为空 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">return</span> size() == <span class="number">0</span> ;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/** 根据下表返回元素 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> AnyType <span class="title">get</span><span class="params">(<span class="keyword">int</span> index)</span></span>&#123;</span><br><span class="line">		checkIndex(index);</span><br><span class="line">		<span class="keyword">return</span> mArray[index];</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/** 在index的位置替换newValue，然后返回index位置以前的Vaule */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> AnyType <span class="title">set</span><span class="params">(<span class="keyword">int</span> index, AnyType newValue)</span></span>&#123;</span><br><span class="line">		checkIndex(index);</span><br><span class="line">		AnyType oldValue = mArray[index];</span><br><span class="line">		mArray[index] = newValue ;</span><br><span class="line">		<span class="keyword">return</span> oldValue ;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/** 默认插入，在当前表的最后一位进行插入 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">add</span> <span class="params">(AnyType value)</span></span>&#123;</span><br><span class="line">		add(size(),value);</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/** 移除index的元素并且把给元素返回 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> AnyType <span class="title">remove</span><span class="params">(<span class="keyword">int</span> index)</span></span>&#123;</span><br><span class="line">		AnyType old = mArray[index] ;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = index; i &lt; size() - <span class="number">1</span>; i++)&#123;</span><br><span class="line">			mArray[i] = mArray[i + <span class="number">1</span>] ;</span><br><span class="line">		&#125;</span><br><span class="line">		mSize -- ;</span><br><span class="line">		<span class="keyword">return</span> old ;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/**给index的位置插入一个新的元素，index以后的所有元素后移一位 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> index, AnyType value)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(mArray.length == size())&#123;</span><br><span class="line">			ensureCapacity(size() * <span class="number">2</span> + <span class="number">1</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = mSize; i &gt; index; i-- )&#123;</span><br><span class="line">			mArray[i] = mArray[i -<span class="number">1</span>];</span><br><span class="line">		&#125;</span><br><span class="line">		mArray[index] = value ;</span><br><span class="line">		</span><br><span class="line">		mSize ++ ;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/** 检查 */</span></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">checkIndex</span><span class="params">(<span class="keyword">int</span> index)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(index &lt; <span class="number">0</span> || index &gt;= size())&#123;</span><br><span class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> ArrayIndexOutOfBoundsException(<span class="string">"index is not true"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/** 扩容方法 */</span></span><br><span class="line">	<span class="meta">@SuppressWarnings</span>(<span class="string">"unchecked"</span>)</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">ensureCapacity</span><span class="params">(<span class="keyword">int</span> newCapactity)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(newCapactity &lt; mSize)&#123;</span><br><span class="line">			<span class="keyword">return</span> 	;</span><br><span class="line">		&#125;</span><br><span class="line">		AnyType[] old = mArray ;</span><br><span class="line">		mArray = (AnyType[]) <span class="keyword">new</span> Object[newCapactity];</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; size(); i++)&#123;</span><br><span class="line">			mArray[i] = old[i];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Iterator&lt;AnyType&gt; <span class="title">iterator</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> ArrayListIterator();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * MyArrayList的迭代器。</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@author</span> pengchengliu</span></span><br><span class="line"><span class="comment">	 *</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayListIterator</span> <span class="keyword">implements</span> <span class="title">Iterator</span>&lt;<span class="title">AnyType</span>&gt;</span>&#123;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">private</span> <span class="keyword">int</span> mCurrent ;</span><br><span class="line">		</span><br><span class="line">		<span class="meta">@Override</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasNext</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			<span class="keyword">return</span> mCurrent &lt; size();</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="meta">@Override</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> AnyType <span class="title">next</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			<span class="keyword">return</span> mArray[mCurrent++];</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="meta">@Override</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			MyArrayList.<span class="keyword">this</span>.remove(--mCurrent) ;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/07/28/dataType-adt-01/" data-id="cjk4xsj4d001pk3ew1xjyoum6" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/07/29/dataType-adt-02/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          数据结构表（ADT）解析(下)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/03/06/view-SurfaceView01/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">SurfaceView的简单使用</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      <a href="/" class="logo">刘鹏程</a>
+      &copy; 2018 刘鹏程<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.scrollLoading.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
