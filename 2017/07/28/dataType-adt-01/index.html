@@ -13,15 +13,15 @@
 <meta property="og:site_name" content="刘鹏程">
 <meta property="og:description" content="1、前言自工作以来，越来越觉得数据结构的重要性，类似于网络上面拉去下来的数据进行分类，还是自定义View画图的x，y还是滑动的距离。滑动距离的判断种种。感觉自己很是欠缺火候，所以开始恶补数据结构、算法的知识，让自己可以提高。 之前在知乎上面看了一个帖子，在讨论数据结构的重要性，有一句话说的很好，也是笔者开始写一系列数据结构算法的动力，在这里送给给位看客，  对于一个程序员来说，算法的高度决定程序员">
 <meta property="og:locale" content="中文">
-<meta property="og:image" content="http://yoursite.com/2017/07/28/dataType-adt-01/dataType-adt-01/01.png">
-<meta property="og:image" content="http://yoursite.com/2017/07/28/dataType-adt-01/dataType-adt-01/02.png">
-<meta property="og:image" content="http://yoursite.com/2017/07/28/dataType-adt-01/dataType-adt-01/03.png">
-<meta property="og:image" content="http://yoursite.com/2017/07/28/dataType-adt-01/dataType-adt-01/04.png">
-<meta property="og:updated_time" content="2018-07-28T04:49:35.228Z">
+<meta property="og:image" content="http://yoursite.com/2017/07/28/dataType-adt-01/01.png">
+<meta property="og:image" content="http://yoursite.com/2017/07/28/dataType-adt-01/02.png">
+<meta property="og:image" content="http://yoursite.com/2017/07/28/dataType-adt-01/03.png">
+<meta property="og:image" content="http://yoursite.com/2017/07/28/dataType-adt-01/04.png">
+<meta property="og:updated_time" content="2018-07-28T04:52:47.258Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据结构表（ADT）解析(上)">
 <meta name="twitter:description" content="1、前言自工作以来，越来越觉得数据结构的重要性，类似于网络上面拉去下来的数据进行分类，还是自定义View画图的x，y还是滑动的距离。滑动距离的判断种种。感觉自己很是欠缺火候，所以开始恶补数据结构、算法的知识，让自己可以提高。 之前在知乎上面看了一个帖子，在讨论数据结构的重要性，有一句话说的很好，也是笔者开始写一系列数据结构算法的动力，在这里送给给位看客，  对于一个程序员来说，算法的高度决定程序员">
-<meta name="twitter:image" content="http://yoursite.com/2017/07/28/dataType-adt-01/dataType-adt-01/01.png">
+<meta name="twitter:image" content="http://yoursite.com/2017/07/28/dataType-adt-01/01.png">
   
   
     <link rel="icon" href="/favicon.png">
@@ -214,16 +214,16 @@
 <p>缺点就是，如果我们需要对顺序表当中的表结构（数据）进行改变呢？我们不妨设想一下，如果我们需要在第2位插入一个元素，那么就代表着，表里面的原先2位置的元素下表变化称为第3，而第3变为第4，以此类推，直到表中元素结束。删除也是同样的道理。当然如果我们在最后一位插入，我们的时间也是常数值。在这里我们考虑最坏情况，那就是在第一位插入活着删除，那么我们的时间就是$o(N)$。</p>
 <p>总结：就是如果对于该表数据为只读权限（完全访问），而没有写权限，那么这种表结构的实现无一就是完美的，但是对插入删除操作比较多的话。笔者在这里不推荐使用这种表，而推荐下述的这种表结构（链表），后续会比较两表的效率问题，</p>
 <h3 id="4-2、简单链表"><a href="#4-2、简单链表" class="headerlink" title="4.2、简单链表"></a>4.2、简单链表</h3><p>为了解决上述问题，人们开始思考，如果我们将表不进行连续存储，可以避免插入和删除的线性开销，下图为链表的一般想法</p>
-<p><img src="/2017/07/28/dataType-adt-01/./dataType-adt-01/01.png" alt="简单链表"></p>
+<p><img src="/2017/07/28/dataType-adt-01/01.png" alt="简单链表"></p>
 <p>上图可知，链表是一系列节点组成的，我们称之为Node，这些Node在内存当中是不连续的。每一个Node都有一条链，我们称之为next链，直向下一个Node，最后一个元素的next链为空。</p>
 <p>我们如果打印全部，或者便利的话，通过第一个元素找到第二个元素以此类推，直到找到最后一个元素。时间是线性的，这个数组实现是一样的，不过其中的常数可能会比使用数组要大，findValueForIndex操作确实没有数组效率高，需要通过第一个开始找，直到遍历到index，所以时间复杂度为 $O(i)$ 。</p>
 <p>如果是删除和插入操作，我们只需要修改两个链也就是引用，我们就可以完成插入操作和删除操作，不需要移动项，所以对比上述数组实现确实是简便了一些。下图为删除和插入的实现链表</p>
-<p><img src="/2017/07/28/dataType-adt-01/./dataType-adt-01/02.png" alt="简单链表"></p>
+<p><img src="/2017/07/28/dataType-adt-01/02.png" alt="简单链表"></p>
 <p>这里如果要插入的话，就把A3指向A4的引用变为A3指向x，然后把x的指向变为A4即可。不需要移动项，所以在这里时间复杂度是常数时间。</p>
-<p><img src="/2017/07/28/dataType-adt-01/./dataType-adt-01/03.png" alt="简单链表"></p>
+<p><img src="/2017/07/28/dataType-adt-01/03.png" alt="简单链表"></p>
 <p>如果要删除A4节点的话，这里我们直接把A3的链指向A5，然后把A4原本指向A5的链制空。就完成了A4的删除。时间复杂度也是常数时间。</p>
 <p>使用上述链表的话，删除最后一个节点，我们得先找到指向最后一个节点的项，但是在上述链表当中，每一个节点不会提供前驱节点的任何信息。所以对上述链表进行改造，得出双向链表，即一个节点会提供下一个节点和上一个节点的信息，结构图如下所示。</p>
-<p><img src="/2017/07/28/dataType-adt-01/./dataType-adt-01/04.png" alt="简单链表"></p>
+<p><img src="/2017/07/28/dataType-adt-01/04.png" alt="简单链表"></p>
 <hr>
 <h2 id="5、Java中的表（ADT）List"><a href="#5、Java中的表（ADT）List" class="headerlink" title="5、Java中的表（ADT）List"></a>5、Java中的表（ADT）List</h2><p>Java语言中，提供了一些普通数据结构的实现。该语言的这一部分叫做Collection API。表（ADT）是在Collection中实现的数据结构之一。</p>
 <p>Java当中由java.util包中的List接口指定。根据上述表的实现思想，Java当中由ArrayList类提供了List ADT的一种可增长数组的实现。使用该数据结构的优点在于，get和set的调用花费常数时间。但是插入操作和删除操作代价昂贵（在于移动其与项）。</p>
@@ -244,7 +244,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/07/28/dataType-adt-01/" data-id="cjk4xsj4d001pk3ew1xjyoum6" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/07/28/dataType-adt-01/" data-id="cjk4xxiky001pktewhb05h1sz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>

@@ -191,7 +191,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/09/OrnamentalGrden/" data-id="cjk4xsj3g0007k3ewud7xj45h" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/09/OrnamentalGrden/" data-id="cjk4xxik40007ktewutg08083" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
@@ -292,7 +292,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/09/thread02/" data-id="cjk4xsj59002kk3ewh7ck4kj6" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/09/thread02/" data-id="cjk4xxilm002kktewsckk65pv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/并发/">并发</a></li></ul>
@@ -414,7 +414,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/09/thread01/" data-id="cjk4xsj4g001wk3ewit2u2bho" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/09/thread01/" data-id="cjk4xxil1001wktew0u5firkc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/并发/">并发</a></li></ul>
@@ -520,7 +520,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/02/08/android-sqlite03/" data-id="cjk4xsj5o002tk3ewuycleubt" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/02/08/android-sqlite03/" data-id="cjk4xxim1002tktewpov85hnq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
@@ -607,7 +607,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/02/06/android-sqlite02/" data-id="cjk4xsj4b001nk3ew84b7ltm2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/02/06/android-sqlite02/" data-id="cjk4xxikx001nktewdc22xyuf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
@@ -775,7 +775,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/02/05/android-sqlite01/" data-id="cjk4xsj4r002bk3ewnb07yck7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/02/05/android-sqlite01/" data-id="cjk4xxilc002bktew73sdkby0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
@@ -823,7 +823,7 @@
 <li>对外提供LinkedListIterator 好进行遍历。</li>
 </ul>
 <h3 id="2-2、节点和链"><a href="#2-2、节点和链" class="headerlink" title="2.2、节点和链"></a>2.2、节点和链</h3><p>我们知道一个节点，应该包含有三个部分，第一个部分应该是指上一个节点的索引，第二部分应该是该节点所含有的数据，第三部分应该是指向下一个节点的索引。</p>
-<p><img src="/2017/07/29/dataType-adt-02/./dataType-adt-02/01.png" alt="note的内容"></p>
+<p><img src="/2017/07/29/dataType-adt-02/01.png" alt="note的内容"></p>
 <p>具体实现如下所示：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 节点类，用来表示链表当中的一个节点。</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> pengchengliu</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &lt;AnyType&gt;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">//TODO : 问题一：为什么选择是private。</span></span><br><span class="line"><span class="comment">//TODO : 问题二：为什么选择是static。</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span>&lt;<span class="title">AnyType</span>&gt;</span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//TODO ：为什么内部属性选用public 。</span></span><br><span class="line">	<span class="keyword">public</span> AnyType data ;</span><br><span class="line">	<span class="keyword">public</span> Node&lt;AnyType&gt; prev ;</span><br><span class="line">	<span class="keyword">public</span> Node&lt;AnyType&gt; next ;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Node</span><span class="params">(AnyType data, Node&lt;AnyType&gt; prev, Node&lt;AnyType&gt; next)</span></span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.data = data ;</span><br><span class="line">		<span class="keyword">this</span>.prev = prev ;</span><br><span class="line">		<span class="keyword">this</span>.next = next ;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>在上述代码当中，笔者提到了三个问题。这这里简单的说一下。</p>
@@ -834,21 +834,21 @@
 <p>第三个问题：为什么内部属性选用public</p>
 <p>答案：这个问题好回答，既然整个类都是private，内部是用public也就无所谓了。</p>
 <h3 id="2-3、标记节点"><a href="#2-3、标记节点" class="headerlink" title="2.3、标记节点"></a>2.3、标记节点</h3><p>了解了上述Node类以后，这里特别说明一下有两个比较特殊的位置，就是第一个元素和最后一个元素，我们第一个元素的第一部分应该是null，而最后一个节点的第三部分应该是null，当我们检测到了最后一个节点的第三部分是null，则代表遍历结束，这是基本的链表结构，但是为了省去不必要的麻烦，我们使用标记节点。代替第一个元素和最后一个元素。为什么选择标记节点。</p>
-<p><img src="/2017/07/29/dataType-adt-02/./dataType-adt-02/02.png" alt="标记节点"></p>
+<p><img src="/2017/07/29/dataType-adt-02/02.png" alt="标记节点"></p>
 <p>需要注意的是由于第一个元素和最后一个元素都比较特殊，所以通过标记节点头节点和尾节点。</p>
 <p>为什么使用标记节点呢？</p>
 <p>如果我们不使用标记节点，我们会存在特殊情况，比如删除或者添加第一个元素，这样就会存在一种可能，那就是我们需要改变第一个元素的位置，而如果有标记节点的话，第一个元素的位置和最后一个元素的位置就是一定的，我们规避了这一种特殊情况。</p>
 <h3 id="2-4、主要操作"><a href="#2-4、主要操作" class="headerlink" title="2.4、主要操作"></a>2.4、主要操作</h3><p>我们知道数据结构重要的地方有两点，第一个比较重要的地方就是集合内的元素，而第二个重要的地方就是操作。</p>
 <h4 id="2-4-1、清空集合"><a href="#2-4-1、清空集合" class="headerlink" title="2.4.1、清空集合"></a>2.4.1、清空集合</h4><p>因为我们有标记节点，所以我们清空集合只需要，让头节点指向尾节点，尾节点指向头节点，然后让size为0即可。效果图如下所示</p>
-<p><img src="/2017/07/29/dataType-adt-02/./dataType-adt-02/03.png" alt="head节点"></p>
+<p><img src="/2017/07/29/dataType-adt-02/03.png" alt="head节点"></p>
 <p>代码如下所示：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 清空当前的容器</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">clear</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	beginMarker = <span class="keyword">new</span> Node&lt;AnyType&gt;(<span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>);</span><br><span class="line">	endMarker = <span class="keyword">new</span> Node&lt;AnyType&gt;(<span class="keyword">null</span>, beginMarker, <span class="keyword">null</span>);</span><br><span class="line">	beginMarker.next = endMarker ;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//	重置计数器。</span></span><br><span class="line">	theSize = <span class="number">0</span> ;</span><br><span class="line">	modCount++ ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="2-4-2、插入元素"><a href="#2-4-2、插入元素" class="headerlink" title="2.4.2、插入元素"></a>2.4.2、插入元素</h4><p>在固定的位置插入一个元素，也就是说，改变该位置上面前后节点的链即可，具体的步骤如下图所示：</p>
-<p><img src="/2017/07/29/dataType-adt-02/./dataType-adt-02/04.png" alt="插入元素"></p>
+<p><img src="/2017/07/29/dataType-adt-02/04.png" alt="插入元素"></p>
 <p>代码如下所示：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 添加一个元素，将元素item添加到node之前。此方法为其他方法的服务方法，所以不需要暴露给外部类调用</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">addBefore</span><span class="params">(Node&lt;AnyType&gt; node, AnyType item)</span></span>&#123;</span><br><span class="line">	Node&lt;AnyType&gt; itemNode = <span class="keyword">new</span> Node&lt;AnyType&gt;(item, node.prev, node);</span><br><span class="line">	itemNode.prev.next = itemNode ;</span><br><span class="line">	node.prev = itemNode ;</span><br><span class="line">	<span class="comment">//更新计数器。</span></span><br><span class="line">	theSize ++ ;</span><br><span class="line">	modCount ++ ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="2-4-3、移除元素"><a href="#2-4-3、移除元素" class="headerlink" title="2.4.3、移除元素"></a>2.4.3、移除元素</h4><p>这个操作方法和上述插入元素，没有什么区别，也是改变前后节点的链的问题。</p>
-<p><img src="/2017/07/29/dataType-adt-02/./dataType-adt-02/05.png" alt="移除元素"></p>
+<p><img src="/2017/07/29/dataType-adt-02/05.png" alt="移除元素"></p>
 <p>代码实现如下所示：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 移除一个元素，将oldNode在原有的集合当前删除。</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> oldNode</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> AnyType <span class="title">remove</span><span class="params">(Node&lt;AnyType&gt; oldNode)</span></span>&#123;</span><br><span class="line">	oldNode.next.prev = oldNode.prev ;</span><br><span class="line">	oldNode.prev.next = oldNode.next ;</span><br><span class="line">	<span class="comment">//更新计数器</span></span><br><span class="line">	theSize-- ;</span><br><span class="line">	modCount++ ;</span><br><span class="line">	<span class="keyword">return</span> oldNode.data ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h4 id="2-4-4、得到节点"><a href="#2-4-4、得到节点" class="headerlink" title="2.4.4、得到节点"></a>2.4.4、得到节点</h4><p>通过下标得到相应的Node，具体的代码实现如下所示：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 得到一个元素，根据index下表值，得到一个元素</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> index 下表值</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> 得到的元素。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> Node&lt;AnyType&gt; <span class="title">getNode</span><span class="params">(<span class="keyword">int</span> index)</span></span>&#123;</span><br><span class="line">	Node&lt;AnyType&gt; tempNode ;</span><br><span class="line">	<span class="comment">//下标合法性验证</span></span><br><span class="line">	<span class="keyword">if</span>(index &lt; <span class="number">0</span> || index &gt; <span class="keyword">this</span>.size())&#123;</span><br><span class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> IndexOutOfBoundsException();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//由于是双向列表，所以根据index的值不同在两端获取。使得效率更加的高效，O(N/2)的时间复杂度。</span></span><br><span class="line">	<span class="keyword">if</span>(index &lt; <span class="keyword">this</span>.size() / <span class="number">2</span>)&#123;</span><br><span class="line">		<span class="comment">//从开头开始找,获取第一个元素</span></span><br><span class="line">		tempNode = beginMarker.next ;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; index; i ++)&#123;</span><br><span class="line">			tempNode = tempNode.next ;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="comment">//从结尾开始找,获取最后一个元素。</span></span><br><span class="line">		tempNode = endMarker.prev ;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="keyword">this</span>.size(); i &gt; index; i--)&#123;</span><br><span class="line">			tempNode = tempNode.prev ;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> tempNode ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -874,7 +874,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/07/29/dataType-adt-02/" data-id="cjk4xsj4e001rk3ew3tcvmhi4" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/07/29/dataType-adt-02/" data-id="cjk4xxikz001rktew1kqx6ilf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
@@ -936,16 +936,16 @@
 <p>缺点就是，如果我们需要对顺序表当中的表结构（数据）进行改变呢？我们不妨设想一下，如果我们需要在第2位插入一个元素，那么就代表着，表里面的原先2位置的元素下表变化称为第3，而第3变为第4，以此类推，直到表中元素结束。删除也是同样的道理。当然如果我们在最后一位插入，我们的时间也是常数值。在这里我们考虑最坏情况，那就是在第一位插入活着删除，那么我们的时间就是$o(N)$。</p>
 <p>总结：就是如果对于该表数据为只读权限（完全访问），而没有写权限，那么这种表结构的实现无一就是完美的，但是对插入删除操作比较多的话。笔者在这里不推荐使用这种表，而推荐下述的这种表结构（链表），后续会比较两表的效率问题，</p>
 <h3 id="4-2、简单链表"><a href="#4-2、简单链表" class="headerlink" title="4.2、简单链表"></a>4.2、简单链表</h3><p>为了解决上述问题，人们开始思考，如果我们将表不进行连续存储，可以避免插入和删除的线性开销，下图为链表的一般想法</p>
-<p><img src="/2017/07/28/dataType-adt-01/./dataType-adt-01/01.png" alt="简单链表"></p>
+<p><img src="/2017/07/28/dataType-adt-01/01.png" alt="简单链表"></p>
 <p>上图可知，链表是一系列节点组成的，我们称之为Node，这些Node在内存当中是不连续的。每一个Node都有一条链，我们称之为next链，直向下一个Node，最后一个元素的next链为空。</p>
 <p>我们如果打印全部，或者便利的话，通过第一个元素找到第二个元素以此类推，直到找到最后一个元素。时间是线性的，这个数组实现是一样的，不过其中的常数可能会比使用数组要大，findValueForIndex操作确实没有数组效率高，需要通过第一个开始找，直到遍历到index，所以时间复杂度为 $O(i)$ 。</p>
 <p>如果是删除和插入操作，我们只需要修改两个链也就是引用，我们就可以完成插入操作和删除操作，不需要移动项，所以对比上述数组实现确实是简便了一些。下图为删除和插入的实现链表</p>
-<p><img src="/2017/07/28/dataType-adt-01/./dataType-adt-01/02.png" alt="简单链表"></p>
+<p><img src="/2017/07/28/dataType-adt-01/02.png" alt="简单链表"></p>
 <p>这里如果要插入的话，就把A3指向A4的引用变为A3指向x，然后把x的指向变为A4即可。不需要移动项，所以在这里时间复杂度是常数时间。</p>
-<p><img src="/2017/07/28/dataType-adt-01/./dataType-adt-01/03.png" alt="简单链表"></p>
+<p><img src="/2017/07/28/dataType-adt-01/03.png" alt="简单链表"></p>
 <p>如果要删除A4节点的话，这里我们直接把A3的链指向A5，然后把A4原本指向A5的链制空。就完成了A4的删除。时间复杂度也是常数时间。</p>
 <p>使用上述链表的话，删除最后一个节点，我们得先找到指向最后一个节点的项，但是在上述链表当中，每一个节点不会提供前驱节点的任何信息。所以对上述链表进行改造，得出双向链表，即一个节点会提供下一个节点和上一个节点的信息，结构图如下所示。</p>
-<p><img src="/2017/07/28/dataType-adt-01/./dataType-adt-01/04.png" alt="简单链表"></p>
+<p><img src="/2017/07/28/dataType-adt-01/04.png" alt="简单链表"></p>
 <hr>
 <h2 id="5、Java中的表（ADT）List"><a href="#5、Java中的表（ADT）List" class="headerlink" title="5、Java中的表（ADT）List"></a>5、Java中的表（ADT）List</h2><p>Java语言中，提供了一些普通数据结构的实现。该语言的这一部分叫做Collection API。表（ADT）是在Collection中实现的数据结构之一。</p>
 <p>Java当中由java.util包中的List接口指定。根据上述表的实现思想，Java当中由ArrayList类提供了List ADT的一种可增长数组的实现。使用该数据结构的优点在于，get和set的调用花费常数时间。但是插入操作和删除操作代价昂贵（在于移动其与项）。</p>
@@ -966,7 +966,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/07/28/dataType-adt-01/" data-id="cjk4xsj4d001pk3ew1xjyoum6" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/07/28/dataType-adt-01/" data-id="cjk4xxiky001pktewhb05h1sz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
@@ -1030,7 +1030,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/06/view-SurfaceView01/" data-id="cjk4xsj3u000ok3ewzbwmlga6" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/03/06/view-SurfaceView01/" data-id="cjk4xxikg000oktew4l19lrvd" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/控件/">控件</a></li></ul>
@@ -1146,7 +1146,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/02/webView01/" data-id="cjk4xsj4t002ek3ewvrw1nyyn" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/03/02/webView01/" data-id="cjk4xxile002ektewp3yy4kv8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/控件/">控件</a></li></ul>
