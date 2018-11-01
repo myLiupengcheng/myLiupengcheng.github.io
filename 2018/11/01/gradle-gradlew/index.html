@@ -3,18 +3,20 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Category: 随笔 | 刘鹏程</title>
+  <title>Android Gradlew编译相关命令 | 刘鹏程</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="活着便是为了更好的活着">
-<meta property="og:type" content="website">
-<meta property="og:title" content="刘鹏程">
-<meta property="og:url" content="http://yoursite.com/categories/随笔/index.html">
+  <meta name="description" content="1、前言gradlew 是什么东西呢，和gradle貌似不大一样，肯定有关系。没错，他就是 gradle wrapper，意思是gradle的一个包装，大家可以理解为在这个项目本地就封装了gradle，比如我的项目是HelloWord, 在HelloWord/gradle/wrapper/gralde-wrapper.properties文件中声明了它指向的目录和版本，比如我的内容是： 12345">
+<meta name="keywords" content="编译,gradlew">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android Gradlew编译相关命令">
+<meta property="og:url" content="http://yoursite.com/2018/11/01/gradle-gradlew/index.html">
 <meta property="og:site_name" content="刘鹏程">
-<meta property="og:description" content="活着便是为了更好的活着">
+<meta property="og:description" content="1、前言gradlew 是什么东西呢，和gradle貌似不大一样，肯定有关系。没错，他就是 gradle wrapper，意思是gradle的一个包装，大家可以理解为在这个项目本地就封装了gradle，比如我的项目是HelloWord, 在HelloWord/gradle/wrapper/gralde-wrapper.properties文件中声明了它指向的目录和版本，比如我的内容是： 12345">
 <meta property="og:locale" content="中文">
+<meta property="og:updated_time" content="2018-11-01T07:09:30.576Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="刘鹏程">
-<meta name="twitter:description" content="活着便是为了更好的活着">
+<meta name="twitter:title" content="Android Gradlew编译相关命令">
+<meta name="twitter:description" content="1、前言gradlew 是什么东西呢，和gradle貌似不大一样，肯定有关系。没错，他就是 gradle wrapper，意思是gradle的一个包装，大家可以理解为在这个项目本地就封装了gradle，比如我的项目是HelloWord, 在HelloWord/gradle/wrapper/gralde-wrapper.properties文件中声明了它指向的目录和版本，比如我的内容是： 12345">
   
   
     <link rel="icon" href="/favicon.png">
@@ -157,39 +159,77 @@
   
 </aside>
         
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/04/29/me/" class="archive-article-date">
-  <time datetime="2016-04-29T02:18:14.000Z" itemprop="datePublished">Apr 29</time>
+        <section id="main"><article id="post-gradle-gradlew" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/01/gradle-gradlew/" class="article-date">
+  <time datetime="2018-11-01T07:02:26.000Z" itemprop="datePublished">2018-11-01</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/04/29/me/">博客简介</a>
+    <h1 class="article-title" itemprop="name">
+      Android Gradlew编译相关命令
     </h1>
   
 
-    </header>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1、前言"><a href="#1、前言" class="headerlink" title="1、前言"></a>1、前言</h3><p>gradlew 是什么东西呢，和gradle貌似不大一样，肯定有关系。没错，他就是 gradle wrapper，意思是gradle的一个包装，大家可以理解为在这个项目本地就封装了gradle，比如我的项目是HelloWord, 在HelloWord/gradle/wrapper/gralde-wrapper.properties文件中声明了它指向的目录和版本，比如我的内容是：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#Thu Nov <span class="number">01</span> <span class="number">14</span>:<span class="number">28</span>:<span class="number">47</span> CST <span class="number">2018</span></span><br><span class="line">distributionBase=GRADLE_USER_HOME</span><br><span class="line">distributionPath=wrapper<span class="regexp">/dists</span></span><br><span class="line"><span class="regexp">zipStoreBase=GRADLE_USER_HOME</span></span><br><span class="line"><span class="regexp">zipStorePath=wrapper/</span>dists</span><br><span class="line">distributionUrl=https\:<span class="comment">//services.gradle.org/distributions/gradle-2.2-all.zip</span></span><br></pre></td></tr></table></figure>
+<p>如果你项目没有该文件的话，那么gradlew会到~/.gradle/wrapper/dists/gradle-2.10-all下寻找，或者你新建给文件，内容复制到里面。其实你会发现是同一个目录咯。里面会有个随机数的文件夹，里面就是gradle，只要下载成功即可用grdlew wrapper的命令代替全局的gradle命令。</p>
+<p>常用命令如下：(linux下是./gradlew，该脚本在项目下，windows直接gradlew即可)</p>
+<h3 id="2、命令"><a href="#2、命令" class="headerlink" title="2、命令"></a>2、命令</h3><ul>
+<li>./gradlew -v 版本号，首次运行，没有gradle的要下载的哦。</li>
+<li>./gradlew clean 删除HelloWord/app目录下的build文件夹</li>
+<li>./gradlew build 检查依赖并编译打包<ul>
+<li>./gradlew assembleDebug 编译并打Debug包</li>
+<li>./gradlew assemblexiaomiDebug 编译并打xiaomi的debug包，其他类似</li>
+<li>./gradlew assembleRelease 编译并打Release的包</li>
+<li>./gradlew assemblexiaomiRelease 编译并打xiaomi的Release包，其他类似</li>
+<li>./gradlew installRelease Release模式打包并安装</li>
+<li>./gradlew uninstallRelease 卸载Release模式包</li>
+</ul>
+</li>
+</ul>
+<h4 id="gradlew-build-检查依赖并编译打包"><a href="#gradlew-build-检查依赖并编译打包" class="headerlink" title="./gradlew build 检查依赖并编译打包"></a>./gradlew build 检查依赖并编译打包</h4><p>这里注意的是 ./gradlew build 命令把debug、release环境的包都打出来，生成的包在目录HelloWord/app/build/outputs/apk/下。如果正式发布只需要打release的包，</p>
+<h5 id="gradlew-build-和-gradle-build-有区别吗"><a href="#gradlew-build-和-gradle-build-有区别吗" class="headerlink" title="gradlew build 和 gradle build 有区别吗?"></a>gradlew build 和 gradle build 有区别吗?</h5><p>使用gradle wrapper是gradle官方推荐的build方式，而gradlew正是运行了wrapper task之后生成的（运行wrapper task是Android Studio自动做的）。使用gralde wrapper的一个好处就是每个项目可以依赖不同版本的gradle，构建的时候gradle wrapper会帮你自动下载所依赖的版本的gradle。而如果你使用gradle build的话，同时你又有多个项目使用不同版本的gradle，那就需要你手动在自己的机器上配置多个版本的gradle，稍微麻烦一些</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">.<span class="regexp">/gradlew clean  clean项目</span></span><br><span class="line"><span class="regexp"> </span></span><br><span class="line"><span class="regexp">./g</span>radlew build  构建项目</span><br><span class="line"> </span><br><span class="line"><span class="regexp">/gradlew assembleDebug or /g</span>radlew aD 编译并打Debug包</span><br><span class="line"> </span><br><span class="line">.<span class="regexp">/gradlew assembleRelease or /g</span>radlew aR 编译并打Release的包</span><br><span class="line"> </span><br><span class="line">.<span class="regexp">/gradlew installRelease or /g</span>radlew iR Release模式打包并安装</span><br><span class="line"> </span><br><span class="line">.<span class="regexp">/gradlew installDebug or /g</span>radlew iD Debug模式打包并安装</span><br><span class="line"> </span><br><span class="line">.<span class="regexp">/gradlew uninstallRelease or ./g</span>radlew uR 卸载Release模式包</span><br><span class="line"> </span><br><span class="line">.<span class="regexp">/gradlew uninstallDebug or ./g</span>radlew uD 卸载Debug模式包</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">需要说明的是这些命令可以叠加使用，例如：</span><br><span class="line"> </span><br><span class="line">.<span class="regexp">/gradlew clean build --info &gt; bugtags.log</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/11/01/gradle-gradlew/" data-id="cjny927yp0008i3ewnv40ger3" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gradlew/">gradlew</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/编译/">编译</a></li></ul>
+
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/09/03/android-system-job/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Android O 后台限制解决方式</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
 
 </section>
       </div>
