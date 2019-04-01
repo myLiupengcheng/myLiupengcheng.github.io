@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Android Q 应用存储空间限制 | 刘鹏程</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="应用存储空间限制1、背景介绍Android 相比于 IOS 来说，外部存储一直都是很混乱的，为了改变相应的这种生态，Android Q 版本对此进行了大量的整改，使用更加精细的划分模式来最大程度的给予App更高的隐私性。 1、适配范围应用存储空间限制仅适用于以 Android Q 为目标的应用程序，（targetSDK = 28） 或者在运行Android Q的设备上新安装的应用。 当满足以下每个">
+<meta name="keywords" content="版本适配">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android Q 应用存储空间限制">
+<meta property="og:url" content="http://yoursite.com/2019/04/01/android-version-Q-storage/index.html">
+<meta property="og:site_name" content="刘鹏程">
+<meta property="og:description" content="应用存储空间限制1、背景介绍Android 相比于 IOS 来说，外部存储一直都是很混乱的，为了改变相应的这种生态，Android Q 版本对此进行了大量的整改，使用更加精细的划分模式来最大程度的给予App更高的隐私性。 1、适配范围应用存储空间限制仅适用于以 Android Q 为目标的应用程序，（targetSDK = 28） 或者在运行Android Q的设备上新安装的应用。 当满足以下每个">
+<meta property="og:locale" content="中文">
+<meta property="og:updated_time" content="2019-04-01T11:58:52.161Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android Q 应用存储空间限制">
+<meta name="twitter:description" content="应用存储空间限制1、背景介绍Android 相比于 IOS 来说，外部存储一直都是很混乱的，为了改变相应的这种生态，Android Q 版本对此进行了大量的整改，使用更加精细的划分模式来最大程度的给予App更高的隐私性。 1、适配范围应用存储空间限制仅适用于以 Android Q 为目标的应用程序，（targetSDK = 28） 或者在运行Android Q的设备上新安装的应用。 当满足以下每个">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <!-- <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'> -->
+  <!-- <link href="//fonts.googleapis.com/css?family=Source+Code+Pro:400,700" rel="stylesheet" type="text/css"> -->
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro:400,700" rel="stylesheet" type="text/css">
+  <link href='//fonts.useso.com/css?family=Open+Sans:300,600' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="header-outer" class="outer">
+    <a href="/" class="logo">刘鹏程</a>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about/index.html">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+        </div>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        
+        
+          <a id="nav-github-link" class="nav-icon" href="https://github.com/ppoffice/hexo-theme-alex" title="Fork me on GitHub"></a>
+        
+      </nav>
+    </div>
+  </div>
+</header>
+      <nav id="mobile-nav" class="off">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about/index.html" class="mobile-nav-link">About</a>
+  
+  <div id="search-form-wrap-mobile">
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+  </div>
+</nav>
+      <div class="outer">
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JVM/">JVM</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/协议/">协议</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/并发/">并发</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据结构/">数据结构</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/04/01/android-version-Q-storage/">Android Q 应用存储空间限制</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/01/gradle-gradlew/">Android Gradlew编译相关命令</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/03/android-system-job/">Android O 后台限制解决方式</a>
+          </li>
+        
+          <li>
+            <a href="/2018/06/15/thread-tools-delayQueue/">线程延时队列DelayQueue</a>
+          </li>
+        
+          <li>
+            <a href="/2018/06/15/JVM-outofMemroyError-02/">JVM学习2 - OutOfMemroyError***</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OutOfMemroy/">OutOfMemroy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gradlew/">gradlew</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/关于博主/">关于博主</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/协议/">协议</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/控件/">控件</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构/">数据结构</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/版本适配/">版本适配</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/绘图技巧/">绘图技巧</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编译/">编译</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JVM/" style="font-size: 13.33px;">JVM</a> <a href="/tags/OutOfMemroy/" style="font-size: 10px;">OutOfMemroy</a> <a href="/tags/gradlew/" style="font-size: 10px;">gradlew</a> <a href="/tags/http/" style="font-size: 16.67px;">http</a> <a href="/tags/关于博主/" style="font-size: 10px;">关于博主</a> <a href="/tags/协议/" style="font-size: 16.67px;">协议</a> <a href="/tags/并发/" style="font-size: 20px;">并发</a> <a href="/tags/控件/" style="font-size: 16.67px;">控件</a> <a href="/tags/数据库/" style="font-size: 16.67px;">数据库</a> <a href="/tags/数据结构/" style="font-size: 13.33px;">数据结构</a> <a href="/tags/版本适配/" style="font-size: 13.33px;">版本适配</a> <a href="/tags/算法/" style="font-size: 13.33px;">算法</a> <a href="/tags/绘图技巧/" style="font-size: 16.67px;">绘图技巧</a> <a href="/tags/编译/" style="font-size: 10px;">编译</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://hexo.io">Hexo</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+        <section id="main"><article id="post-android-version-Q-storage" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/01/android-version-Q-storage/" class="article-date">
+  <time datetime="2019-04-01T15:31:39.000Z" itemprop="datePublished">2019-04-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android Q 应用存储空间限制
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="应用存储空间限制"><a href="#应用存储空间限制" class="headerlink" title="应用存储空间限制"></a>应用存储空间限制</h2><h3 id="1、背景介绍"><a href="#1、背景介绍" class="headerlink" title="1、背景介绍"></a>1、背景介绍</h3><p>Android 相比于 IOS 来说，外部存储一直都是很混乱的，为了改变相应的这种生态，Android Q 版本对此进行了大量的整改，使用更加精细的划分模式来最大程度的给予App更高的隐私性。</p>
+<h4 id="1、适配范围"><a href="#1、适配范围" class="headerlink" title="1、适配范围"></a>1、适配范围</h4><p>应用存储空间限制仅适用于以 Android Q 为目标的应用程序，（targetSDK = 28） 或者在运行Android Q的设备上新安装的应用。</p>
+<p>当满足以下每个条件时，系统会将应用程序的文件访问权限置于兼容模式：</p>
+<ul>
+<li>1、您的应用针对Android 9（API级别28）或更低版本。</li>
+<li>2、您的应用安装在从Android 9升级到Android Q的设备上。</li>
+</ul>
+<h3 id="2、整改内容"><a href="#2、整改内容" class="headerlink" title="2、整改内容"></a>2、整改内容</h3><h4 id="1、每个应用程序持有私有文件的独立存储沙箱"><a href="#1、每个应用程序持有私有文件的独立存储沙箱" class="headerlink" title="1、每个应用程序持有私有文件的独立存储沙箱"></a>1、每个应用程序持有私有文件的独立存储沙箱</h4><p>每个App，Android Q 都会创建一个独立的存储沙箱，限制其他应用程序访问您的应用程序的外部存储设备上的文件。常见的外部存储设备是/sdcard，</p>
+<p>该方案具有以下优点：</p>
+<ul>
+<li>需要更少的权限。应用程序沙箱中的文件对您的应用程序是私有的。因此，不再需要权限在外部存储中访问、保存自己的文件。（READ_EXTERNAL_STORAGE，WRITE_EXTERNAL_STORAGE）</li>
+<li>相对于设备上的其他应用程序，隐私性更强。没有其他应用可以直接访问您应用的独立存储沙箱中的文件。此访问限制使您的应用程序更容易维护沙盒文件的隐私。</li>
+</ul>
+<p>注意：如果用户卸载了您的应用，则会清除隔离存储沙箱中的文件。（这点有点类似于 IOS）</p>
+<p>获取 Android Q 为每一个 App 分享的独立存储沙箱，可以调用如下方法 </p>
+<p>Context.getExternalFilesDir(String type)</p>
+<p>而type的取值为以下这几种</p>
+<ul>
+<li>{@link android.os.Environment#DIRECTORY_MUSIC},</li>
+<li>{@link android.os.Environment#DIRECTORY_PODCASTS},</li>
+<li>{@link android.os.Environment#DIRECTORY_RINGTONES},</li>
+<li>{@link android.os.Environment#DIRECTORY_ALARMS},</li>
+<li>{@link android.os.Environment#DIRECTORY_NOTIFICATIONS},</li>
+<li>{@link android.os.Environment#DIRECTORY_PICTURES}, or</li>
+<li>{@link android.os.Environment#DIRECTORY_MOVIES}.</li>
+</ul>
+<h4 id="2、每个应用程序持有公共媒体的共享集合"><a href="#2、每个应用程序持有公共媒体的共享集合" class="headerlink" title="2、每个应用程序持有公共媒体的共享集合"></a>2、每个应用程序持有公共媒体的共享集合</h4><p>每个App，Android Q 都会创建出一个公共的存储区域，供里面的文件独立于 App 之外，当 App 卸载以后，保留该文件，例如：通过 App 下载下来的音乐文件，在这个区域，当你的app需要修改和读取由该APP创建的文件，则不需要任何权限，而如果需要读取和修改其他App创建的文件，则需要申请权限。关于具体权限如下所示：</p>
+<ul>
+<li>读取 Photos 相关文件，则需要 READ_MEDIA_IMAGES</li>
+<li>读取 Videos 相关文件，则需要 READ_MEDIA_VIDEO</li>
+<li>读取 Music 相关文件，则需要 READ_MEDIA_AUDIO</li>
+</ul>
+<p>关于上述，还有两个比较特殊的存在</p>
+<ul>
+<li>There’s no permission for accessing the Downloads shared collection. Your app can access its own files in this collection. To access other apps’ files in this collection, however, you must allow the user to choose a file using the system’s file picker app.</li>
+<li>If your app uses the Storage Access Framework, it doesn’t need to request these media-scoped permissions.</li>
+</ul>
+<h5 id="1、访问共享集合"><a href="#1、访问共享集合" class="headerlink" title="1、访问共享集合"></a>1、访问共享集合</h5><p>APP 申请了相应的权限以后，可以使用 MediaStore API 来访问这些共享文件。</p>
+<ul>
+<li>对于 Photos 相关文件，使用 MediaStore.Images</li>
+<li>对于 Videos 相关文件，使用 MediaStore.Video.</li>
+<li>对于 Music 相关文件，使用 MediaStore.Audio.</li>
+<li>对于 Downloads 相关文件，使用 MediaStore.Downloads.</li>
+</ul>
+<p>适配点 ： 在 Android Q 版本之后，调用 System 提供的 getExternalStoragePublicDirectory（）方法，只会返回该 APP 的独立沙盒目录，要完成适配，则要一直持有 READ_MEDIA_* 权限，然后更新你的存储框架即可。</p>
+<p>要访问手机当中的媒体文件，请使用MediaStore检索该文件，然后通过相应的文件描述符就可以访问该文件</p>
+<h5 id="2、APP-文件写入共享集合"><a href="#2、APP-文件写入共享集合" class="headerlink" title="2、APP 文件写入共享集合"></a>2、APP 文件写入共享集合</h5><p>Android Q 版本上，当用户卸载 App 的时候，System 会清除 App 所包含的数据，（包含 system 提供给 APP 的独立存储沙箱），如果 APP 想在卸载 APP 后保存部分数据的话，就需要将文件保存在共享集合当中。如何将文件写入共享集合？</p>
+<p>使用 MediaStore 集合中插入新行，使用以下方式填充其列</p>
+<ul>
+<li>1、为 DISPLAY_NAME 和 MIME_TYPE 列提供值</li>
+<li>2、您可以使用 PRIMARY_DIRECTORY 和 SECONDARY_DIRECTORY 列来影响文件在磁盘上的放置位置</li>
+<li>3、保持 DATA 列未定义。这样，该平台可以灵活地将文件保存在沙箱之外.</li>
+<li><p>4、使用API ContentResolver.openFileDescriptor()来读取或写入新创建的文件的数据</p>
+<p>但是，如果用户稍后重新安装了 APP ，则 APP 无法访问这些文件，情况类似于应用程序尝试访问其他应用程序文件的情况</p>
+</li>
+</ul>
+<h5 id="3、访问其他应用创建的文件"><a href="#3、访问其他应用创建的文件" class="headerlink" title="3、访问其他应用创建的文件"></a>3、访问其他应用创建的文件</h5><p>要访问和读取其他应用程序已保存到外部存储设备的媒体文件，请完成以下步骤：</p>
+<ul>
+<li>1、权限</li>
+<li>2、使用ContentResolver对象查找并打开文件， 请关注（ContentResolver loadThumbnail 方法）</li>
+</ul>
+<h5 id="4、写入其他应用创建的文件"><a href="#4、写入其他应用创建的文件" class="headerlink" title="4、写入其他应用创建的文件"></a>4、写入其他应用创建的文件</h5><p>通过将文件保存到共享集合，您的应用程序将成为该文件的所有者。通常，只有当您是文件所有者时，您的应用才能写入共享集合中的文件。但是，如果您的应用程序充当特定用例的用户默认应用程序，您还可以写入其他应用程序拥有的文件</p>
+<ul>
+<li>1、如果您的应用是用户的默认Photo Manager应用，则可以修改其他应用保存到“ 照片和视频”共享集合中的图像文件。</li>
+<li>2、如果您的应用是用户的默认音乐应用，则可以修改其他应用保存到音乐共享收藏集的音频文件。</li>
+</ul>
+<p>==注意：无论是默认的照片管理器还是音乐应用，您的应用都应保持正常运行。==</p>
+<p>要修改其他应用最初保存到外部存储设备的媒体文件，请使用ContentResolver对象查找文件并进行就地修改。执行编辑/修改操作时，请捕获， RecoverableSecurityException以便您可以请求用户授予您对该特定项目的写入权限。</p>
+<h4 id="3、APP-访问媒体文件"><a href="#3、APP-访问媒体文件" class="headerlink" title="3、APP 访问媒体文件"></a>3、APP 访问媒体文件</h4><h5 id="1、访问照片-（注意事项）"><a href="#1、访问照片-（注意事项）" class="headerlink" title="1、访问照片 （注意事项）"></a>1、访问照片 （注意事项）</h5><p>Android Q 增加了一些功能，使用户可以更好地控制在外部存储上访问照片的方式。总所周知，在图片文件当中会包含一些 Exif 元数据，通过这些数据，可以访问关于照片的一些详细信息，例如图片的位置信息，而在 Q 版本之上，为了更加安全的保护用户的隐私，对这些 Exif 元数据做了一定的限制。</p>
+<p>==如果在 Android 的 System Package Manager 当中。你的应用是默认的 Photos Manager 应用，那么 System会自动让你的应用访问这些照片的位置信息==</p>
+<p>除了上述着一种特殊情况，默认其他的应用如果需要访问图片的位置信息，需要满足以下两种情况</p>
+<ul>
+<li>1、权限 ACCESS_MEDIA_LOCATION</li>
+<li>2、从MediaStore对象，调用setRequireOriginal()，传入照片的URI。</li>
+</ul>
+<p>例如，以下代码块</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Uri photoUri = Uri.withAppendedPath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, cursor.getString(idColumnIndex));</span><br><span class="line"><span class="keyword">final</span> <span class="keyword">double</span>[] latLong;</span><br><span class="line"><span class="keyword">if</span> (BuildCompat.isAtLeastQ()) &#123;</span><br><span class="line">    photoUri = MediaStore.setRequireOriginal(photoUri);</span><br><span class="line">    InputStream stream = getContentResolver().openInputStream(photoUri);</span><br><span class="line">    <span class="keyword">if</span> (stream != <span class="keyword">null</span>) &#123;</span><br><span class="line">        ExifInterface exifInterface = <span class="keyword">new</span> ExifInterface(stream);</span><br><span class="line">        <span class="keyword">double</span>[] returnedLatLong = exifInterface.getLatLong();</span><br><span class="line">        latLong = returnedLatLong != <span class="keyword">null</span> ? returnedLatLong : <span class="keyword">new</span> <span class="keyword">double</span>[<span class="number">2</span>];</span><br><span class="line">        stream.close();</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        latLong = <span class="keyword">new</span> <span class="keyword">double</span>[<span class="number">2</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    latLong = <span class="keyword">new</span> <span class="keyword">double</span>[]&#123;cursor.getFloat(latitudeColumnIndex), cursor.getFloat(longitudeColumnIndex)&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果您的应用是相机应用，则它无法直接访问照片和视频共享集中保存的照片，除非它是设备的默认Photo Manager应用。要将用户定向到图库应用，请使用 ACTION_REVIEW意图</p>
+<h5 id="2、访问媒体文件-（注意事项）"><a href="#2、访问媒体文件-（注意事项）" class="headerlink" title="2、访问媒体文件 （注意事项）"></a>2、访问媒体文件 （注意事项）</h5><p>应用需要访问特定的媒体文件，例如其他应用分享文件给该应用，或需要访问来自用户媒体集的文件。在这些情况下，优先获取文件的uri，然后通过 content resolver 获取文件描述符。如下代码所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Uri contentUri = ContentUris.withAppendedId(android.provider.MediaStore.</span><br><span class="line">        Audio.Media.EXTERNAL_CONTENT_URI, cursor.getLong(Integer.parseInt(BaseColumns._ID)));</span><br><span class="line">String fileOpenMode = <span class="string">"r"</span>;</span><br><span class="line">ParcelFileDescriptor parcelFd = <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    parcelFd = <span class="keyword">this</span>.getContentResolver().openFileDescriptor(contentUri, fileOpenMode);</span><br><span class="line">    <span class="keyword">if</span> (parcelFd != <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">int</span> fd = parcelFd.detachFd();</span><br><span class="line">        <span class="comment">// 获取到相应的文件描述符以后，即可以操作该文件。</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">    <span class="comment">// 错误处理（文件没有找到）</span></span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    <span class="comment">// 清理操作</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="3-、访问特定文件"><a href="#3-、访问特定文件" class="headerlink" title="3    、访问特定文件"></a>3    、访问特定文件</h5><p>在某些用例中，您的应用可能需要打开或创建无权访问的文件：</p>
+<ul>
+<li>1、在照片编辑应用中，打开一张图纸。</li>
+<li>2、在业务生产力应用程序中，将文本文档保存到用户选择的位置。</li>
+</ul>
+<p>对于这些情况，请使用存储访问框架，该框架允许用户选择要打开的特定文件，或选择特定位置来保存文件。</p>
+<h4 id="4、外部存储设备"><a href="#4、外部存储设备" class="headerlink" title="4、外部存储设备"></a>4、外部存储设备</h4><p>在Android 9（API级别28）及更低版本中，所有存储设备上的所有文件都显示在单个”external”卷（主卷 – 类似于Windows上面的C盘）名称下。Android Q为每个外部存储设备提供唯一的卷名。此命名系统可帮助您有效地组织和索引内容，并使您可以控制新内容的存储位置。</p>
+<p>要唯一标识外部存储中的特定文件，必须同时使用卷名和ID。例如，</p>
+<ul>
+<li>主存储设备上的文件将是content://media/external/images/media/12，</li>
+<li>但是被调用的辅助存储设备上的相应文件FA23-3E92将是 content://media/FA23-3E92/images/media/12。</li>
+</ul>
+<p>您可以通过将此卷名称传递到特定的媒体集合来访问存储在特定卷上的文件，例如 MediaStore.Images.getContentUri()。</p>
+<h5 id="1、获取外部存储设备列表"><a href="#1、获取外部存储设备列表" class="headerlink" title="1、获取外部存储设备列表"></a>1、获取外部存储设备列表</h5><p>要获取所有当前可用卷的名称列表，请调用 MediaStore.getAllVolumeNames()，如以下代码段所示</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Set&lt;String&gt; volumeNames = MediaStore.getAllVolumeNames(context);</span><br></pre></td></tr></table></figure>
+<h3 id="3、测试"><a href="#3、测试" class="headerlink" title="3、测试"></a>3、测试</h3><p>设置虚拟外部存储设备</p>
+<p>在没有可移动外部存储的设备上，使用以下命令启用虚拟磁盘以进行测试：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb shell sm set-virtual-disk true</span><br></pre></td></tr></table></figure>
+<p>为了帮助您使应用程序与此新行为更改兼容，该平台提供了多种方法来调整与更改相关的多个参数。</p>
+<p>切换行为更改<br>要在Android Q Beta 1中启用此行为更改，请在终端窗口中执行以下命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb shell sm set-isolated-storage on</span><br></pre></td></tr></table></figure>
+<p>运行此命令后，设备将重新启动。如果没有，请等一下再尝试再次运行该命令。</p>
+<p>要确认行为更改已生效，请使用以下命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb shell getprop sys 。isolated_storage_snapshot</span><br></pre></td></tr></table></figure>
+<p>测试兼容模式行为<br>测试应用程序时，可以 通过在终端窗口中运行以下命令来启用外部文件存储访问的兼容性模式：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb shell cmd appops设置your-package-name android：legacy_storage allow</span><br></pre></td></tr></table></figure>
+<p>要禁用兼容模式，请在Android Q上卸载并重新安装您的应用，或在终端窗口中运行以下命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb shell cmd appops设置your-package-name android：legacy_storage default</span><br></pre></td></tr></table></figure>
+<h3 id="4、特性总结"><a href="#4、特性总结" class="headerlink" title="4、特性总结"></a>4、特性总结</h3><ul>
+<li><ol>
+<li>Android Q 为每个应用程序在外部存储设备提供了一个独立的存储沙箱，应用通过路径创建的文件都保存在应用的沙箱目录</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>共享集合：如果应用的一些文件是用户选择下载保存的，应用卸载的时候用户不希望删除，这部分文件开发者可以通过MediaProvider接口保存在公共共享集合，包括：照片、视频、音乐和下载集合</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>新的访问多媒体文件的权限：应用读写自己创建的文件不需要权限，但是如果需要读取其他应用创建的多媒体文件就需要申请对应的权限，通过MediaProvider接口读取</li>
+</ol>
+</li>
+<li><ol start="4">
+<li>读写其他应用的下载公共集合文件需要使用SAF的方式读写</li>
+</ol>
+</li>
+<li><ol start="5">
+<li>目前版本该特性没有默认开启，需要开发者通过命令开启：adbshell smset-isolated-storage on</li>
+</ol>
+</li>
+<li><ol start="6">
+<li>参考谷歌提供的官方适配指导文档：<a href="https://developer.android.google.cn/preview/privacy/scoped-storage" target="_blank" rel="noopener">https://developer.android.google.cn/preview/privacy/scoped-storage</a></li>
+</ol>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/04/01/android-version-Q-storage/" data-id="cjtyax25b0027gyewcylhnrxv" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/版本适配/">版本适配</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/11/01/gradle-gradlew/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Android Gradlew编译相关命令</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      <a href="/" class="logo">刘鹏程</a>
+      &copy; 2019 刘鹏程<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.scrollLoading.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
