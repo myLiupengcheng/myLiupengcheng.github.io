@@ -13,14 +13,14 @@
 <meta property="og:site_name" content="刘鹏程">
 <meta property="og:description" content="什么是内存抖动 内存抖动的影响 引起内存抖动的原因 如何发现内存抖动 内存抖动常见的解决方式   Android 是基于 Java ，不管是刚刚接触 Android 的新手，还是混迹在开发前线的老手，都知道在 Android上面的开发，不用管内存的回收，需要对象的时候 new 出来就好了，其余的 GC 会帮助我们，但是 GC 也不是万能的，GC 机制帮助我们的同时，也会限制我们，俗话说有得有失嘛">
 <meta property="og:locale" content="中文">
-<meta property="og:image" content="http://yoursite.com/2019/01/09/android-Performance-optimization-Memory-jitter-md/android-Performance-optimization-Memory-jitter-md⁩/01.png">
-<meta property="og:image" content="http://yoursite.com/2019/01/09/android-Performance-optimization-Memory-jitter-md/android-Performance-optimization-Memory-jitter-md⁩/02.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/01/09/android-Performance-optimization-Memory-jitter-md/android-Performance-optimization-Memory-jitter-md⁩/03.jpg">
-<meta property="og:updated_time" content="2019-11-07T12:46:08.015Z">
+<meta property="og:image" content="http://yoursite.com/2019/01/09/android-Performance-optimization-Memory-jitter-md/01.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/09/android-Performance-optimization-Memory-jitter-md/android-Performance-optimization-Memory-jitter-md⁩/02.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/09/android-Performance-optimization-Memory-jitter-md/03.png">
+<meta property="og:updated_time" content="2019-11-07T14:54:58.820Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="性能优化1 - 内存抖动">
 <meta name="twitter:description" content="什么是内存抖动 内存抖动的影响 引起内存抖动的原因 如何发现内存抖动 内存抖动常见的解决方式   Android 是基于 Java ，不管是刚刚接触 Android 的新手，还是混迹在开发前线的老手，都知道在 Android上面的开发，不用管内存的回收，需要对象的时候 new 出来就好了，其余的 GC 会帮助我们，但是 GC 也不是万能的，GC 机制帮助我们的同时，也会限制我们，俗话说有得有失嘛">
-<meta name="twitter:image" content="http://yoursite.com/2019/01/09/android-Performance-optimization-Memory-jitter-md/android-Performance-optimization-Memory-jitter-md⁩/01.png">
+<meta name="twitter:image" content="http://yoursite.com/2019/01/09/android-Performance-optimization-Memory-jitter-md/01.png">
   
   
     <link rel="icon" href="/favicon.png">
@@ -211,11 +211,11 @@
 <p>我们知道 Java 当中的字符串对象是不可变的，如果累加的话。会将原来的 Copy 出来一份。然后进行累加成为新的字符串，原来的就会被回收掉，现在我们就利用这个特性来模拟一个简单的内存抖动现象</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span> <span class="params">(View view)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++) &#123;</span><br><span class="line">            String tempTestString = <span class="string">"  "</span>;</span><br><span class="line">            <span class="comment">//拼接打印</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">200</span>; j++) &#123;</span><br><span class="line">                tempTestString += <span class="string">" ++"</span>;</span><br><span class="line">                tempTestString += <span class="string">" --"</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这样必然会出现内存抖动，我们通过 AS 自带的工具观察一下内存的使用情况，如下所示：</p>
-<p><img src="/2019/01/09/android-Performance-optimization-Memory-jitter-md/android-Performance-optimization-Memory-jitter-md⁩/01.png" alt="内存抖动"></p>
+<p><img src="/2019/01/09/android-Performance-optimization-Memory-jitter-md/01.png" alt="内存分析图"></p>
 <p>有小白色的垃圾桶，说明触发了 GC ，有一个代表出发了一次 GC ，上图有多个，然后我们选定一个时刻，仔细的看一下对象，例如下图</p>
-<p><img src="/2019/01/09/android-Performance-optimization-Memory-jitter-md/android-Performance-optimization-Memory-jitter-md⁩/02.jpg" alt="内存抖动"></p>
+<p><img src="/2019/01/09/android-Performance-optimization-Memory-jitter-md/android-Performance-optimization-Memory-jitter-md⁩/02.png" alt="内存对象创建内容"></p>
 <p>可以看到对象最多便是char数组，和 String 类型，然后点击 String，随便选取一个实例，查看他的堆栈，双击 便可以定位到我们的代码当中，然后结合详细的代码，进行分析，便可以规避上述的问题。</p>
-<p><img src="/2019/01/09/android-Performance-optimization-Memory-jitter-md/android-Performance-optimization-Memory-jitter-md⁩/03.jpg" alt="内存抖动"></p>
+<p><img src="/2019/01/09/android-Performance-optimization-Memory-jitter-md/03.png" alt="内存抖动分析图"></p>
 <h2 id="内存泄漏常见的解决方式"><a href="#内存泄漏常见的解决方式" class="headerlink" title="内存泄漏常见的解决方式"></a>内存泄漏常见的解决方式</h2><ul>
 <li>尽量避免在循环体内创建对象，应该把对象创建移到循环体外。</li>
 <li>注意自定义View的onDraw()方法会被频繁调用，所以在这里面不应该频繁的创建对象。</li>
@@ -227,7 +227,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/09/android-Performance-optimization-Memory-jitter-md/" data-id="ck2opn4ih00050mewbzugg5ys" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/09/android-Performance-optimization-Memory-jitter-md/" data-id="ck2ou1y8d0001imew75p810kd" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/性能优化/">性能优化</a></li></ul>
