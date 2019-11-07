@@ -14,9 +14,9 @@
 <meta property="og:description" content="什么是内存抖动 内存抖动的影响 引起内存抖动的原因 如何发现内存抖动 内存抖动常见的解决方式   Android 是基于 Java ，不管是刚刚接触 Android 的新手，还是混迹在开发前线的老手，都知道在 Android上面的开发，不用管内存的回收，需要对象的时候 new 出来就好了，其余的 GC 会帮助我们，但是 GC 也不是万能的，GC 机制帮助我们的同时，也会限制我们，俗话说有得有失嘛">
 <meta property="og:locale" content="中文">
 <meta property="og:image" content="http://yoursite.com/2019/01/09/android-Performance-optimization-Memory-jitter-md/01.png">
-<meta property="og:image" content="http://yoursite.com/2019/01/09/android-Performance-optimization-Memory-jitter-md/android-Performance-optimization-Memory-jitter-md⁩/02.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/09/android-Performance-optimization-Memory-jitter-md/02.png">
 <meta property="og:image" content="http://yoursite.com/2019/01/09/android-Performance-optimization-Memory-jitter-md/03.png">
-<meta property="og:updated_time" content="2019-11-07T14:54:58.820Z">
+<meta property="og:updated_time" content="2019-11-07T14:58:07.241Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="性能优化1 - 内存抖动">
 <meta name="twitter:description" content="什么是内存抖动 内存抖动的影响 引起内存抖动的原因 如何发现内存抖动 内存抖动常见的解决方式   Android 是基于 Java ，不管是刚刚接触 Android 的新手，还是混迹在开发前线的老手，都知道在 Android上面的开发，不用管内存的回收，需要对象的时候 new 出来就好了，其余的 GC 会帮助我们，但是 GC 也不是万能的，GC 机制帮助我们的同时，也会限制我们，俗话说有得有失嘛">
@@ -213,7 +213,7 @@
 <p>这样必然会出现内存抖动，我们通过 AS 自带的工具观察一下内存的使用情况，如下所示：</p>
 <p><img src="/2019/01/09/android-Performance-optimization-Memory-jitter-md/01.png" alt="内存分析图"></p>
 <p>有小白色的垃圾桶，说明触发了 GC ，有一个代表出发了一次 GC ，上图有多个，然后我们选定一个时刻，仔细的看一下对象，例如下图</p>
-<p><img src="/2019/01/09/android-Performance-optimization-Memory-jitter-md/android-Performance-optimization-Memory-jitter-md⁩/02.png" alt="内存对象创建内容"></p>
+<p><img src="/2019/01/09/android-Performance-optimization-Memory-jitter-md/02.png" alt="内存抖动分析图"></p>
 <p>可以看到对象最多便是char数组，和 String 类型，然后点击 String，随便选取一个实例，查看他的堆栈，双击 便可以定位到我们的代码当中，然后结合详细的代码，进行分析，便可以规避上述的问题。</p>
 <p><img src="/2019/01/09/android-Performance-optimization-Memory-jitter-md/03.png" alt="内存抖动分析图"></p>
 <h2 id="内存泄漏常见的解决方式"><a href="#内存泄漏常见的解决方式" class="headerlink" title="内存泄漏常见的解决方式"></a>内存泄漏常见的解决方式</h2><ul>
@@ -227,7 +227,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/09/android-Performance-optimization-Memory-jitter-md/" data-id="ck2ou1y8d0001imew75p810kd" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/09/android-Performance-optimization-Memory-jitter-md/" data-id="ck2ou5ruq0007jsewl8ipxhfl" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/性能优化/">性能优化</a></li></ul>
