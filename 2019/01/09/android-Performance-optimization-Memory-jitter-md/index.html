@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>性能优化1 - 内存抖动 | 刘鹏程</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="什么是内存抖动 内存抖动的影响 引起内存抖动的原因 如何发现内存抖动 内存抖动常见的解决方式   Android 是基于 Java ，不管是刚刚接触 Android 的新手，还是混迹在开发前线的老手，都知道在 Android上面的开发，不用管内存的回收，需要对象的时候 new 出来就好了，其余的 GC 会帮助我们，但是 GC 也不是万能的，GC 机制帮助我们的同时，也会限制我们，俗话说有得有失嘛">
+<meta name="keywords" content="性能优化">
+<meta property="og:type" content="article">
+<meta property="og:title" content="性能优化1 - 内存抖动">
+<meta property="og:url" content="http://yoursite.com/2019/01/09/android-Performance-optimization-Memory-jitter-md/index.html">
+<meta property="og:site_name" content="刘鹏程">
+<meta property="og:description" content="什么是内存抖动 内存抖动的影响 引起内存抖动的原因 如何发现内存抖动 内存抖动常见的解决方式   Android 是基于 Java ，不管是刚刚接触 Android 的新手，还是混迹在开发前线的老手，都知道在 Android上面的开发，不用管内存的回收，需要对象的时候 new 出来就好了，其余的 GC 会帮助我们，但是 GC 也不是万能的，GC 机制帮助我们的同时，也会限制我们，俗话说有得有失嘛">
+<meta property="og:locale" content="中文">
+<meta property="og:image" content="http://yoursite.com/2019/01/09/android-Performance-optimization-Memory-jitter-md/android-Performance-optimization-Memory-jitter-md⁩/01.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/09/android-Performance-optimization-Memory-jitter-md/android-Performance-optimization-Memory-jitter-md⁩/02.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/01/09/android-Performance-optimization-Memory-jitter-md/android-Performance-optimization-Memory-jitter-md⁩/03.jpg">
+<meta property="og:updated_time" content="2019-11-07T12:46:08.015Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="性能优化1 - 内存抖动">
+<meta name="twitter:description" content="什么是内存抖动 内存抖动的影响 引起内存抖动的原因 如何发现内存抖动 内存抖动常见的解决方式   Android 是基于 Java ，不管是刚刚接触 Android 的新手，还是混迹在开发前线的老手，都知道在 Android上面的开发，不用管内存的回收，需要对象的时候 new 出来就好了，其余的 GC 会帮助我们，但是 GC 也不是万能的，GC 机制帮助我们的同时，也会限制我们，俗话说有得有失嘛">
+<meta name="twitter:image" content="http://yoursite.com/2019/01/09/android-Performance-optimization-Memory-jitter-md/android-Performance-optimization-Memory-jitter-md⁩/01.png">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <!-- <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'> -->
+  <!-- <link href="//fonts.googleapis.com/css?family=Source+Code+Pro:400,700" rel="stylesheet" type="text/css"> -->
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro:400,700" rel="stylesheet" type="text/css">
+  <link href='//fonts.useso.com/css?family=Open+Sans:300,600' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="header-outer" class="outer">
+    <a href="/" class="logo">刘鹏程</a>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about/index.html">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+        </div>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        
+        
+          <a id="nav-github-link" class="nav-icon" href="https://github.com/ppoffice/hexo-theme-alex" title="Fork me on GitHub"></a>
+        
+      </nav>
+    </div>
+  </div>
+</header>
+      <nav id="mobile-nav" class="off">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about/index.html" class="mobile-nav-link">About</a>
+  
+  <div id="search-form-wrap-mobile">
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+  </div>
+</nav>
+      <div class="outer">
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JVM/">JVM</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/协议/">协议</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/并发/">并发</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据结构/">数据结构</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/04/01/android-version-Q-storage/">Android Q 应用存储空间限制</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/09/android-Performance-optimization-Memory-jitter-md/">性能优化1 - 内存抖动</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/01/gradle-gradlew/">Android Gradlew编译相关命令</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/03/android-system-job/">Android O 后台限制解决方式</a>
+          </li>
+        
+          <li>
+            <a href="/2018/06/15/thread-tools-delayQueue/">线程延时队列DelayQueue</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OutOfMemroy/">OutOfMemroy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gradlew/">gradlew</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/关于博主/">关于博主</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/协议/">协议</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能优化/">性能优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/控件/">控件</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构/">数据结构</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/版本适配/">版本适配</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/绘图技巧/">绘图技巧</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编译/">编译</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JVM/" style="font-size: 13.33px;">JVM</a> <a href="/tags/OutOfMemroy/" style="font-size: 10px;">OutOfMemroy</a> <a href="/tags/gradlew/" style="font-size: 10px;">gradlew</a> <a href="/tags/http/" style="font-size: 16.67px;">http</a> <a href="/tags/关于博主/" style="font-size: 10px;">关于博主</a> <a href="/tags/协议/" style="font-size: 16.67px;">协议</a> <a href="/tags/并发/" style="font-size: 20px;">并发</a> <a href="/tags/性能优化/" style="font-size: 10px;">性能优化</a> <a href="/tags/控件/" style="font-size: 16.67px;">控件</a> <a href="/tags/数据库/" style="font-size: 16.67px;">数据库</a> <a href="/tags/数据结构/" style="font-size: 13.33px;">数据结构</a> <a href="/tags/版本适配/" style="font-size: 13.33px;">版本适配</a> <a href="/tags/算法/" style="font-size: 13.33px;">算法</a> <a href="/tags/绘图技巧/" style="font-size: 16.67px;">绘图技巧</a> <a href="/tags/编译/" style="font-size: 10px;">编译</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://hexo.io">Hexo</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+        <section id="main"><article id="post-android-Performance-optimization-Memory-jitter-md" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/09/android-Performance-optimization-Memory-jitter-md/" class="article-date">
+  <time datetime="2019-01-09T12:40:25.000Z" itemprop="datePublished">2019-01-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      性能优化1 - 内存抖动
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>什么是内存抖动</li>
+<li>内存抖动的影响</li>
+<li>引起内存抖动的原因</li>
+<li>如何发现内存抖动</li>
+<li>内存抖动常见的解决方式</li>
+</ul>
+<hr>
+<p>Android 是基于 Java ，不管是刚刚接触 Android 的新手，还是混迹在开发前线的老手，都知道在 Android上面的开发，不用管内存的回收，需要对象的时候 new 出来就好了，其余的 GC 会帮助我们，但是 GC 也不是万能的，GC 机制帮助我们的同时，也会限制我们，俗话说有得有失嘛。今天来看一下由于这种机制给我们带来的第一个坑，内存抖动。</p>
+<h2 id="什么是内存抖动"><a href="#什么是内存抖动" class="headerlink" title="什么是内存抖动"></a>什么是内存抖动</h2><p>内存回收是指在程序需要对象的时候，在堆当中分配出来一块空间，使用完毕以后，由 GC 帮我们清理掉这片内存空间。如果频繁的一直持续上述操作，就会引起内存抖动。也就是有源源不断的对象被创建，同时又有源源不断的对象被回收。</p>
+<h2 id="内存抖动的影响"><a href="#内存抖动的影响" class="headerlink" title="内存抖动的影响"></a>内存抖动的影响</h2><ul>
+<li>导致程序卡顿</li>
+<li>导致程序内存溢出</li>
+</ul>
+<p>出现上述情况的内存抖动，会对程序造成什么影响呢，首先我们知道 GC 回收的时候也是需要消耗资源的，比如 GC 回收的时候会停止掉所有的线程，如果触发一次 GC 就停止一次，那如果多次频繁的触发 GC 线程也会一卡一卡的，所以总的来说内存抖动可能会造成程序的卡顿。</p>
+<p>如果发生频繁的 GC 会导致出现不连续的内存片无法进行分配，导致 OOM 内存溢出。</p>
+<p>注意：Android 垃圾回收机制使用的是 CMS 垃圾回收器 （采用标记 - 清理算法）</p>
+<h2 id="引起内存抖动的原因"><a href="#引起内存抖动的原因" class="headerlink" title="引起内存抖动的原因"></a>引起内存抖动的原因</h2><p>内存抖动出现原因主要是频繁在循环里创建对象，导致大量对象在短时间内被创建，由于新对象是要占用内存空间的而且是频繁，如果一次或者两次在循环里创建对象对内存影响不大，不会造成严重内存抖动这样可以接受也不可避免，频繁的话就很内存抖动很严重。</p>
+<h2 id="如何发现内存抖动"><a href="#如何发现内存抖动" class="headerlink" title="如何发现内存抖动"></a>如何发现内存抖动</h2><p>首先我们先来看一个简单的 Demo </p>
+<p>我们知道 Java 当中的字符串对象是不可变的，如果累加的话。会将原来的 Copy 出来一份。然后进行累加成为新的字符串，原来的就会被回收掉，现在我们就利用这个特性来模拟一个简单的内存抖动现象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span> <span class="params">(View view)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++) &#123;</span><br><span class="line">            String tempTestString = <span class="string">"  "</span>;</span><br><span class="line">            <span class="comment">//拼接打印</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">200</span>; j++) &#123;</span><br><span class="line">                tempTestString += <span class="string">" ++"</span>;</span><br><span class="line">                tempTestString += <span class="string">" --"</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样必然会出现内存抖动，我们通过 AS 自带的工具观察一下内存的使用情况，如下所示：</p>
+<p><img src="/2019/01/09/android-Performance-optimization-Memory-jitter-md/android-Performance-optimization-Memory-jitter-md⁩/01.png" alt="内存抖动"></p>
+<p>有小白色的垃圾桶，说明触发了 GC ，有一个代表出发了一次 GC ，上图有多个，然后我们选定一个时刻，仔细的看一下对象，例如下图</p>
+<p><img src="/2019/01/09/android-Performance-optimization-Memory-jitter-md/android-Performance-optimization-Memory-jitter-md⁩/02.jpg" alt="内存抖动"></p>
+<p>可以看到对象最多便是char数组，和 String 类型，然后点击 String，随便选取一个实例，查看他的堆栈，双击 便可以定位到我们的代码当中，然后结合详细的代码，进行分析，便可以规避上述的问题。</p>
+<p><img src="/2019/01/09/android-Performance-optimization-Memory-jitter-md/android-Performance-optimization-Memory-jitter-md⁩/03.jpg" alt="内存抖动"></p>
+<h2 id="内存泄漏常见的解决方式"><a href="#内存泄漏常见的解决方式" class="headerlink" title="内存泄漏常见的解决方式"></a>内存泄漏常见的解决方式</h2><ul>
+<li>尽量避免在循环体内创建对象，应该把对象创建移到循环体外。</li>
+<li>注意自定义View的onDraw()方法会被频繁调用，所以在这里面不应该频繁的创建对象。</li>
+<li>当需要大量使用Bitmap的时候，试着把它们缓存在数组中实现复用。</li>
+<li>对于能够复用的对象，同理可以使用对象池将它们缓存起来。</li>
+</ul>
+<h2 id="参考文献："><a href="#参考文献：" class="headerlink" title="参考文献："></a>参考文献：</h2><p><a href="https://www.cnblogs.com/xgjblog/p/9042458.html" target="_blank" rel="noopener">https://www.cnblogs.com/xgjblog/p/9042458.html</a><br><a href="https://blog.csdn.net/wanghao200906/article/details/79311288" target="_blank" rel="noopener">https://blog.csdn.net/wanghao200906/article/details/79311288</a><br><a href="https://blog.csdn.net/nicolelili1/article/details/89219191" target="_blank" rel="noopener">https://blog.csdn.net/nicolelili1/article/details/89219191</a><br><a href="https://blog.csdn.net/qq_31370269/article/details/52818277" target="_blank" rel="noopener">https://blog.csdn.net/qq_31370269/article/details/52818277</a><br><a href="https://blog.csdn.net/wanghao200906/article/details/79311288" target="_blank" rel="noopener">https://blog.csdn.net/wanghao200906/article/details/79311288</a><br><a href="https://www.youtube.com/watch?v=McAvq5SkeTk" target="_blank" rel="noopener">https://www.youtube.com/watch?v=McAvq5SkeTk</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/01/09/android-Performance-optimization-Memory-jitter-md/" data-id="ck2ophphc0005ymewtmvc9tlu" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/性能优化/">性能优化</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/04/01/android-version-Q-storage/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Android Q 应用存储空间限制
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/11/01/gradle-gradlew/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Android Gradlew编译相关命令</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      <a href="/" class="logo">刘鹏程</a>
+      &copy; 2019 刘鹏程<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.scrollLoading.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
